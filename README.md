@@ -15,4 +15,4 @@
   * Como usuario quiero poder crear salas para poder jugar con amigos sin gastar monedas.
   * Como Administrador quiero dar beneficio a los jugadores para poder lograr que los usuarios sigan activos.
  
- ![img/poker.jpg]
+ ![](img/poker.jpg)
