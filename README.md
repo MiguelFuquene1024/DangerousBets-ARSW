@@ -12,6 +12,8 @@
  
 ## Resumen
 
+La idea del proyecto es hacer una plataforma donde la gente se pueda conectar concurrentemente y tiempo real a dicha plataforma.Esta tratara de un juego poker donde las personas podran hacer sus apuestas y poder pasarla bien en estos tiempos de pandemia. Inicialmente queremos que el usuario se registre con un correo electronico y despues de eso les daremos inicialmente 5000 monedas del juego para que puedan empezar sus apuestas, cada dia el usuario al ingresar podra adquirir 1000 monedas mas a su cuenta, esto para cuando las personas se queden sin monedas para jugar, tambien tendra como tal un chat para que puedan dialogar entre ellos. Los usuarios dispontran de dos opciones a la hora de jugar, entrar a una sala publica o crear una sala privada para poder jugar con conocidos en dado caso, en las salas publicas lo ideal es que se pueda entrar en cualquier momento y en dado caso que una ronda ya haya empezado este podra espectar a los que ya estan jugando y una vez terminada la ronda, este podra entrar a jugar.
+
  ## Casos de Usuario:
  
   * Como usuario quiero acceder a salas para poder jugar con otros usuarios.
