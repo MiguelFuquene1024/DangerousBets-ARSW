@@ -21,6 +21,6 @@ La idea del proyecto es hacer una plataforma donde la gente se pueda conectar co
   * Como usuario quiero poder crear salas para poder jugar con amigos sin gastar monedas.
   * Como Administrador quiero dar beneficio a los jugadores para poder lograr que los usuarios sigan activos.
  
- ![](img/caso_uso.jpg)
+ ![](img/caso_uso.jpeg)
  
  ![](img/poker.jpg)
