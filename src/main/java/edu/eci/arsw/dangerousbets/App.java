@@ -1,4 +1,4 @@
-package edu.eci.arsw.dangerousbets;
+package edu.eci.arsw.DangerousBets;
 
 /**
  * Hello world!
