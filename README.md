@@ -4,7 +4,9 @@
   * Miguel Angel Fuquene
   * Juan Sebastian Ramos
   * Yarit Yajanny Villalobos
-  
+
+
+![](img/poker.jpg)
  
  ## Descripción
  
@@ -38,4 +40,8 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
  
  ![](img/caso_uso.jpeg)
  
- ![](img/poker.jpg)
+
+## Diagrama de Clases
+![](img/DiagramaClases.PNG)
+
+ 
