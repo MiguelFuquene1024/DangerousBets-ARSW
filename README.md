@@ -40,8 +40,47 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
  
  ![](img/caso_uso.jpeg)
  
+## Mockups
+
+
+- Login y registro
+
+
+![](img/Mockups/Mockup1.png)
+
+
+- Menu principal
+
+
+![](img/Mockups/Mockup2.png)
+
+
+- Personalizacion de juego
+
+
+![](img/Mockups/Mockup5.png)
+
+
+- Sala de juego
+
+
+![](img/Mockups/Mockup3.png)
+
+
+- Datos y estadisticas
+
+
+![](img/Mockups/Mockup4.png)
+
+
+
+
+
 
 ## Diagrama de Clases
 ![](img/DiagramaClases.PNG)
+
+
+
 
  
