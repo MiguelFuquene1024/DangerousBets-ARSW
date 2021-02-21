@@ -1,6 +1,7 @@
 # DangerousBets-ARSW
 
-https://tree.taiga.io/project/julitom1-dangerousbets-1/backlog
+
+[Taiga](https://tree.taiga.io/project/julitom1-dangerousbets-1/backlog)
  ## Integrantes:
   * Miguel Angel Fuquene
   * Juan Sebastian Ramos
@@ -29,17 +30,12 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
  -	Actualización del dinero dentro del juego
  -	Ranking de mejores jugadores
  -	Categorización de salas
- -	Lista de amigos por usuario
- -	Control de pagos
+ -	Lista de amigos por usuario 
 
  ## Casos de Uso:
- 
-  * Como usuario quiero acceder a salas para poder jugar con otros usuarios.
-  * Como usuario quiero apostar para poder ganar más monedas.
-  * Como usuario quiero poder crear salas para poder jugar con amigos sin gastar monedas.
-  * Como Administrador quiero dar beneficio a los jugadores para poder lograr que los usuarios sigan activos.
- 
- ![](img/caso_uso.jpeg)
+  
+ ![](img/Diagrama%20Casos%20de%20uso.PNG)
+
  
 ## Mockups
 
