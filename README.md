@@ -74,7 +74,7 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 
 
 
-## Diagrama de Clases
+## Diagrama de Clasess
 ![](img/DiagramaClases.PNG)
 
 
