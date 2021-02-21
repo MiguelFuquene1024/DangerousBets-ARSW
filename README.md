@@ -1,7 +1,7 @@
 # DangerousBets-ARSW
 
 https://tree.taiga.io/project/julitom1-dangerousbets-1/backlog
- ## Integrantes:
+ ## Integrantes:s
   * Miguel Angel Fuquene
   * Juan Sebastian Ramos
   * Yarit Yajanny Villalobos
