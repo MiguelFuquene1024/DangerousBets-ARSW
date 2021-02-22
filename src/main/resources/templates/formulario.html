@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
+<head>
+<meta charset="utf-8">
+<title>DangerousBets</title>
+	
+	
+	<link rel="shortcut icon" href="img/favi1.ico"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">\
+	<link rel="stylesheet" type="text/css" th:href="@{/estilos/style.css}">
+
+	
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+
+function validarFormulario(){
+	
+		var nickname = document.getElementById('nickname').value;
+		var correo1 = document.getElementById('correo1').value;
+		var correo2 = document.getElementById('correo2').value;
+		var contrasena1 = document.getElementById('contrasena1').value;
+		var contrasena2 = document.getElementById('contrasena2').value;
+		
+		if(correo1!=correo2){
+			alert('ERROR: los dos correos deben ser iguales');
+			return false;
+		}if(contrasena1!=contrasena2){
+			alert('ERROR: las contraseñas son diferentes');
+			return false;
+		}
+		if(nickname.length<3 || nickname.length>25){
+			alert('ERROR: nickname no cumple con lo establecido');
+			return false;
+		}
+		if(contrasena1.length<8){
+			alert('ERROR: contrasena muy débil');
+			return false;
+		}
+
+		return true;
+		
+	
+} 
+
+
+</script>
+<center>
+	<div id="formulario">
+		
+		<form class="sf-form" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"  method="POST" onsubmit="return validarFormulario()">
+
+			<input type=hidden name="oid" value="00D3k000000tdQq">
+			<input type=hidden name="retURL" value="google.com">
+			<div class="formulario_bloque">
+				<div class="registro">
+					<h1 class="titulo">Registro</h1>
+				</div>
+				<div class="nombre">
+					<label for="name" class="letra_formulario">Nombre Usuario</label></br>
+					<input name="name" id="name" type="text" size="20" maxlength="40" required="true">
+				</div>
+				<div class="nickname">
+					<label for="nickname" class="letra_formulario">Nickname</label></br>
+					<input name="nickname" id="nickname" type="text" size="20" maxlength="40" required="true"></br>
+					<small>El nickname debe ser de 3 hasta 25 caracteres de largo.</small>
+				</div>
+			</div>
+			<div class="formulario_bloque">
+				<div class="text_correo">
+					<h1 class="titulo">Correo electrónico</h1>
+				</div>
+				<div class="correo1">
+					<label for="correo1" class="letra_formulario">Correo electrónico</label></br>
+					<input name="correo1" id="correo1" type="text" pattern="[A-Z0-9a-z._%-]+@[A-Z0-9a-z._%-]+\.[A-Za-z]+" required="true">
+				</div>
+				<div class="correo2">
+					<label for="correo2" class="letra_formulario">Confirmar correo electrónico</label></br>
+					<input name="correo2" id="correo2" type="text" size="20" maxlength="40" required="true">
+				</div>
+			</div>
+			<div class="formulario_bloque">
+				<div class="text_contrasena">
+					<h1 class="titulo">Contraseña</h1>
+				</div>
+				<div class="contrasena">
+					<label for="contrasena" class="letra_formulario">Contraseña</label></br>
+					<input name="contrasena" id="contrasena1" type="password" size="20" maxlength="40" required="true"><br>
+					<small>Una contraseña segura debe tener por lo menos 8 caracteres de largo.</small>
+				</div>
+				
+				<div class="correo">
+					<label for="contrasena2" class="letra_formulario">Confirmar contraseña</label></br>
+					<input name="contrasena2" id="contrasena2" type="password" size="20" maxlength="40" required="true">
+				</div>
+			</div>
+			<div class="boton_formulario">
+			<input name="" type="reset" value="Restablecer" class="restablecer">
+		<input name="submit" type="submit" value="Enviar" class="Envir">
+		
+		</div>
+	</div>
+	
+</center>
+</form>
+</html>
+
