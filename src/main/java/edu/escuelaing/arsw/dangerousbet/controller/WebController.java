@@ -4,6 +4,9 @@ package edu.escuelaing.arsw.dangerousbet.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import edu.eci.arsw.blueprints.model.Usuario;
 
 
 @Controller
@@ -17,16 +20,23 @@ public class WebController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        System.out.print(model.getAttribute("input1"));
-
+        //System.out.print(model.getAttribute("input1"));
+        
         return "login";
     }
 
     @GetMapping("/registro")
     public String registro(Model model) {
         System.out.print(model.getAttribute("input1"));
-
+        model.addAttribute("usuario", new Usuario());
         return "formulario";
+    }
+    
+    @PostMapping("/registro/enviar")
+    public String registroEnviar(Usuario usuario,Model model) {
+  
+ 
+        return "login";
     }
 
 

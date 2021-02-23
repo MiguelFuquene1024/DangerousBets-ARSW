@@ -1,11 +1,16 @@
 <!doctype html>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="mvc" %>
 <html xmlns:th="http://www.thymeleaf.org">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
 <head>
 <meta charset="utf-8">
 <title>DangerousBets</title>
 	
+	
+	<link rel="shortcut icon" href="img/favi1.ico"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">\
 	<link rel="stylesheet" type="text/css" th:href="@{/estilos/style.css}">
 
 	
@@ -49,9 +54,9 @@ function validarFormulario(){
 <center>
 	<div id="formulario">
 		
-		<form class="sf-form" th:object="${usuario}" th:action="@{/registro/enviar}"  method="POST" onsubmit="return validarFormulario()">
+		<form class="sf-form" th:action="@{/registro/enviar}"  method="POST" onsubmit="return validarFormulario()">
 
-			
+			<input type=hidden name="oid" value="00D3k000000tdQq">
 			<input type=hidden name="retURL" value="google.com">
 			<div class="formulario_bloque">
 				<div class="registro">
@@ -59,7 +64,7 @@ function validarFormulario(){
 				</div>
 				<div class="nombre">
 					<label for="name" class="letra_formulario">Nombre Usuario</label></br>
-					<input name="name" id="name" type="text" size="20" maxlength="40" th:field="*{name}" required="true">
+					<input th:field="*{name}" name="name" id="name" type="text" size="20" maxlength="40" required="true">
 				</div>
 				<div class="nickname">
 					<label for="nickname" class="letra_formulario">Nickname</label></br>
@@ -73,11 +78,11 @@ function validarFormulario(){
 				</div>
 				<div class="correo1">
 					<label for="correo1" class="letra_formulario">Correo electrónico</label></br>
-					<input th:field="*{correo}" name="correo1" id="correo1" type="text" pattern="[A-Z0-9a-z._%-]+@[A-Z0-9a-z._%-]+\.[A-Za-z]+" required="true">
+					<input th:field="*{correo1}" name="correo1" id="correo1" type="text" pattern="[A-Z0-9a-z._%-]+@[A-Z0-9a-z._%-]+\.[A-Za-z]+" required="true">
 				</div>
 				<div class="correo2">
 					<label for="correo2" class="letra_formulario">Confirmar correo electrónico</label></br>
-					<input name="correo2" id="correo2" type="text" size="20" maxlength="40" required="true">
+					<input th:field="*{correo2}" name="correo2" id="correo2" type="text" size="20" maxlength="40" required="true">
 				</div>
 			</div>
 			<div class="formulario_bloque">
@@ -92,7 +97,7 @@ function validarFormulario(){
 				
 				<div class="correo">
 					<label for="contrasena2" class="letra_formulario">Confirmar contraseña</label></br>
-					<input name="contrasena2" id="contrasena2" type="password" size="20" maxlength="40" required="true">
+					<input th:field="*{contrasena2}" name="contrasena2" id="contrasena2" type="password" size="20" maxlength="40" required="true">
 				</div>
 			</div>
 			<div class="boton_formulario">
@@ -105,4 +110,3 @@ function validarFormulario(){
 </center>
 </form>
 </html>
-

@@ -17,13 +17,13 @@ body {
 #formulario small{
 	font-size:13px;
 }
-#formulario .Restablecer,
+#formulario .restablecer,
 #formulario .Envir{
 	width:40%;
 	background:green;
 	
 }
-#formulario .Restablecer:hover,
+#formulario .restablecer:hover,
 #formulario .Envir:hover{
 	width:40%;
 	background:#ED544B;
