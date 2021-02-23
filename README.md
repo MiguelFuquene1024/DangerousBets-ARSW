@@ -1,7 +1,14 @@
 # DangerousBets-ARSW
 
 [Taiga](https://tree.taiga.io/project/julitom1-dangerousbets-1/backlog)
- ## Integrantes:s
+
+### Circleci
+[![CircleCI](https://circleci.com/gh/jsr25/Taller2Arep.svg?style=svg)](https://app.circleci.com/pipelines/github/MiguelFuquene1024/DangerousBets-ARSW)
+
+### Despliegue Heroku
+[![Heroku](https://www.herokucdn.com/deploy/button.png)](https://blooming-cliffs-42779.herokuapp.com/)
+
+ ## Integrantes
   * Miguel Angel Fuquene
   * Juan Sebastian Ramos
   * Yarit Yajanny Villalobos
