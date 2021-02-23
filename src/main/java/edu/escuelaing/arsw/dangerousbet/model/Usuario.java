@@ -1,4 +1,4 @@
-package edu.eci.arsw.blueprints.model;
+package edu.escuelaing.arsw.dangerousbet.model;
 
 public class Usuario {
 	private String name;
