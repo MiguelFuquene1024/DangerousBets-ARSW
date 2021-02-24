@@ -42,7 +42,7 @@ public class WebController {
     @PostMapping("/registro/enviar")
     public String registroEnviar(Usuario usuario,Model model) {
  
-        return "index";
+        return "redirect:/registro/bienvenido";
 
     }
 
