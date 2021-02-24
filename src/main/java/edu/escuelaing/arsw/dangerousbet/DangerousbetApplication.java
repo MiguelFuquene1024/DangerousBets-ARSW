@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class DangerousbetApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(DangerousbetApplication.class, args);
 	}
 

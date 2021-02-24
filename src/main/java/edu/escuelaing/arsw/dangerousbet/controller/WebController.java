@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import edu.eci.arsw.blueprints.model.Usuario;
+import edu.escuelaing.arsw.dangerousbet.model.Usuario;
 
 
 @Controller
@@ -20,7 +20,7 @@ public class WebController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        //System.out.print(model.getAttribute("input1"));
+        model.addAttribute("usuario", new Usuario());;
         
         return "login";
     }
@@ -41,8 +41,16 @@ public class WebController {
     
     @PostMapping("/registro/enviar")
     public String registroEnviar(Usuario usuario,Model model) {
+<<<<<<< HEAD
  
         return "redirect:/registro/bienvenido";
+=======
+        System.out.print("\n"+usuario.getNickname());
+        System.out.print("\n"+usuario.getContrasena());
+
+ 
+        return "index";
+>>>>>>> 16f263ba8ae37ab933bd7f84950de5e933cac8d8
     }
 
 

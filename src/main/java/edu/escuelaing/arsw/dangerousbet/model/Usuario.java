@@ -1,10 +1,20 @@
-package edu.eci.arsw.blueprints.model;
+package edu.escuelaing.arsw.dangerousbet.model;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuario")
 public class Usuario {
+
 	private String name;
 	private String contrasena;
+	@Id
 	private String nickname;
 	private String correo;
+
 	public String getName() {
 		return name;
 	}
