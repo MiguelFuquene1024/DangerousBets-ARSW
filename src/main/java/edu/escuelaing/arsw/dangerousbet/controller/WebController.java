@@ -41,16 +41,9 @@ public class WebController {
     
     @PostMapping("/registro/enviar")
     public String registroEnviar(Usuario usuario,Model model) {
-<<<<<<< HEAD
- 
-        return "redirect:/registro/bienvenido";
-=======
-        System.out.print("\n"+usuario.getNickname());
-        System.out.print("\n"+usuario.getContrasena());
-
  
         return "index";
->>>>>>> 16f263ba8ae37ab933bd7f84950de5e933cac8d8
+
     }
 
 
