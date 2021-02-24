@@ -32,11 +32,17 @@ public class WebController {
         return "formulario";
     }
     
+    @GetMapping("/registro/bienvenido")
+    public String registroBienvenido(Model model) {
+        //System.out.print(model.getAttribute("input1"));
+        
+        return "bienvenido";
+    }
+    
     @PostMapping("/registro/enviar")
     public String registroEnviar(Usuario usuario,Model model) {
-  
  
-        return "login";
+        return "redirect:/registro/bienvenido";
     }
 
 

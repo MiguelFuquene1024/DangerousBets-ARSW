@@ -56,9 +56,21 @@ input{
 	width:90%;
 	margin-top:1%;
 	height:35px;
-	font-size:20px;
-	
+	font-size:20px;	
 }
+#bienvenido .texto{
+	padding-top:3vw;
+	position:relative;
+	display:inline-block;
+	width:100%;
+}
+#bienvenido .bloque_texto{
+	position:absolute;
+	top:50%;
+	right:50%;
+	background:blue;
+}
+
 
 
 
