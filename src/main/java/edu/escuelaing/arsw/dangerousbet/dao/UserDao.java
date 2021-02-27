@@ -4,8 +4,8 @@ import edu.escuelaing.arsw.dangerousbet.model.Usuario;
 import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
-public class UserDao implements CrudRepository<Usuario, String> {
-
+public interface UserDao extends CrudRepository<Usuario, String> {
+/*
     @Override
     public <S extends Usuario> S save(S s) {
         return null;
@@ -59,5 +59,5 @@ public class UserDao implements CrudRepository<Usuario, String> {
     @Override
     public void deleteAll() {
 
-    }
+    }*/
 }

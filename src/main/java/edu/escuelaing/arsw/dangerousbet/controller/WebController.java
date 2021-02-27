@@ -1,17 +1,34 @@
 package edu.escuelaing.arsw.dangerousbet.controller;
 
 
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import edu.escuelaing.arsw.dangerousbet.dao.UserDao;
 import edu.escuelaing.arsw.dangerousbet.model.Usuario;
 
 
 @Controller
 public class WebController {
 
+	@Autowired
+    private UserDao uc;
+	
+	
+	
+	
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("hora","buenos dias a todos este es la primera aplicacion");
@@ -40,10 +57,24 @@ public class WebController {
     }
     
     @PostMapping("/registro/enviar")
-    public String registroEnviar(Usuario usuario,Model model) {
- 
-        return "redirect:/registro/bienvenido";
+    public String registroEnviar(@Valid Usuario usuario,BindingResult bindingResult) {
+    	//System.out.println(bindingResult.getAllErrors());
+    	//System.out.println(bindingResult.getErrorCount());
+    	if(bindingResult.hasErrors()){
+          
+            return "formulario";
+    	}else{
+    			if(uc.existsById(usuario.getNickname())) {
+    				
+    				return "redirect:/registro/hola";
+    			}else {
+    				uc.save(usuario);
+    				return "redirect:/registro/bienvenido";
+    			}
 
+    		
+    	}
+  
     }
 
 

@@ -13,7 +13,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-
+function miFuncion(){
+	alert('ERROR: prueba 2.0');
+}
 
 function validarFormulario(){
 	
@@ -26,20 +28,12 @@ function validarFormulario(){
 		if(correo1!=correo2){
 			alert('ERROR: los dos correos deben ser iguales');
 			return false;
-		}if(contrasena1!=contrasena2){
+		}
+		if(contrasena1!=contrasena2){
 			alert('ERROR: las contraseñas son diferentes');
 			return false;
 		}
-		if(nickname.length<3 || nickname.length>25){
-			alert('ERROR: nickname no cumple con lo establecido');
-			return false;
-		}
-		if(contrasena1.length<8){
-			alert('ERROR: contrasena muy débil');
-			return false;
-		}
-
-		return true;
+		
 		
 	
 } 
@@ -59,11 +53,13 @@ function validarFormulario(){
 				</div>
 				<div class="nombre">
 					<label for="name" class="letra_formulario">Nombre Usuario</label></br>
-					<input name="name" id="name" type="text" size="20" maxlength="40" th:field="*{name}" required="true">
+					<input name="name" id="name" type="text" size="20" th:field="*{name}"><br>
+					<small class="error" th:if="${#fields.hasErrors('name')}"  th:errors="*{name}"></small>
 				</div>
 				<div class="nickname">
 					<label for="nickname" class="letra_formulario">Nickname</label></br>
-					<input th:field="*{nickname}" name="nickname" id="nickname" type="text" size="20" maxlength="40" required="true"></br>
+					<input th:field="*{nickname}" name="nickname" id="nickname" type="text" size="20" ></br>
+					<small class="error" th:if="${#fields.hasErrors('nickname')}"  th:errors="*{nickname}"></small><br>
 					<small>El nickname debe ser de 3 hasta 25 caracteres de largo.</small>
 				</div>
 			</div>
@@ -73,11 +69,12 @@ function validarFormulario(){
 				</div>
 				<div class="correo1">
 					<label for="correo1" class="letra_formulario">Correo electrónico</label></br>
-					<input th:field="*{correo}" name="correo1" id="correo1" type="text" pattern="[A-Z0-9a-z._%-]+@[A-Z0-9a-z._%-]+\.[A-Za-z]+" required="true">
+					<input th:field="*{correo}"  name="correo1" id="correo1" type="text"><br>
+					<small class="error" th:if="${#fields.hasErrors('correo')}"  th:errors="*{correo}"></small>
 				</div>
 				<div class="correo2">
 					<label for="correo2" class="letra_formulario">Confirmar correo electrónico</label></br>
-					<input name="correo2" id="correo2" type="text" size="20" maxlength="40" required="true">
+					<input name="correo2" id="correo2" type="text">
 				</div>
 			</div>
 			<div class="formulario_bloque">
@@ -86,13 +83,14 @@ function validarFormulario(){
 				</div>
 				<div class="contrasena">
 					<label for="contrasena" class="letra_formulario">Contraseña</label></br>
-					<input th:field="*{contrasena}" name="contrasena" id="contrasena1" type="password" size="20" maxlength="40" required="true"><br>
+					<input for="contrasena" th:field="*{contrasena}" name="contrasena" id="contrasena1" type="password" size="20"><br>
+					<small class="error" th:if="${#fields.hasErrors('contrasena')}"  th:errors="*{contrasena}"></small><br>
 					<small>Una contraseña segura debe tener por lo menos 8 caracteres de largo.</small>
 				</div>
 				
 				<div class="correo">
 					<label for="contrasena2" class="letra_formulario">Confirmar contraseña</label></br>
-					<input name="contrasena2" id="contrasena2" type="password" size="20" maxlength="40" required="true">
+					<input name="contrasena2" id="contrasena2" type="password" size="20">
 				</div>
 			</div>
 			<div class="boton_formulario">
