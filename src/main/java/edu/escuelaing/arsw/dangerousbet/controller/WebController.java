@@ -59,9 +59,9 @@ public class WebController {
     
     @PostMapping("/registro")
     public String registroEnviar(@Valid Usuario usuario,BindingResult bindingResult) {
-    	if(uc.existsById(usuario.getNickname())) {
-    		bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
-    	}
+    	//if(uc.existsById(usuario.getNickname())) {
+    		//bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
+    	//}
     	//System.out.println(bindingResult.getAllErrors());
     	if(bindingResult.hasErrors()){
           
