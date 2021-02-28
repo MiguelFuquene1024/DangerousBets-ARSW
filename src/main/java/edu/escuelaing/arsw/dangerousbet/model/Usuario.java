@@ -63,6 +63,17 @@ public class Usuario {
 	public String getNickname() {
 		return nickname;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario{" +
+				"name='" + name + '\'' +
+				", contrasena='" + contrasena + '\'' +
+				", nickname='" + nickname + '\'' +
+				", correo='" + correo + '\'' +
+				'}';
+	}
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}

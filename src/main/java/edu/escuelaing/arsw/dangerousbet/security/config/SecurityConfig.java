@@ -1,6 +1,9 @@
 package edu.escuelaing.arsw.dangerousbet.security.config;
 
 
+import edu.escuelaing.arsw.dangerousbet.service.UserService;
+import edu.escuelaing.arsw.dangerousbet.util.EncrytedPasswodUtils;
+import edu.escuelaing.arsw.dangerousbet.util.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +19,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+ @Autowired
+ UserDetailsServiceImpl us;
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-
+        auth.userDetailsService(us).passwordEncoder(passwordEncoder());
+//        auth.inMemoryAuthentication()
+//                .withUser("user").password(EncrytedPasswodUtils.encryted("user")).roles("user");
     }
 
     @Bean
@@ -30,6 +38,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/login", "/logout","/registro").permitAll();
-        //http.authorizeRequests().antMatchers("/registro").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/bienvenido").access("hasAnyRole('ROLE_USER','ROLE_ADMIN')");
+        // For ADMIN only.
+        http.authorizeRequests().antMatchers("/admin").access("hasRole('ROLE_ADMIN')");
+        http.authorizeRequests().and().formLogin()//
+                // Submit URL of login page.
+                .loginProcessingUrl("/login_check") // Submit URL
+                .loginPage("/login")//
+                .defaultSuccessUrl("/bienvenido")//
+                .failureUrl("/login?error=true")//
+                .usernameParameter("nickname")//
+                .passwordParameter("contrasena")
+                // Config for Logout Page
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+    //http.authorizeRequests().antMatchers("/registro").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
     }
 }

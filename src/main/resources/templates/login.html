@@ -6,14 +6,16 @@
     <title>Login</title>
     <link rel="shortcut icon" href="img/favi1.ico"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">\
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    \
     <link rel="stylesheet" type="text/css" th:href="@{/estilos/style.css}">
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <body>
 <center>
     <div id="formulario">
-        <form class="sf-form" th:object="${usuario}" th:action="@{/registro/enviar}"  method="POST">
+        <form class="sf-form" th:action="@{/login_check}" method="POST">
             <input type=hidden name="retURL" value="google.com">
             <div class="formulario_bloque">
                 <div class="registro">
@@ -21,20 +23,23 @@
                 </div>
                 <div class="nickname">
                     <label for="nickname" class="letra_formulario">Nickname</label></br>
-                    <input name="nickname" th:field="*{nickname}" id="nickname" type="text" size="20" maxlength="40" required="true"></br>
+                    <input name="nickname" id="nickname" type="text" size="20" maxlength="40" required="true"></br>
                 </div>
                 <div class="contrasena">
                     <label for="contrasena" class="letra_formulario">Contraseña</label></br>
-                    <input name="contrasena" th:field="*{contrasena}" id="contrasena" type="password" size="20" maxlength="40" required="true"><br>
+                    <input name="contrasena" id="contrasena" type="password" size="20" maxlength="40"
+                           required="true"><br>
                 </div>
-				<div class="boton">
-					<a href="../../registro" class="boton">
-					<span>Registrate aquí</span>
-				</div>
-            </div>
-            <div class="boton_formulario">
-                <input name="submit" type="submit" value="Enviar" class="Envir">
-            </div>
+                <p>Remember Me?</p>
+                <input type="checkbox" name="remember-me"/>
+                <div class="boton">
+                    <a href="../../registro" class="boton">
+                        <span>Registrate aquí</span>
+                </div>
+                /div>
+                <div class="boton_formulario">
+                    <input name="submit" type="submit" value="Enviar" class="Envir">
+                </div>
         </form>
     </div>
 </center>

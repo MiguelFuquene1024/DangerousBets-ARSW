@@ -4,6 +4,7 @@ package edu.escuelaing.arsw.dangerousbet.controller;
 
 import javax.validation.Valid;
 
+import edu.escuelaing.arsw.dangerousbet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ import edu.escuelaing.arsw.dangerousbet.model.Usuario;
 public class WebController {
 
 	@Autowired
-    private UserDao uc;
+    private UserService service;
 	
 	
 	
@@ -50,32 +51,31 @@ public class WebController {
         return "formulario";
     }
     
-    @GetMapping("/registro/bienvenido")
+    @GetMapping("/bienvenido")
     public String registroBienvenido(Model model) {
         //System.out.print(model.getAttribute("input1"));
-        
+        System.out.println("Login exitoso");
         return "bienvenido";
     }
     
     @PostMapping("/registro")
     public String registroEnviar(@Valid Usuario usuario,BindingResult bindingResult) {
-    	if(uc.existsById(usuario.getNickname())) {
-    		bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
-    	}
-    	//System.out.println(bindingResult.getAllErrors());
+        if(!service.save(usuario)){
+            bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
+        }
     	if(bindingResult.hasErrors()){
-          
             return "formulario";
     	}else{
-    			
-   
-    		uc.save(usuario);
-    		return "redirect:/registro/bienvenido";
-    			
-
-    		
+     		return "redirect:/registro/bienvenido";
     	}
   
+    }
+
+    @GetMapping("/logoutSuccessful")
+    public String logoutSuccessful(Model model) {
+        //System.out.print(model.getAttribute("input1"));
+        System.out.println("logout exitoso");
+        return "logoutSuccessful";
     }
 
 

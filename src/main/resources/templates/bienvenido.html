@@ -16,7 +16,12 @@
 			<img src="/estilos/ficha.jpeg" width="70%">
 			<div class="boton">
 				<a href="../../login" class="boton">
-		<span>volver</span>
+				<span>volver</span>
+			</div>
+			<div>
+				<form class="sf-form" th:action="@{/logout}" method="POST">
+					<input name="logout" type="submit" value="logout" class="logout">
+					<form/>
 			</div>
 		</div>
 		
