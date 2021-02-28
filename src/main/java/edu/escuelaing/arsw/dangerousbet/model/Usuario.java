@@ -42,6 +42,7 @@ public class Usuario {
 		
 	}
 	public Usuario(String nombre, String password, String email,String nickname) {
+		
         this.name = nombre;
         this.contrasena = password;
         this.correo = email;

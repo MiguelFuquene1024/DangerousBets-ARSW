@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -58,19 +59,19 @@ public class WebController {
     
     @PostMapping("/registro/enviar")
     public String registroEnviar(@Valid Usuario usuario,BindingResult bindingResult) {
+    	if(uc.existsById(usuario.getNickname())) {
+    		bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
+    	}
     	//System.out.println(bindingResult.getAllErrors());
-    	//System.out.println(bindingResult.getErrorCount());
     	if(bindingResult.hasErrors()){
           
             return "formulario";
     	}else{
-    			if(uc.existsById(usuario.getNickname())) {
-    				
-    				return "redirect:/registro/hola";
-    			}else {
-    				uc.save(usuario);
-    				return "redirect:/registro/bienvenido";
-    			}
+    			
+   
+    		uc.save(usuario);
+    		return "redirect:/registro/bienvenido";
+    			
 
     		
     	}
