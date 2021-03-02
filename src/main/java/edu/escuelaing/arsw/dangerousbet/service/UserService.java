@@ -2,6 +2,7 @@ package edu.escuelaing.arsw.dangerousbet.service;
 
 import edu.escuelaing.arsw.dangerousbet.dao.UserDao;
 import edu.escuelaing.arsw.dangerousbet.model.Usuario;
+import edu.escuelaing.arsw.dangerousbet.util.EncrytedPasswodUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,6 +25,8 @@ public class UserService{
         boolean correct=false;
         if(!dao.existsById(usuario.getNickname())) {
             correct=true;
+            String pas= EncrytedPasswodUtils.encryted(usuario.getContrasena());
+            usuario.setContrasena(pas);
             dao.save(usuario);
         }
         return correct;

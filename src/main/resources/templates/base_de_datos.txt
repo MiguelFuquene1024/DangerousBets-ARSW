@@ -32,6 +32,11 @@ create table dinero(
 	moneda int
 );
 
+create table rol(
+	nickname varchar(26),
+	value varchar(15)
+);
+
 drop table usuario;
 drop table dinero;
 ALTER TABLE usuario ADD CONSTRAINT id_usuario primary key(nickname); 

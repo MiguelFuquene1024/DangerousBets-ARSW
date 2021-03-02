@@ -2,6 +2,7 @@ package edu.escuelaing.arsw.dangerousbet.controller;
 
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import edu.escuelaing.arsw.dangerousbet.service.UserService;
@@ -29,8 +30,6 @@ public class WebController {
     private UserService service;
 	
 	
-	
-	
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("hora","buenos dias a todos este es la primera aplicacion");
@@ -52,10 +51,12 @@ public class WebController {
     }
     
     @GetMapping("/bienvenido")
-    public String registroBienvenido(Model model) {
-        //System.out.print(model.getAttribute("input1"));
+    public String registroBienvenido(HttpServletRequest request) {
+        if(request.isUserInRole("ROLE_USER")){
+            return "redirect:/user";
+        }
         System.out.println("Login exitoso");
-        return "bienvenido";
+        return "redirect:/admin";
     }
     
     @PostMapping("/registro")
@@ -78,5 +79,14 @@ public class WebController {
         return "logoutSuccessful";
     }
 
-
+    @GetMapping("/admin")
+    public String adminBienvenido(Model model) {
+        System.out.println("Admin");
+        return "admin";
+    }
+    @GetMapping("/user")
+    public String userBienvenido(Model model) {
+        System.out.println("user");
+        return "user";
+    }
 }
