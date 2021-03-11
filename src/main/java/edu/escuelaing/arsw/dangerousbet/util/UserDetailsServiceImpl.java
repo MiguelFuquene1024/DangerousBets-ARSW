@@ -32,7 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         System.out.println(user.get().toString());
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         grantList.add(new SimpleGrantedAuthority(rolUser.get().getValue()));
-        UserDetails userDetails = (UserDetails) new User(user.get().getNickname(),EncrytedPasswodUtils.encryted(user.get().getContrasena()), grantList);
+        UserDetails userDetails = (UserDetails) new User(user.get().getNickname(),user.get().getContrasena(), grantList);
         return userDetails;
 
     }
