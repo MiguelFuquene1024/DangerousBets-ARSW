@@ -32,6 +32,7 @@ public class WebController {
 	@Autowired
     private UserDao uc;
 	
+	
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("hora","buenos dias a todos este es la primera aplicacion");
@@ -67,13 +68,10 @@ public class WebController {
     		bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
     	}
     	if(bindingResult.hasErrors()){
-            
             return "formulario";
     	}else{
-    			
-   
     		uc.save(usuario);
-    		return "redirect:/registro/bienvenido";
+     		return "bienvenido";
     	}
   
     }
