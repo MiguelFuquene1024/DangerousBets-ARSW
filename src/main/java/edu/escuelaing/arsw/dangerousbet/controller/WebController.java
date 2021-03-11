@@ -67,7 +67,7 @@ public class WebController {
     	if(bindingResult.hasErrors()){
             return "formulario";
     	}else{
-     		return "redirect:/registro/bienvenido";
+     		return "bienvenido";
     	}
   
     }

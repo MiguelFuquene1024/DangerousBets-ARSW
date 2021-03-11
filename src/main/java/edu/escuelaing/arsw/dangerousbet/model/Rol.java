@@ -16,6 +16,8 @@ public class Rol {
     @Column
     private String value;
 
+
+
     public String getNickname() {
         return nickname;
     }
