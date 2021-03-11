@@ -85,5 +85,8 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 
 
 
+## Diagrama c&c
+
+![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/DiagramaC%26C.png)
 
  
