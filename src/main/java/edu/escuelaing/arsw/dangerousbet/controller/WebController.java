@@ -29,6 +29,8 @@ public class WebController {
 	@Autowired
     private UserService service;
 	
+	@Autowired
+    private UserDao uc;
 	
     @GetMapping("/")
     public String index(Model model) {
@@ -61,13 +63,17 @@ public class WebController {
     
     @PostMapping("/registro")
     public String registroEnviar(@Valid Usuario usuario,BindingResult bindingResult) {
-        if(!service.save(usuario)){
-            bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
-        }
+    	if(uc.existsById(usuario.getNickname())) {
+    		bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
+    	}
     	if(bindingResult.hasErrors()){
+            
             return "formulario";
     	}else{
-     		return "bienvenido";
+    			
+   
+    		uc.save(usuario);
+    		return "redirect:/registro/bienvenido";
     	}
   
     }
