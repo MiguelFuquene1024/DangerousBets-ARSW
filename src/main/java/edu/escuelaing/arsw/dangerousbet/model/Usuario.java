@@ -48,6 +48,9 @@ public class Usuario {
         this.correo = email;
         this.nickname=nickname;
     }
+    public Usuario(String nickname){
+		this.nickname=nickname;
+	}
 	public String getName() {
 		return name;
 	}
