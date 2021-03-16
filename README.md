@@ -3,7 +3,7 @@
 [Taiga](https://tree.taiga.io/project/julitom1-dangerousbets-1/backlog)
 
 ### Circleci
-[![CircleCI](https://circleci.com/gh/jsr25/Taller2Arep.svg?style=svg)](https://app.circleci.com/pipelines/github/MiguelFuquene1024/DangerousBets-ARSW)
+[![CircleCI](https://circleci.com/gh/MiguelFuquene1024/DangerousBets-ARSW.svg?style=svg)](https://app.circleci.com/pipelines/github/MiguelFuquene1024/DangerousBets-ARSW)
 
 ### Despliegue Heroku
 [![Heroku](https://www.herokucdn.com/deploy/button.png)](https://dangerousbetsarsw.herokuapp.com/)
