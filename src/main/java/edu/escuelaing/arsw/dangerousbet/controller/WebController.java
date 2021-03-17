@@ -56,7 +56,7 @@ public class WebController {
     @GetMapping("/bienvenido")
     public String registroBienvenido(HttpServletRequest request) {
         if(request.isUserInRole("ROLE_USER")){
-            return "redirect:/user";
+            return "redirect:/menu";
         }
         System.out.println("Login exitoso");
         return "redirect:/admin";
@@ -92,5 +92,9 @@ public class WebController {
     public String userBienvenido(Model model) {
         System.out.println("user");
         return "user";
+    }
+    @GetMapping("/menu")
+    public String userMenu(Model model) {
+        return "menu";
     }
 }
