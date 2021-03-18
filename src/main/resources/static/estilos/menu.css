@@ -45,6 +45,8 @@ body{
 	width:100%;
 	border-style: inset;
 }
+#panel-superior .herramientas .dropdown-menu form:hover,
+#panel-superior .herramientas .dropdown-menu input:HOVER,
 #panel-superior .herramientas .dropdown-menu li:hover{
 	
 	background:red;
@@ -58,7 +60,20 @@ body{
 	margin-top:1%;
 	line-height:2vw;
 }
-
+#panel-superior .herramientas .dropdown-menu form{
+	width:120%;
+	font-size:2vw;
+	line-height:2vw;
+	background:black;
+	text-align:left;
+}
+#panel-superior .herramientas .dropdown-menu input{
+	color:white;
+	background:black;
+	cursor:pointer;
+	width:100%;
+	text-align:left;
+}
 #panel-superior .herramientas:hover{
 	cursor:pointer;
 	
