@@ -1,4 +1,4 @@
-package edu.escuelaing.arsw.dangerousbet.util;
+ package edu.escuelaing.arsw.dangerousbet.util;
 
 import edu.escuelaing.arsw.dangerousbet.dao.RolDao;
 import edu.escuelaing.arsw.dangerousbet.dao.UserDao;
@@ -23,7 +23,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     UserDao dao;
     @Autowired
     RolDao rol;
-
+    
+  
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

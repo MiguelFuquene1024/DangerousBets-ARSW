@@ -2,12 +2,17 @@ package edu.escuelaing.arsw.dangerousbet.controller;
 
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import edu.escuelaing.arsw.dangerousbet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,6 +33,9 @@ public class WebController {
 
 	@Autowired
     private UserService service;
+	
+	@Autowired
+    private UserDao uc;
 	
 	
     @GetMapping("/")
@@ -53,20 +61,27 @@ public class WebController {
     @GetMapping("/bienvenido")
     public String registroBienvenido(HttpServletRequest request) {
         if(request.isUserInRole("ROLE_USER")){
-            return "redirect:/user";
+            return "redirect:/menu";
         }
         System.out.println("Login exitoso");
         return "redirect:/admin";
     }
+    @GetMapping("/monedas")
+    public ResponseEntity<?> getMonedas() {
+    		System.out.println("20002222222222222220202020200220020");
+            return new ResponseEntity<>(service.getMonedas(),HttpStatus.ACCEPTED);
+        
+    }
     
     @PostMapping("/registro")
     public String registroEnviar(@Valid Usuario usuario,BindingResult bindingResult) {
-        if(!service.save(usuario)){
-            bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
-        }
+    	if(uc.existsById(usuario.getNickname())) {
+    		bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
+    	}
     	if(bindingResult.hasErrors()){
             return "formulario";
     	}else{
+    		uc.save(usuario);
      		return "bienvenido";
     	}
   
@@ -89,6 +104,7 @@ public class WebController {
         System.out.println("user");
         return "user";
     }
+
     @GetMapping("/salas")
     public String salaBienvenido(Model model) {
         System.out.println("user");
@@ -98,5 +114,10 @@ public class WebController {
     public String crearSalaBienvenido(Model model) {
         System.out.println("user");
         return "crearSalas";
+    }
+    @GetMapping("/menu")
+    public String userMenu(Model model) {
+        return "menu";
+
     }
 }
