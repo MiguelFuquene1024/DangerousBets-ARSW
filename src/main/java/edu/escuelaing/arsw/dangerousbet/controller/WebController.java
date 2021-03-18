@@ -89,4 +89,14 @@ public class WebController {
         System.out.println("user");
         return "user";
     }
+    @GetMapping("/salas")
+    public String salaBienvenido(Model model) {
+        System.out.println("user");
+        return "salas";
+    }
+    @GetMapping("/crearSalas")
+    public String crearSalaBienvenido(Model model) {
+        System.out.println("user");
+        return "crearSalas";
+    }
 }

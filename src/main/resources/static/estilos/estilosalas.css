@@ -1,0 +1,68 @@
+body {
+
+}
+#header, #footer {
+	
+}
+body {
+	background:url('salapoker.jpg');
+	
+}
+
+#formulario .letra_formulario{
+	font-size:20px;
+	font-weight:700;
+}
+
+#formulario small{
+	font-size:13px;
+}
+#formulario .Restablecer,
+#formulario .Envir{
+	width:40%;
+	background:green;
+	
+}
+#formulario .Restablecer:hover,
+#formulario .Envir:hover{
+	width:40%;
+	background:#ED544B;
+	
+}
+#formulario{
+	text-align:center;
+	max-width:600px;
+	background:#DFFADE;
+	width:90%;
+	margin:3%;
+	opacity:.9;
+	padding-bottom:5%;
+	padding-top:2%;
+}
+#formulario .titulo{
+	color:#064C01;
+	font-size:30px;
+}
+
+#formulario .formulario_bloque .contrasena,
+#formulario .formulario_bloque .correo1,
+#formulario .formulario_bloque .nombre{
+	margin-bottom:2vw;
+}
+#formulario .boton_formulario{
+	padding-top:5%;
+}
+input{
+	width:90%;
+	margin-top:1%;
+	height:35px;
+	font-size:20px;	
+}
+.error{
+	color:red;
+}
+
+
+
+
+

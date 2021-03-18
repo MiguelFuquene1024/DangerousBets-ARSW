@@ -1,0 +1,53 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>DangerousBets</title>
+	
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" th:href="@{/estilos/estilosalas.css}">
+
+	
+</head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"></script>
+
+<center>
+	<div id="formulario">
+		
+		<form class="sf-form"    method="POST" >
+
+			
+			
+			<div class="formulario_bloque">
+				<div class="registro">
+					<h1 class="titulo">Creación de sala</h1>
+				</div>
+				<div class="nombre">
+					<label for="name" class="letra_formulario">Nombre Sala</label></br>
+					<input name="name" id="name" type="text" size="20" ><br>
+					
+				</div>
+				
+			</div>
+			
+			<div class="formulario_bloque">
+				
+				<div class="contrasena">
+					<label for="contrasena" class="letra_formulario">Clave de Acceso</label></br>
+					<input for="contrasena" name="contrasena" id="contrasena1" type="password" size="20"><br>		
+				</div>
+				
+				<div class="correo">
+					<label for="contrasena2" class="letra_formulario">Confirmar clave de acceso</label></br>
+					<input name="contrasena2" id="contrasena2" type="password" size="20">
+				</div>
+			</div>
+			<div class="boton_formulario">
+			<input name="" type="reset" value="Restablecer" class="Restablecer">
+		<input name="submit" type="submit" value="Enviar" class="Envir">
+		
+		</div>
+	</div>
