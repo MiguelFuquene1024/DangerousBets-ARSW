@@ -1,19 +1,13 @@
 var apiclient = (function () {
   
 	return {
-		cerrarSesion : function(){
-		let promise = new Promise( (resolve, reject) => {
-			var putPromise = $.ajax({
-				url: "http://localhost:8080/logout",
-				type: 'POST',
-				contentType: "application/json"
-			});
-			resolve(putPromise);				 
-			});
-			return promise;
-				
+		getMonedas : function (callback) {
+			$.getJSON("http://localhost:8080/monedas" ,function (data) {
+					callback(data);
+				}
+			);
 		}
 
-	}	
+	};
 
 })();

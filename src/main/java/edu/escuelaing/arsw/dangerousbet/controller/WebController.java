@@ -2,12 +2,17 @@ package edu.escuelaing.arsw.dangerousbet.controller;
 
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import edu.escuelaing.arsw.dangerousbet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -60,6 +65,12 @@ public class WebController {
         }
         System.out.println("Login exitoso");
         return "redirect:/admin";
+    }
+    @GetMapping("/monedas")
+    public ResponseEntity<?> getMonedas() {
+    		System.out.println("20002222222222222220202020200220020");
+            return new ResponseEntity<>(service.getMonedas(),HttpStatus.ACCEPTED);
+        
     }
     
     @PostMapping("/registro")
