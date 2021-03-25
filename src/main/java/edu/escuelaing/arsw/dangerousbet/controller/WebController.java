@@ -2,6 +2,7 @@ package edu.escuelaing.arsw.dangerousbet.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,10 +68,8 @@ public class WebController {
         return "redirect:/admin";
     }
     @GetMapping("/monedas")
-    public ResponseEntity<?> getMonedas() {
-    		System.out.println("20002222222222222220202020200220020");
+    public ResponseEntity<?> getMonedas() {	
             return new ResponseEntity<>(service.getMonedas(),HttpStatus.ACCEPTED);
-        
     }
     
     @PostMapping("/registro")
@@ -118,6 +117,31 @@ public class WebController {
     @GetMapping("/menu")
     public String userMenu(Model model) {
         return "menu";
+    }
+	@GetMapping("/logros")
+    public String logrosMenu(Model model) {
+        return "logros";
+    }
+	@PostMapping("/vista")
+    public String registroSala(@Valid Usuario usuario,BindingResult bindingResult) {
 
+     		return "vista";
+  
+    }
+	@GetMapping("/vista")
+    public String visaPoker(Model model) {
+        return "vista";
+    }
+	@GetMapping("/perfil")
+    public String verPerfil(Model model) {
+        return "perfil";
+    }
+	@GetMapping("/getLogros")
+    public ResponseEntity<?> getLogros() {	
+		ArrayList<String> lista=new ArrayList<>();
+		lista.add("cuadrado.png");
+		lista.add("cuadrado.png");
+		lista.add("cuadrado.png");
+        return new ResponseEntity<>(lista,HttpStatus.ACCEPTED);
     }
 }

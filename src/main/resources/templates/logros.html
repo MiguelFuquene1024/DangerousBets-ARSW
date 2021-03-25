@@ -1,0 +1,68 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>DangerousBets</title>
+	
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" th:href="@{/estilos/logros.css}">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.bundle.min.js"></script>
+	<script src="/js/apiclient.js"></script>
+	<script src="/js/logros.js"></script>
+
+</head>
+
+<body>
+
+   <div id="contenedor">
+		<div class="volver">
+			<a href="menu"><img src="/estilos/imagenes/flecha-volver-roja.png" width="6%"></a>		
+		</div>
+		<center>
+		<div id="logros_titulo">
+			<img src="/estilos/imagenes/tlogros.png" width="100%">
+		</div></center>
+		<div class="medallas">
+			<div class="medalla">
+				<div id="primeraRonda" class="imagen"></div>
+				<label>Gana la primera ronda</label>
+			</div>
+			<div class="medalla">
+				<div id="gana3Rondas" class="imagen"></div>
+				<label>Gana 3 rondas consecutivas</label>
+			</div>
+			<div class="medalla">
+				<div id="fullHouse" class="imagen"></div>
+				<label>Gana por Full-house</label>
+			</div>
+			<div class="medalla">
+				<div id="ganaPorEscalera" class="imagen"></div>
+				<label>Gana por escalera</label>
+			</div>
+			<div class="medalla">
+				<div id="ganaPorColor" class="imagen"></div>
+				<label>Gana por color</label>
+			</div>
+			<div class="medalla">
+				<div id="ganaElJuego" class="imagen"></div>
+				<label>Gana el juego</label>
+			</div>
+			<div class="medalla">
+				<div id="apostarTodo" class="imagen"></div>
+				<label>Apuesta todo y gana el juego</label>
+			</div>
+	
+			<div class="medalla">
+				<div id="ganaPorRetiro" class="imagen"></div>
+				<label>Gana porque todos se retiren</label>
+			</div>
+		</div>
+		
+		
+   </div>
+</body>
+
+</html>

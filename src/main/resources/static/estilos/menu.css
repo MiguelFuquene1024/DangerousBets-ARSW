@@ -1,3 +1,7 @@
+.link{
+  color: black;
+  text-decoration: none;
+}
 body{
 	background:black;
 	overflow-x: hidden;
@@ -7,7 +11,7 @@ body{
 	margin-top:10em;
 	margin-bottom:1em;
 	width:100%;
-	background:url('poker.jfif');
+	background:url('imagenes/poker.jfif');
 	background-size:100% auto;
 }
 #panel-superior{
@@ -82,21 +86,31 @@ body{
 	
 }
 #panel-superior .monedas{
-	width:15%;
+	width:30%;
 	height:100%;
-	right:38%;	
+	right:30%;	
 }
+
 #panel-superior .monedas label{
 	font-size:3vw;
 	margin-left:5%;
 	float:left;
 	margin-top:-2%;
 }
-#panel-superior .monedas img{
-	width:26%;
-	margin:1%;
+
+#panel-superior .monedas .divisor{
+	width:40%;
+	margin-left:5%;
 	float:left;
 	
+}
+#panel-superior .monedas img{
+	width:30%;
+	margin:1%;
+	float:left;	
+}
+#panel-superior .monedas .trofeos img{
+	width:40%;	
 }
 #panel-inferior{
 	height:44vw;
@@ -111,7 +125,6 @@ body{
 #bloque2{
 	width:60%;
 	display:inline-block;
-	
 	height:100%;
 }
 #bloque2 .botones{

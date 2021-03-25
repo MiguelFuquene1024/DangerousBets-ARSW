@@ -6,8 +6,16 @@ var apiclient = (function () {
 					callback(data);
 				}
 			);
-		}
+		},
 
-	};
+		getLogros : function (callback) {
 
+			$.getJSON("/getLogros" ,function (data) {
+					callback(data);
+				}
+			);
+		},
+		
+
+	}
 })();

@@ -11,13 +11,17 @@
 	
 </head>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript"></script>
 
+
+<body>
+<div class="volver">
+		<a href="menu">	<img src="/estilos/imagenes/flecha-volver-roja.png" width="6%"></a>		
+		</div>
 <center>
+	
 	<div id="formulario">
 		
-		<form class="sf-form"    method="POST" >
+		<form class="sf-form" th:action="@{/vista}"   method="POST" >
 
 			
 			
@@ -51,3 +55,4 @@
 		
 		</div>
 	</div>
+</body>

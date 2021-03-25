@@ -1,0 +1,53 @@
+body{
+	background:green;
+}
+#contenedor{
+	display:block;
+	height:50vw;
+}
+#informacion,
+#imagen_perfil{
+	width:50%;
+	float:left;	
+}
+#informacion{
+	margin-top:5%;
+	position:relative;
+}
+#informacion .titulo{
+	line-height:3vw;
+	font-weight:700;
+	font-size:3vw;
+	padding:0;
+	margin:0;
+}
+#informacion .entrada{
+	line-height:3vw;
+	font-size:2.5vw;
+}
+#informacion .info{
+	margin-top:4%;
+}
+#informacion .editar{
+	top:-4%;
+	right:4%;
+	font-size:2.5vw;
+	position:absolute;
+}
+#informacion .editar label:hover{
+	color:blue;
+	cursor:pointer;
+}
+#historial{
+	display:block;
+	width:100%;
+	text-align:center
+}
+#historial{
+	display:block;
+	width:100%;
+	text-align:center;
+	font-size:6vw;
+	font-weight:700;
+}
+

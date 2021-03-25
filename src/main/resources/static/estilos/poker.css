@@ -1,0 +1,78 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: url("imagenes/fondo.jpg");
+    
+}
+
+.conteiner{
+    background-image: url("imagenes/mesapoker.png");
+    align-self:center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 870px;
+    height: 420px;
+}
+
+.carta{
+    width: 50px;
+    height: 70px;
+    border: 2px solid black;
+}
+
+
+#cartas{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+    
+   
+}
+
+#cartas_conteiner{
+    display: flex;
+    justify-content: center;
+}
+
+.button_mesa{
+    height: 30px;
+    width: 90px;
+    border: 2px solid black;
+    border-radius: 45%;
+    color: black;
+    
+
+}
+
+.user_img{
+    height: 50px;
+    width: 60px;
+    border: 2px solid black;
+
+}
+
+#user{
+    display: flex;
+    justify-content: center;
+}
+#userInfo{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#valor_apuesta{
+    height: 30px;
+    width: 90px;
+    visibility: hidden;   
+    margin-top: 30px;
+}
+
+#conteiner_buttons{
+    display: flex;
+    flex-direction: column;
+}
+
+
