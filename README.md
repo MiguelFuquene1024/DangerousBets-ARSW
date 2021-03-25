@@ -86,15 +86,15 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 
 ## Diagrama c&c
 
-![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/cc.jpeg)
+![](img/cc.jpeg)
 
 
 ## Diagrama de despliegue
 
-![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/despliegue.jpeg)
+![](img/despliegue.jpeg)
 
 ## Diagrama entidad-Relación
 
-![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/entidad-relacion.jpeg)
+![](img/entidadRelacion.PNG)
 
  
