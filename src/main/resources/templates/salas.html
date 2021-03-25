@@ -17,10 +17,13 @@
 			<a href="menu"><img src="/estilos/imagenes/flecha-volver-roja.png" width="6%"></a>		
 		</div>
 <center>
-    <div id="formulario">
+    <div id="formulario" style="height:55vw">
         <form class="sf-form" th:action="@{/vista}" method="POST">
-            <div class="formulario_bloque">
-                <div class="registro">
+            <div class="fondo"></div>
+			<div class="formulario_bloque">
+                
+	
+				<div class="registro">
                     <h1 class="titulo">Salas</h1>
                 </div>
                 <div class="nickname">
@@ -37,10 +40,11 @@
                     <a href="../../crearSalas" class="boton">
                         <span>Crear una sala</span>
                 </div>
-                </div>
                 <div class="boton_formulario">
                     <input name="submit" type="submit" value="Enviar" class="Envir">
                 </div>
+				</div>
+                
         </form>
     </div>
 </center>

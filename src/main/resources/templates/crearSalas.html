@@ -21,9 +21,9 @@
 	
 	<div id="formulario">
 		
-		<form class="sf-form" th:action="@{/vista}"   method="POST" >
+		<form class="sf-form" th:action="@{/vista}"   style="height:60vw" method="POST" >
 
-			
+			<div class="fondo"></div>
 			
 			<div class="formulario_bloque">
 				<div class="registro">
@@ -35,9 +35,6 @@
 					
 				</div>
 				
-			</div>
-			
-			<div class="formulario_bloque">
 				
 				<div class="contrasena">
 					<label for="contrasena" class="letra_formulario">Clave de Acceso</label></br>
@@ -48,11 +45,12 @@
 					<label for="contrasena2" class="letra_formulario">Confirmar clave de acceso</label></br>
 					<input name="contrasena2" id="contrasena2" type="password" size="20">
 				</div>
-			</div>
+			
 			<div class="boton_formulario">
 			<input name="" type="reset" value="Restablecer" class="Restablecer">
 		<input name="submit" type="submit" value="Enviar" class="Envir">
 		
+		</div>
 		</div>
 	</div>
 </body>
