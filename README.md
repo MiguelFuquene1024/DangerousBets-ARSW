@@ -37,7 +37,6 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
  -	Ranking de mejores jugadores
  -	Categorización de salas
  -	Lista de amigos por usuario
- -	Control de pagos
 
  ## Casos de Uso:
  
