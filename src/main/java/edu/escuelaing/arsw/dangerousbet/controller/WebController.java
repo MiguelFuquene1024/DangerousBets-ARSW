@@ -25,12 +25,6 @@ import org.springframework.web.bind.annotation.*;
 public class WebController {
 
 
-	
-
-	
-	
-
-
 //    @PostMapping("/login")
 //    public ResponseEntity<?> login(@RequestBody Usuario user) {
 //        try {
@@ -56,10 +50,10 @@ public class WebController {
         System.out.println("Login exitoso");
         return "redirect:/admin";
     }
-//    @GetMapping("/monedas")
-//    public ResponseEntity<?> getMonedas() {
-//            return new ResponseEntity<>(service.getMonedas(),HttpStatus.ACCEPTED);
-//    }
+    @GetMapping("/monedas")
+    public ResponseEntity<?> getMonedas() {
+            return new ResponseEntity<>(5000,HttpStatus.ACCEPTED);
+    }
 //
 //    @PostMapping("/registro")
 //    public ResponseEntity<?> registro(@RequestBody Usuario user) {
@@ -77,28 +71,28 @@ public class WebController {
         System.out.println("logout exitoso");
         return "logoutSuccessful";
     }
-
-    @GetMapping("/admin")
-    public String adminBienvenido(Model model) {
-        System.out.println("Admin");
-        return "admin";
-    }
-    @GetMapping("/user")
-    public String userBienvenido(Model model) {
-        System.out.println("user");
-        return "user";
-    }
-
-    @GetMapping("/salas")
-    public String salaBienvenido(Model model) {
-        System.out.println("user");
-        return "salas";
-    }
-    @GetMapping("/crearSalas")
-    public String crearSalaBienvenido(Model model) {
-        System.out.println("user");
-        return "crearSalas";
-    }
+//
+//    @GetMapping("/admin")
+//    public String adminBienvenido(Model model) {
+//        System.out.println("Admin");
+//        return "admin";
+//    }
+//    @GetMapping("/user")
+//    public String userBienvenido(Model model) {
+//        System.out.println("user");
+//        return "user";
+//    }
+//
+//    @GetMapping("/salas")
+//    public String salaBienvenido(Model model) {
+//        System.out.println("user");
+//        return "salas";
+//    }
+//    @GetMapping("/crearSalas")
+//    public String crearSalaBienvenido(Model model) {
+//        System.out.println("user");
+//        return "crearSalas";
+//    }
     @GetMapping("/menu")
     public String userMenu(Model model) {
         return "menu";
@@ -117,10 +111,10 @@ public class WebController {
     public String visaPoker(Model model) {
         return "vista";
     }
-	@GetMapping("/perfil")
-    public String verPerfil(Model model) {
-        return "perfil";
-    }
+//	@GetMapping("/perfil")
+//    public String verPerfil(Model model) {
+//        return "perfil";
+//    }
 	@GetMapping("/getLogros")
     public ResponseEntity<?> getLogros() {	
 		ArrayList<String> lista=new ArrayList<>();

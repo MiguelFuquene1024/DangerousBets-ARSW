@@ -1,7 +1,7 @@
 var api = apiclient;
 var dinero=api.getMonedas(function(plata){
 $("#cantidadDeMonedas").html(plata);
-$("#nickname").html(sessionStorage.getItem("usuario"))
+$("#nickname").html(localStorage.getItem("usuario"))
 });
 
 //var nick=$("#nickname").html(sessionStorage.getItem("usuario"))

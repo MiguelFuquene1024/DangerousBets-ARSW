@@ -20,21 +20,23 @@ var apiclient = (function () {
 			let nickname=$("#nickname").val()
 			let pass=$("#contrasena").val()
 			const promise = $.post({
-				url: "/login",
+				url: "/auth/login",
 				contentType: "application/json",
-				data: "{\"nickname\": \"" + nickname + "\",\"contrasena\":\"" + pass + "\"}",
+				data: "{\"nickname\":\"" + nickname + "\",\"contrasena\":\"" + pass + "\"}",
 			});
 			promise.then(function (data) {
 				console.log(data)
-                if(data){
-					window.location.href="/menu.html";
-					sessionStorage.setItem("usuario",nickname)
-				}
-				else{
-					alert("Clave Incorrecta")
-				}
+				console.log(data.nombreUsuario)
+				console.log(data.authorities[0].authority)
+				localStorage.removeItem("usuario")
+				localStorage.removeItem("token")
+				localStorage.removeItem("authority")
+				localStorage.setItem("usuario",data.nombreUsuario)
+				localStorage.setItem("token",data.token)
+				localStorage.setItem("authority",data.authorities[0].authority)
+				window.location.href="/menu.html";
             }, function (error) {
-                alert("No se pudo crear el blueprint")
+                alert("No se pudo conectar")
             }
 			
         );
@@ -46,20 +48,21 @@ var apiclient = (function () {
 			let name=$("#name").val()
 			let correo=$("#correo1").val()
 			const promise = $.post({
-				url: "/registro",
+				url: "/auth/register",
 				contentType: "application/json",
 				data: "{\"nickname\": \"" + nickname + "\",\"contrasena\":\"" + pass + "\",\"name\":\"" + name + "\",\"correo\":\"" + correo + "\"}",
 			});
 			promise.then(function (data) {
 				console.log(data)
-                if(data){
+                if(data=="Usuario creado"){
+					console.log(data)
 					window.location.href="/login.html";					
 				}
 				else{
 					alert("No puede registrar a este usuario")
 				}
             }, function (error) {
-                alert("No se pudo crear el blueprint")
+                alert("No se pudo crear el usuario")
             }
 			
         )		
