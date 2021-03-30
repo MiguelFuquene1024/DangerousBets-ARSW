@@ -6,12 +6,13 @@
 <title>DangerousBets</title>
 	
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" th:href="@{/estilos/style.css}">
+	<link rel="stylesheet" type="text/css" href="estilos/style.css">
 
 	
 </head>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="js/apiclient.js"></script>
 <script type="text/javascript">
 function miFuncion(){
 	alert('ERROR: prueba 2.0');
@@ -43,7 +44,7 @@ function validarFormulario(){
 <center>
 	<div id="formulario">
 		
-		<form class="sf-form" th:object="${usuario}" th:action="@{/registro}"  method="POST" onsubmit="return validarFormulario()">
+
 
 			
 			
@@ -53,14 +54,13 @@ function validarFormulario(){
 				</div>
 				<div class="nombre">
 					<label for="name" class="letra_formulario">Nombre Usuario</label></br>
-					<input name="name" id="name" type="text" size="20" th:field="*{name}"><br>
-					<small class="error" th:if="${#fields.hasErrors('name')}"  th:errors="*{name}"></small>
+					<input name="name" id="name" type="text" size="20" ><br>
+
 				</div>
 				<div class="nickname">
 					<label for="nickname" class="letra_formulario">Nickname</label></br>
-					<input th:field="*{nickname}" name="nickname" id="nickname" type="text" size="20" ></br>
-					<small class="error" th:if="${#fields.hasErrors('nickname')}"  th:errors="*{nickname}"></small><br>
-					<small>El nickname debe ser de 3 hasta 25 caracteres de largo.</small>
+					<input  name="nickname" id="nickname" type="text" size="20" ></br>
+
 				</div>
 			</div>
 			<div class="formulario_bloque">
@@ -69,8 +69,8 @@ function validarFormulario(){
 				</div>
 				<div class="correo1">
 					<label for="correo1" class="letra_formulario">Correo electrónico</label></br>
-					<input th:field="*{correo}"  name="correo1" id="correo1" type="text"><br>
-					<small class="error" th:if="${#fields.hasErrors('correo')}"  th:errors="*{correo}"></small>
+					<input   name="correo1" id="correo1" type="text"><br>
+
 				</div>
 				<div class="correo2">
 					<label for="correo2" class="letra_formulario">Confirmar correo electrónico</label></br>
@@ -83,9 +83,8 @@ function validarFormulario(){
 				</div>
 				<div class="contrasena">
 					<label for="contrasena" class="letra_formulario">Contraseña</label></br>
-					<input for="contrasena" th:field="*{contrasena}" name="contrasena" id="contrasena1" type="password" size="20"><br>
-					<small class="error" th:if="${#fields.hasErrors('contrasena')}"  th:errors="*{contrasena}"></small><br>
-					<small>Una contraseña segura debe tener por lo menos 8 caracteres de largo.</small>
+					<input for="contrasena"  name="contrasena" id="contrasena1" type="password" size="20"><br>
+
 				</div>
 				
 				<div class="correo">
@@ -95,12 +94,12 @@ function validarFormulario(){
 			</div>
 			<div class="boton_formulario">
 			<input name="" type="reset" value="Restablecer" class="Restablecer">
-		<input name="submit" type="submit" value="Enviar" class="Envir">
+		<input name="submit" type="button" onclick="apiclient.postRegistro()" value="Enviar" class="Envir">
 		
 		</div>
 	</div>
 	
 </center>
-</form>
+
 </html>
 

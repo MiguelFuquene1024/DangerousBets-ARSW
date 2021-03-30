@@ -10,4 +10,10 @@ public class EncrytedPasswodUtils {
     }
 
 
+
+    public static boolean matches(String password, String encode){
+        BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
+        return encoder.matches(password,encode);
+    }
+
 }
