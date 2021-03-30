@@ -39,17 +39,16 @@ public class WebController {
     private UserDao uc;
 	
 	
-    @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("hora","buenos dias a todos este es la primera aplicacion");
-        return "index";
-    }
 
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("usuario", new Usuario());;
-        
-        return "login";
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Usuario user) {
+        try {
+            return new ResponseEntity<>(service.login(user),HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            Logger.getLogger(WebController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/registro")
@@ -73,17 +72,13 @@ public class WebController {
     }
     
     @PostMapping("/registro")
-    public String registroEnviar(@Valid Usuario usuario,BindingResult bindingResult) {
-    	if(uc.existsById(usuario.getNickname())) {
-    		bindingResult.rejectValue("nickname", "usuario.nickname", "Este nickname ya existe");
-    	}
-    	if(bindingResult.hasErrors()){
-            return "formulario";
-    	}else{
-    		uc.save(usuario);
-     		return "bienvenido";
-    	}
-  
+    public ResponseEntity<?> registro(@RequestBody Usuario user) {
+        try {
+            return new ResponseEntity<>(service.save(user),HttpStatus.CREATED);
+        } catch (Exception e) {
+            Logger.getLogger(WebController.class.getName()).log(Level.SEVERE, null, e);
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/logoutSuccessful")
