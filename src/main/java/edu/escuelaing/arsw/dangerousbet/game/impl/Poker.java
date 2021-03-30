@@ -3,7 +3,6 @@ package edu.escuelaing.arsw.dangerousbet.game.impl;
 import edu.escuelaing.arsw.dangerousbet.game.Baraja;
 import edu.escuelaing.arsw.dangerousbet.game.Juego;
 import edu.escuelaing.arsw.dangerousbet.game.JuegoException;
-import edu.escuelaing.arsw.dangerousbet.model.Usuario;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.Map;
 public class Poker implements Juego {
 
 
-    private List<Usuario> jugadores;
+//    private List<Usuario> jugadores;
     private Baraja baraja;
     private Map<String, List<String>> cartas;
     private Map<String, Integer> apuestas;
@@ -76,13 +75,13 @@ public class Poker implements Juego {
 
     }
 
-    public void setJugadores(List<Usuario> jugadores) {
-        this.jugadores = jugadores;
-    }
-
-    public int getSizeJugadores() {
-        return jugadores.size();
-    }
+//    public void setJugadores(List<Usuario> jugadores) {
+//        this.jugadores = jugadores;
+//    }
+//
+//    public int getSizeJugadores() {
+//        return jugadores.size();
+//    }
 
     public Integer getApuestaByJugador(String nickname) {
         return apuestas.get(nickname);
