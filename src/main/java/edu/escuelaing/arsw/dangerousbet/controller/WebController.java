@@ -127,6 +127,11 @@ public class WebController {
 		lista.add("cuadrado.png");
 		lista.add("cuadrado.png");
 		lista.add("cuadrado.png");
+		lista.add("cuadrado.png");
+		lista.add("color.png");
+		lista.add("ganar_juego.png");
+		lista.add("apostar_todo.png");
+		lista.add("cuadrado.png");
         return new ResponseEntity<>(lista,HttpStatus.ACCEPTED);
     }
 }

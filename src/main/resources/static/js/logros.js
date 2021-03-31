@@ -1,13 +1,14 @@
 var api = apiclient;
 function logros(logros){
+	
 	$("#primeraRonda").css("background-image","url('estilos/imagenes/"+logros[0]+"')");
-	$("#gana3Rondas").css("background-image","url('estilos/imagenes/en_racha.png')");
-	$("#fullHouse").css("background-image","url('estilos/imagenes/full_house.png')");
-	$("#ganaPorEscalera").css("background-image","url('estilos/imagenes/escalera.png')");
-	$("#ganaPorColor").css("background-image","url('estilos/imagenes/color.png')");
-	$("#ganaElJuego").css("background-image","url('estilos/imagenes/ganar_juego.png')");
-	$("#apostarTodo").css("background-image","url('estilos/imagenes/apostar_todo.png')");
-	$("#ganaPorRetiro").css("background-image","url('estilos/imagenes/cuadrado.png')");
+	$("#gana3Rondas").css("background-image","url('estilos/imagenes/"+logros[1]+"')");
+	$("#fullHouse").css("background-image","url('estilos/imagenes/"+logros[2]+"')");
+	$("#ganaPorEscalera").css("background-image","url('estilos/imagenes/"+logros[3]+"')");
+	$("#ganaPorColor").css("background-image","url('estilos/imagenes/"+logros[4]+"')");
+	$("#ganaElJuego").css("background-image","url('estilos/imagenes/"+logros[5]+"')");
+	$("#apostarTodo").css("background-image","url('estilos/imagenes/"+logros[6]+"')");
+	$("#ganaPorRetiro").css("background-image","url('estilos/imagenes/"+logros[7]+"')");
 }
 
 $(document).ready(function(){	
