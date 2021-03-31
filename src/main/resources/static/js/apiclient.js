@@ -63,15 +63,19 @@ var apiclient = (function () {
 				console.log(data)
                 if(data=="Usuario creado"){
 					console.log(data)
+
 					window.location.href="/bienvenido.html";					
+
 				}
 				else{
 					$("#nickname").after('<small class="error">nickname ya existe.</small>');
 					//alert("No puede registrar a este usuario")
 				}
             }, function (error) {
+
 				$("#nickname").after('<small class="error">nickname ya existe.</small>');
                 //alert("No se pudo crear el usuario")
+
             }
 			
         )		

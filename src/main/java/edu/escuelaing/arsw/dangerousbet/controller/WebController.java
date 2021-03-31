@@ -54,12 +54,14 @@ public class WebController {
     public ResponseEntity<?> getMonedas() {
             return new ResponseEntity<>(5000,HttpStatus.ACCEPTED);
     }
+
 	
 	@GetMapping("/logrosObtenidos")
     public ResponseEntity<?> logrosObtenidos() {
 
             return new ResponseEntity<>(2,HttpStatus.ACCEPTED);
     }
+
 //
 //    @PostMapping("/registro")
 //    public ResponseEntity<?> registro(@RequestBody Usuario user) {
