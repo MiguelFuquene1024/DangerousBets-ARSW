@@ -10,6 +10,7 @@ console.log(numeroLogros);
 $("#racha_trofeos").html(numeroLogros+"/10");
 //$("#nickname").html(localStorage.getItem("usuario"))
 
+});
 
 //var nick=$("#nickname").html(sessionStorage.getItem("usuario"))
 
