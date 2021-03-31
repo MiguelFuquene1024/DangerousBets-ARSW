@@ -8,11 +8,7 @@ body {
 	background:url('imagenes/salapoker.jpg');
 	
 }
-.formulario_bloque{
-	position:absolute;
-	height:auto;
-	width:100%;
-}
+
 #formulario .letra_formulario{
 	font-size:20px;
 	font-weight:700;
@@ -31,27 +27,17 @@ body {
 #formulario .Envir:hover{
 	width:40%;
 	background:#ED544B;
-	cursor:pointer;
 	
 }
 #formulario{
 	text-align:center;
 	max-width:600px;
+	background:#DFFADE;
 	width:90%;
 	margin:3%;
+	opacity:.9;
 	padding-bottom:5%;
 	padding-top:2%;
-	position:relative;
-	
-}
-#formulario .fondo{
-	position:absolute;
-	width:100%;
-	height:100%;
-	background:#FCFF80;
-	width:100%;
-
-	opacity:.6;
 }
 #formulario .titulo{
 	color:#064C01;

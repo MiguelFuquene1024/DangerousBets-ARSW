@@ -60,6 +60,7 @@ input{
 }
 .error{
 	color:red;
+	display:inline-block;
 }
 
 

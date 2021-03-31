@@ -9,54 +9,38 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import edu.escuelaing.arsw.dangerousbet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.*;
 
-import edu.escuelaing.arsw.dangerousbet.dao.UserDao;
-import edu.escuelaing.arsw.dangerousbet.model.Usuario;
 
 
 @Controller
 public class WebController {
 
-	@Autowired
-    private UserService service;
-	
-	@Autowired
-    private UserDao uc;
-	
-	
 
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Usuario user) {
-        try {
-            return new ResponseEntity<>(service.login(user),HttpStatus.ACCEPTED);
-        } catch (Exception e) {
-            Logger.getLogger(WebController.class.getName()).log(Level.SEVERE, null, e);
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @GetMapping("/registro")
-    public String registro(Model model) {
-        System.out.print(model.getAttribute("input1"));
-        model.addAttribute("usuario", new Usuario());
-        return "formulario";
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody Usuario user) {
+//        try {
+//            return new ResponseEntity<>(service.login(user),HttpStatus.ACCEPTED);
+//        } catch (Exception e) {
+//            Logger.getLogger(WebController.class.getName()).log(Level.SEVERE, null, e);
+//            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+//        }
+//    }
+//
+//    @GetMapping("/registro")
+//    public String registro(Model model) {
+//        System.out.print(model.getAttribute("input1"));
+//        model.addAttribute("usuario", new Usuario());
+//        return "formulario";
+//    }
     
     @GetMapping("/bienvenido")
     public String registroBienvenido(HttpServletRequest request) {
@@ -67,19 +51,25 @@ public class WebController {
         return "redirect:/admin";
     }
     @GetMapping("/monedas")
-    public ResponseEntity<?> getMonedas() {	
-            return new ResponseEntity<>(service.getMonedas(),HttpStatus.ACCEPTED);
+    public ResponseEntity<?> getMonedas() {
+            return new ResponseEntity<>(5000,HttpStatus.ACCEPTED);
     }
-    
-    @PostMapping("/registro")
-    public ResponseEntity<?> registro(@RequestBody Usuario user) {
-        try {
-            return new ResponseEntity<>(service.save(user),HttpStatus.CREATED);
-        } catch (Exception e) {
-            Logger.getLogger(WebController.class.getName()).log(Level.SEVERE, null, e);
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
-        }
+	
+	@GetMapping("/logrosObtenidos")
+    public ResponseEntity<?> logrosObtenidos() {
+
+            return new ResponseEntity<>(2,HttpStatus.ACCEPTED);
     }
+//
+//    @PostMapping("/registro")
+//    public ResponseEntity<?> registro(@RequestBody Usuario user) {
+//        try {
+//            return new ResponseEntity<>(service.save(user),HttpStatus.CREATED);
+//        } catch (Exception e) {
+//            Logger.getLogger(WebController.class.getName()).log(Level.SEVERE, null, e);
+//            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+//        }
+//    }
 
     @GetMapping("/logoutSuccessful")
     public String logoutSuccessful(Model model) {
@@ -87,28 +77,28 @@ public class WebController {
         System.out.println("logout exitoso");
         return "logoutSuccessful";
     }
-
-    @GetMapping("/admin")
-    public String adminBienvenido(Model model) {
-        System.out.println("Admin");
-        return "admin";
-    }
-    @GetMapping("/user")
-    public String userBienvenido(Model model) {
-        System.out.println("user");
-        return "user";
-    }
-
-    @GetMapping("/salas")
-    public String salaBienvenido(Model model) {
-        System.out.println("user");
-        return "salas";
-    }
-    @GetMapping("/crearSalas")
-    public String crearSalaBienvenido(Model model) {
-        System.out.println("user");
-        return "crearSalas";
-    }
+//
+//    @GetMapping("/admin")
+//    public String adminBienvenido(Model model) {
+//        System.out.println("Admin");
+//        return "admin";
+//    }
+//    @GetMapping("/user")
+//    public String userBienvenido(Model model) {
+//        System.out.println("user");
+//        return "user";
+//    }
+//
+//    @GetMapping("/salas")
+//    public String salaBienvenido(Model model) {
+//        System.out.println("user");
+//        return "salas";
+//    }
+//    @GetMapping("/crearSalas")
+//    public String crearSalaBienvenido(Model model) {
+//        System.out.println("user");
+//        return "crearSalas";
+//    }
     @GetMapping("/menu")
     public String userMenu(Model model) {
         return "menu";
@@ -118,19 +108,19 @@ public class WebController {
         return "logros";
     }
 	@PostMapping("/vista")
-    public String registroSala(@Valid Usuario usuario,BindingResult bindingResult) {
-
-     		return "vista";
-  
-    }
+//    public String registroSala(@Valid Usuario usuario,BindingResult bindingResult) {
+//
+//     		return "vista";
+//
+//    }
 	@GetMapping("/vista")
     public String visaPoker(Model model) {
         return "vista";
     }
-	@GetMapping("/perfil")
-    public String verPerfil(Model model) {
-        return "perfil";
-    }
+//	@GetMapping("/perfil")
+//    public String verPerfil(Model model) {
+//        return "perfil";
+//    }
 	@GetMapping("/getLogros")
     public ResponseEntity<?> getLogros() {	
 		ArrayList<String> lista=new ArrayList<>();

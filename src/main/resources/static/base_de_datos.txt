@@ -1,0 +1,71 @@
+create trigger ADDMONEDA
+after insert on usuario
+ FOR EACH ROW
+execute procedure addDinero();
+
+drop trigger ADDMONEDA on usuario;
+insert into usuario values('miguel','fuque','12345678','mi.fuque');
+
+
+CREATE OR REPLACE FUNCTION addDinero()
+  RETURNS trigger 
+ language plpgsql AS
+$$
+begin 
+	
+	insert into dinero(nickname,moneda) values(new.nickname,5000);
+	return new;
+end;
+$$
+
+
+create table usuario(
+	nombre varchar(30),
+	nickname varchar(26),
+	contrasena varchar(30),
+	correo varchar(40)
+	
+);
+
+create table dinero(
+	nickname varchar(26),
+	moneda int
+);
+
+create table rol(
+	nickname varchar(26),
+	value varchar(15)
+);
+
+drop table usuario;
+drop table dinero;
+ALTER TABLE usuario ADD CONSTRAINT id_usuario primary key(nickname); 
+ALTER TABLE dinero ADD CONSTRAINT id_dinero primary key(nickname); 
+
+ALTER TABLE dinero ADD FOREIGN KEY (nickname) REFERENCES usuario (nickname);
+
+
+insert into usuario values('yarit','bony','12345678','yarit.villalobos');
+
+insert into dinero values('bony',30);
+
+
+
+if(contrasena1!=contrasena2){
+			alert('ERROR: las contraseñas son diferentes');
+			return false;
+		}
+		
+		if(contrasena1.length<8){
+			alert('ERROR: contrasena muy débil');
+			return false;
+		}
+		
+		
+		if(nickname.length<3 || nickname.length>25){
+			alert('ERROR: nickname no cumple con lo establecido');
+			return false;
+		}
+		
+
+		return true;

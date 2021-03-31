@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
 <head>
     <meta charset="utf-8">
@@ -7,39 +7,41 @@
     <link rel="shortcut icon" href="img/favi1.ico"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-          rel="stylesheet">    
-    <link rel="stylesheet" type="text/css" href="estilos/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/apiclient.js"></script>
+          rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="/estilos/estilosalas.css">
 </head>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <body>
+<div class="volver">
+			<a href="menu.html"><img src="/estilos/imagenes/flecha-volver-roja.png" width="6%"></a>		
+		</div>
 <center>
     <div id="formulario">
+        
             <div class="formulario_bloque">
                 <div class="registro">
-                    <h1 class="titulo">Login</h1>
+                    <h1 class="titulo">Salas</h1>
                 </div>
                 <div class="nickname">
-                    <label for="nickname" class="letra_formulario">Nickname</label></br>
+                    <label for="nickname" class="letra_formulario">Nick de la sala</label></br>
                     <input name="nickname" id="nickname" type="text" size="20" maxlength="40" required="true"></br>
                 </div>
                 <div class="contrasena">
-                    <label for="contrasena" class="letra_formulario">Contraseña</label></br>
+                    <label for="contrasena" class="letra_formulario">Clave de Acceso</label></br>
                     <input name="contrasena" id="contrasena" type="password" size="20" maxlength="40"
                            required="true"><br>
-                </div>             
                 </div>
-				<div class="boton">
-					<a href="/registro.html" class="boton">
-						<span>Registrate aquí</span>
-					</a>
-				</div>
+                
+                <div class="boton">
+                    <a href="/crearSalas.html" class="boton">
+                        <span>Crear una sala</span>
+                </div>
+                </div>
                 <div class="boton_formulario">
-                    <input name="submit" type="button" onclick="apiclient.hacerPost()" value="Enviar" class="Envir">
+                    <input name="submit" type="submit" value="Enviar" class="Envir">
                 </div>
     </div>
 </center>
 </body>
 </html>
-
