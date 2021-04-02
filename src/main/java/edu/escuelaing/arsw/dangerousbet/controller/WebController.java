@@ -17,6 +17,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import edu.escuelaing.arsw.dangerousbet.security.service.UsuarioLogrosService;
+
 import org.springframework.web.bind.annotation.*;
 
 
@@ -24,23 +27,8 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class WebController {
 
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody Usuario user) {
-//        try {
-//            return new ResponseEntity<>(service.login(user),HttpStatus.ACCEPTED);
-//        } catch (Exception e) {
-//            Logger.getLogger(WebController.class.getName()).log(Level.SEVERE, null, e);
-//            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
-//        }
-//    }
-//
-//    @GetMapping("/registro")
-//    public String registro(Model model) {
-//        System.out.print(model.getAttribute("input1"));
-//        model.addAttribute("usuario", new Usuario());
-//        return "formulario";
-//    }
+	@Autowired
+	private UsuarioLogrosService s;
     
     @GetMapping("/bienvenido")
     public String registroBienvenido(HttpServletRequest request) {
@@ -52,7 +40,7 @@ public class WebController {
     }
     @GetMapping("/monedas")
     public ResponseEntity<?> getMonedas() {
-            return new ResponseEntity<>(5000,HttpStatus.ACCEPTED);
+    	return new ResponseEntity<>(5000,HttpStatus.ACCEPTED);
     }
 
 	
@@ -62,16 +50,7 @@ public class WebController {
             return new ResponseEntity<>(2,HttpStatus.ACCEPTED);
     }
 
-//
-//    @PostMapping("/registro")
-//    public ResponseEntity<?> registro(@RequestBody Usuario user) {
-//        try {
-//            return new ResponseEntity<>(service.save(user),HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            Logger.getLogger(WebController.class.getName()).log(Level.SEVERE, null, e);
-//            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
-//        }
-//    }
+
 
     @GetMapping("/logoutSuccessful")
     public String logoutSuccessful(Model model) {
@@ -79,61 +58,13 @@ public class WebController {
         System.out.println("logout exitoso");
         return "logoutSuccessful";
     }
-//
-//    @GetMapping("/admin")
-//    public String adminBienvenido(Model model) {
-//        System.out.println("Admin");
-//        return "admin";
-//    }
-//    @GetMapping("/user")
-//    public String userBienvenido(Model model) {
-//        System.out.println("user");
-//        return "user";
-//    }
-//
-//    @GetMapping("/salas")
-//    public String salaBienvenido(Model model) {
-//        System.out.println("user");
-//        return "salas";
-//    }
-//    @GetMapping("/crearSalas")
-//    public String crearSalaBienvenido(Model model) {
-//        System.out.println("user");
-//        return "crearSalas";
-//    }
-    @GetMapping("/menu")
-    public String userMenu(Model model) {
-        return "menu";
-    }
-	@GetMapping("/logros")
-    public String logrosMenu(Model model) {
-        return "logros";
-    }
-	@PostMapping("/vista")
-//    public String registroSala(@Valid Usuario usuario,BindingResult bindingResult) {
-//
-//     		return "vista";
-//
-//    }
-	@GetMapping("/vista")
-    public String visaPoker(Model model) {
-        return "vista";
-    }
-//	@GetMapping("/perfil")
-//    public String verPerfil(Model model) {
-//        return "perfil";
-//    }
+
+
+
 	@GetMapping("/getLogros")
     public ResponseEntity<?> getLogros() {	
 		ArrayList<String> lista=new ArrayList<>();
-		lista.add("cuadrado.png");
-		lista.add("cuadrado.png");
-		lista.add("cuadrado.png");
-		lista.add("cuadrado.png");
-		lista.add("color.png");
-		lista.add("ganar_juego.png");
-		lista.add("apostar_todo.png");
-		lista.add("cuadrado.png");
-        return new ResponseEntity<>(lista,HttpStatus.ACCEPTED);
+		s.consultaPractica();
+        return new ResponseEntity<>(s.consultaPractica(),HttpStatus.ACCEPTED);
     }
 }
