@@ -18,6 +18,10 @@ public class Salas {
 	
 	private boolean publico;
 
+	public Salas() {
+		
+	}
+	
 	public Salas(int id2, String nombre2, String clave2, boolean publico2) {
 		id=id2;
 		nombre=nombre2;

@@ -92,8 +92,9 @@ var apiclient = (function () {
 		
 		
 		crearSala: function(){
-			let nickname=$("#nickname").val()
-			let pass=$("#contrasena").val()
+			console.log("vivo");
+			let nickname=$("#name").val()
+			let pass=$("#contrasena1").val()
 			
 			const promise = $.post({
 				url: "/salas",
@@ -106,6 +107,31 @@ var apiclient = (function () {
             }, function (error) {
 
 				$("#nickname").after('<small class="error">nickname ya existe.</small>');
+                alert("No se pudo crear el usuario")
+
+            })
+		},
+		
+		
+		
+		anadirJugador: function(){
+			console.log("vivo");
+			let nickname=$("#nickname").val()
+			let pass=$("#contrasena").val()
+			let usuario = window.localStorage.usuario;
+			console.log(pass);
+			const promise = $.post({
+				url: "/nuevoJugador",
+				contentType: "application/json",
+				
+				data: "{\"nombreSala\": \"" + nickname + "\",\"nickname\":\"" + usuario + "\",\"contrasena\":\"" + pass + "\"}",
+			});
+			promise.then(function (data) {
+				console.log(data)
+                
+            }, function (error) {
+
+				
                 alert("No se pudo crear el usuario")
 
             })

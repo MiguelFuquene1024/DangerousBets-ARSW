@@ -23,8 +23,11 @@ import org.springframework.validation.BindingResult;
 import edu.escuelaing.arsw.dangerousbet.security.dto.JwtDto;
 import edu.escuelaing.arsw.dangerousbet.security.dto.LoginUsuario;
 import edu.escuelaing.arsw.dangerousbet.security.dto.nuevaSala;
+import edu.escuelaing.arsw.dangerousbet.security.dto.NuevoJugador;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Usuario;
+import edu.escuelaing.arsw.dangerousbet.security.entity.EnSala;
+import edu.escuelaing.arsw.dangerousbet.security.service.EnSalaService;
 import edu.escuelaing.arsw.dangerousbet.security.service.MonedaService;
 import edu.escuelaing.arsw.dangerousbet.security.service.SalasService;
 import edu.escuelaing.arsw.dangerousbet.security.service.UsuarioLogrosService;
@@ -45,6 +48,9 @@ public class WebController {
 	
 	@Autowired
 	private UsuarioService usuario;
+	
+	@Autowired
+	private EnSalaService es;
 	
 	@Autowired
 	private SalasService sala;
@@ -80,6 +86,25 @@ public class WebController {
         this.sala.save(new Salas(this.sala.mayorSala(),sala.getNombre(),sala.getClave(),false));
         
         return new ResponseEntity<>("SALA CREADA", HttpStatus.CREATED);
+
+    }
+    
+    @PostMapping("/nuevoJugador")
+    public ResponseEntity<?> agregarJugador(@RequestBody NuevoJugador nj, BindingResult bindingResult){
+        System.out.println("================================================================");
+    	if (bindingResult.hasErrors()){
+            return new ResponseEntity<>("Campos mal puestos", HttpStatus.BAD_REQUEST);
+        }
+    	System.out.println("#############################################################");
+    	System.out.println(nj.getContrasena()+" "+nj.getNombreSala()+" "+nj.getNickname());
+        if(es.comprobar(nj.getNombreSala(),nj.getContrasena())) {
+        	
+        	es.save(new EnSala(es.mayorSala(),nj.getNickname(),nj.getNombreSala()));
+            return new ResponseEntity<>("JUGADOR AÑADIDO", HttpStatus.CREATED);
+        }
+        
+        
+        return new ResponseEntity<>("JUGADOR NO AÑADIDO", HttpStatus.BAD_REQUEST);
 
     }
 

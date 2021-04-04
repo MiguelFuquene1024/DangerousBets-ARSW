@@ -28,7 +28,6 @@ public class UsuarioLogrosService {
 	public  ArrayList<String[]> consultaPractica(String nombre){
 		
 		TypedQuery<Logros> cantLogros= em.createQuery("SELECT l FROM Logros l", Logros.class);
-		System.out.println("==============================================");
 		TypedQuery<Logros> query= em.createQuery("SELECT l.logros_id FROM UsuarioLogros l WHERE l.nickname LIKE '" + nombre+"'",Logros.class);
 		List<Logros> resultList2 =cantLogros.getResultList();
 		List<Logros> resultList =query.getResultList();
