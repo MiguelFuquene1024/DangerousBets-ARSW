@@ -8,11 +8,18 @@ var apiclient = (function () {
 				}
 			);
 		},
+                getUsuario : function (callback) {
+			let user = window.localStorage.usuario;
+			$.getJSON("/usuario/"+ user ,function (data) {
+					callback(data);
+				}
+			);
+		},
 		logrosObtenidos : function (callback) {
 			let user = window.localStorage.usuario;
 			console.log(user);
 			$.getJSON("/logrosObtenidos/"+ user,function (data) {
-					console.log("Empezabdo a creer");
+					console.log("Empezando a creer");
 					callback(data);
 				}
 			);

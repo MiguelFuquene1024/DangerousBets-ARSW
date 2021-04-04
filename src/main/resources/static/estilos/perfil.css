@@ -26,6 +26,7 @@ body{
 	font-size:2.5vw;
 }
 #informacion .info{
+        background:red;
 	margin-top:4%;
 }
 #informacion .editar{
@@ -34,7 +35,7 @@ body{
 	font-size:2.5vw;
 	position:absolute;
 }
-#informacion .editar label:hover{
+#informacion .editar button:hover{
 	color:blue;
 	cursor:pointer;
 }
