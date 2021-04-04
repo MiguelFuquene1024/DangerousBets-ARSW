@@ -67,6 +67,7 @@ public class WebController {
     public ResponseEntity<?> obtenerUsuario(@PathVariable("user") String user) {
     	Usuario u=usuario.getById(user).get();
     	u.setContrasena(null);
+        System.out.println(u);
     	return new ResponseEntity<>(u,HttpStatus.ACCEPTED);
     }
     
