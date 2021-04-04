@@ -1,5 +1,7 @@
 var api = apiclient;
-
+if (window.localStorage.usuario!=undefined){
+	window.location.href="/menu.html";
+}
 
 $(document).ready(function(){	
 	$("#restablecer").click(function(){

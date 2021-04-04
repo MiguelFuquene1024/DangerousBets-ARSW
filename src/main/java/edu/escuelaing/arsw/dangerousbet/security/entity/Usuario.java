@@ -10,20 +10,14 @@ import java.util.Set;
 @Entity
 @Table(name="usuario")
 public class Usuario {
-    @NotNull(message="Este espacio es obligatorio.")
+
     @Column(name="nombre")
-    @Size(min = 5,max=25, message="El nombre debe tener al menos de 5 carecteres.")
     private String name;
-    @NotNull(message="Este espacio es obligatorio.")
-    @Size(min = 8, message="La contaseña es demasiada débil.")
+
     private String contrasena;
     @Id
-    @NotNull(message="Este espacio es obligatorio.")
-    @Size(min = 3, message="No cumple con los requisitos.")
     private String nickname;
     @Column
-    @NotNull(message="Este espacio es obligatorio.")
-    @Pattern(regexp="[A-Z0-9a-z._%-]+@[A-Z0-9a-z._%-]+\\.[A-Za-z]+",message="Este correo es invalido." )
     private String correo;
     @ManyToMany
     @JoinTable(name = "usuario_rol",joinColumns = @JoinColumn(name = "usuario_id"), inverseJoinColumns = @JoinColumn(name = "id"))

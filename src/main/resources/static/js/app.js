@@ -1,35 +1,30 @@
 var api = apiclient;
-var dinero=api.getMonedas(function(plata){
-$("#cantidadDeMonedas").html(plata);
 
-//$("#nickname").html(localStorage.getItem("usuario"))
+if (window.localStorage.usuario==undefined){
+	window.location.href="/login.html";
+}
+var dinero=api.getMonedas(function(plata){
+
+	$("#cantidadDeMonedas").html(plata);
 });
 var logrosOb=api.logrosObtenidos(function(numeroLogros){
-console.log("holaMundo");
-console.log(numeroLogros);
-$("#racha_trofeos").html(numeroLogros+"/10");
-//$("#nickname").html(localStorage.getItem("usuario"))
+	console.log("holaMundo");
+	console.log(numeroLogros);
+	$("#racha_trofeos").html(numeroLogros[0]+"/"+numeroLogros[1]);
 
 });
 
 //var nick=$("#nickname").html(sessionStorage.getItem("usuario"))
 
-$(document).ready(function(){	
-	//$("#crearSala").click(function(){
-	//	alert("Crear Sala");
-	//});
-	//$("#unirseSala").click(function(){
-	//	alert("unirse a Sala");
-	//});
-	//$("#ranking").click(function(){
-		//alert("ranking");
-	//});
-	//$("#logros").click(function(){
-		//alert("logros");
-	//});
-	//$("#tienda").click(function(){
-		//alert("tienda");
-	//});
+$(document).ready(function(){
+	
+
+	$("#cerrarSesion").click(function(){
+			window.localStorage.clear();
+			window.location.href="/login.html";
+	});
+	
+	
 });
 	
 

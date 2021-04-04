@@ -2,26 +2,36 @@ var apiclient = (function () {
   
 	return {
 		getMonedas : function (callback) {
-			$.getJSON("/monedas" ,function (data) {
+			let user = window.localStorage.usuario;
+			$.getJSON("/monedas/"+ user ,function (data) {
 					callback(data);
 				}
 			);
 		},
 		logrosObtenidos : function (callback) {
-			
-			$.getJSON("/logrosObtenidos" ,function (data) {
+			let user = window.localStorage.usuario;
+			console.log(user);
+			$.getJSON("/logrosObtenidos/"+ user,function (data) {
 					console.log("Empezabdo a creer");
 					callback(data);
 				}
 			);
 		},
 		getLogros : function (callback) {
-
-			$.getJSON("/getLogros" ,function (data) {
+			let user = window.localStorage.usuario;
+			$.getJSON("/getLogros/"+ user ,function (data) {
 					callback(data);
 				}
 			);
 		},
+		
+		getMejoresJugadores : function (callback) {
+			$.getJSON("/getMejoresJugadores" ,function (data) {
+					callback(data);
+				}
+			);
+		},
+		
 		 
 		hacerPost : function(){
 			let nickname=$("#nickname").val()
@@ -69,17 +79,39 @@ var apiclient = (function () {
 				}
 				else{
 					$("#nickname").after('<small class="error">nickname ya existe.</small>');
-					//alert("No puede registrar a este usuario")
+					alert("No puede registrar a este usuario")
 				}
             }, function (error) {
 
 				$("#nickname").after('<small class="error">nickname ya existe.</small>');
-                //alert("No se pudo crear el usuario")
+                alert("No se pudo crear el usuario")
 
-            }
+            })
+		},
+		
+		
+		
+		crearSala: function(){
+			let nickname=$("#nickname").val()
+			let pass=$("#contrasena").val()
 			
-        )		
+			const promise = $.post({
+				url: "/salas",
+				contentType: "application/json",
+				data: "{\"nombre\": \"" + nickname + "\",\"clave\":\"" + pass + "\"}",
+			});
+			promise.then(function (data) {
+				console.log(data)
+                
+            }, function (error) {
 
+				$("#nickname").after('<small class="error">nickname ya existe.</small>');
+                alert("No se pudo crear el usuario")
+
+            })
+		}
+		
+		
+		
 	}
-}
 })();

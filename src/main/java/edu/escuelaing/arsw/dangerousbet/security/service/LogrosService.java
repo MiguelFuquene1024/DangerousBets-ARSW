@@ -15,10 +15,6 @@ public class LogrosService {
 	LogrosRepository logrosRepository;
 	
 	public void getLogros(){
-	//	@Query(value = "select ul.logro ,l.recurso \r\n" + 
-		//		"from usuarios_logros ul \r\n" + 
-			//	"left join logros l on ul.logro = l.id \r\n" + 
-				//"where ul.nickname like 'yarit'")
-		//List<>
+
 	}
 }
