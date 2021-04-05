@@ -1,0 +1,41 @@
+body{
+	background:url('imagenes/negro.jpg');
+	background-size:100% 100%;
+	
+}
+
+#ranking_titulo{
+	width:70%;
+}
+.tabla{
+	width:70vw;
+}
+
+.tabla .cmonedas{
+	width:width:40%;
+}
+.tabla .nombre{
+	width:40%;
+
+}
+.tabla .puesto{
+	width:20%;
+
+}	
+.tabla tr{
+	
+	border-bottom: 2px solid white;
+	
+}
+.tabla th{
+	font-family: Brush Script MT,cursive; 
+	font-size:2.2vw;
+	color:white;
+	padding-top:3%;
+	padding-bottom:3%;
+	text-align:center;
+}
+.tabla .jugadores:hover{
+	background:#FF575A;
+	cursor:pointer;
+}

@@ -9,19 +9,29 @@ var api = apiclient;
 if (window.localStorage.usuario==undefined){
 	window.location.href="/login.html";
 }
-var usuario = api.getUsuario(function(obtenerUsuario){
 
-	console.log(obtenerUsuario);
-        $("#nombreUsuario").html(obtenerUsuario.name);
+function getQueryVariable(variable) {
+   var query = window.location.search.substring(1);
+   var vars = query.split("&");
+   for (var i=0; i < vars.length; i++) {
+       var pair = vars[i].split("=");
+       if(pair[0] == variable) {
+           return pair[1];
+       }
+   }
+   return window.localStorage.usuario;
+}
+
+
+
+var usuario = api.getUsuario(getQueryVariable("name"),function(obtenerUsuario){
+
+		$("#nombreUsuario").html(obtenerUsuario.name);
+		$("#nickUsuario").html(obtenerUsuario.nickname);
+	
 });
-var nick = api.getUsuario(function(obtenerNickName){
 
-	console.log(obtenerNickName);
-        $("#nickUsuario").html(obtenerNickName.nickname);
-});
-var monedas = api.getMonedas(function(obtenerMonedas){
-
-	console.log(obtenerMonedas);
+var monedas = api.getMonedas(getQueryVariable("name"),function(obtenerMonedas){
         $("#cantidadMonedas").html(obtenerMonedas);
 }); 
 

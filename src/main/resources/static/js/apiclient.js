@@ -1,15 +1,15 @@
 var apiclient = (function () {
   
 	return {
-		getMonedas : function (callback) {
-			let user = window.localStorage.usuario;
+		getMonedas : function (user,callback) {
+	
 			$.getJSON("/monedas/"+ user ,function (data) {
 					callback(data);
 				}
 			);
 		},
-                getUsuario : function (callback) {
-			let user = window.localStorage.usuario;
+                getUsuario : function (user,callback) {
+
 			$.getJSON("/usuario/"+ user ,function (data) {
 					callback(data);
 				}

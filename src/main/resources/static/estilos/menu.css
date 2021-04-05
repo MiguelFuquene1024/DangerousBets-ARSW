@@ -86,7 +86,7 @@ body{
 	
 }
 #panel-superior .monedas{
-	width:30%;
+	width:40%;
 	height:100%;
 	right:30%;	
 }
@@ -99,18 +99,18 @@ body{
 }
 
 #panel-superior .monedas .divisor{
-	width:40%;
-	margin-left:5%;
+	width:36%;
+	margin-left:2%;
 	float:left;
 	
 }
 #panel-superior .monedas img{
-	width:30%;
+	width:24%;
 	margin:1%;
 	float:left;	
 }
 #panel-superior .monedas .trofeos img{
-	width:40%;	
+	width:35%;	
 }
 #panel-inferior{
 	height:44vw;

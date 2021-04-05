@@ -3,7 +3,7 @@ var api = apiclient;
 if (window.localStorage.usuario==undefined){
 	window.location.href="/login.html";
 }
-var dinero=api.getMonedas(function(plata){
+var dinero=api.getMonedas(window.localStorage.usuario,function(plata){
 
 	$("#cantidadDeMonedas").html(plata);
 });
