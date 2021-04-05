@@ -91,10 +91,10 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 
 ## Diagrama de despliegue
 
-![](img/despliegue.jpeg)
+![](img/despliegue.png)
 
 ## Diagrama entidad-Relación
 
-![](img/entidadRelacion.PNG)
+![](img/img.PNG)
 
  
