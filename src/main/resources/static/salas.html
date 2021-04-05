@@ -2,14 +2,11 @@
 <html lang="es">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700&display=swap" rel="stylesheet">
 <head>
-    <meta charset="utf-8">
-    <title>Login</title>
-    <link rel="shortcut icon" href="img/favi1.ico"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-          rel="stylesheet">
-    
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/estilos/estilosalas.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/apiclient.js"></script>
 	<script src="/js/salas.js"></script>
 
@@ -28,14 +25,24 @@
                     <h1 class="titulo">Salas</h1>
                 </div>
                 <div class="nickname">
-                    <label for="nickname" class="letra_formulario">Nick de la sala</label></br>
-                    <input name="nickname" id="nickname" type="text" size="20" maxlength="40" required="true"></br>
+                    <label for="sala" class="letra_formulario">Nick de la sala</label></br>
+                    <input name="sala" id="sala" type="text" onchange="cambio()" size="20" maxlength="40" required="true"></br>
                 </div>
                 <div class="contrasena">
                     <label for="contrasena" class="letra_formulario">Clave de Acceso</label></br>
                     <input name="contrasena" id="contrasena" type="password" size="20" maxlength="40"
                            required="true"><br>
                 </div>
+				
+				<div class="valorSala">
+                    <label class="letra_formulario">Valor de la sala:</label>
+					<label id="valorSala" class="letra_formulario">0</label>
+                </div>
+				<div class="Privacidad">
+                    <label class="letra_formulario">Privacidad:</label>
+					<label id="privacidadSala" class="letra_formulario"></label>
+                </div>
+				
                 
               
                 </div>

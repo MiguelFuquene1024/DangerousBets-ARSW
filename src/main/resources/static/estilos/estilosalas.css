@@ -22,6 +22,7 @@ body {
 #formulario .Envir:hover{
 	width:40%;
 	background:#ED544B;
+	cursor:pointer;
 	
 }
 #formulario{
@@ -56,6 +57,7 @@ input{
 }
 .error{
 	color:red;
+	display:block;
 }
 .fondo{
 	position:absolute;

@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.escuelaing.arsw.dangerousbet.security.entity.Dinero;
+import edu.escuelaing.arsw.dangerousbet.security.entity.Logros;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
 import edu.escuelaing.arsw.dangerousbet.security.repository.SalasRepository;
 
@@ -35,5 +35,20 @@ public class SalasService {
 
 		return resultList2.get(0).getId()+1;
     }
+
+
+	public Salas costoSala(String s) {
+
+		TypedQuery<Salas> query= em.createQuery("SELECT s FROM Salas s WHERE s.nombre LIKE '" + s+"'",Salas.class);
+		List<Salas> resultList2 =query.getResultList();
+		try {
+			Salas sal=resultList2.get(0);
+			//sal.setClave(null);
+			return sal;
+		}catch(Exception e) {
+			return null;
+		}
+		
+	}
 
 }

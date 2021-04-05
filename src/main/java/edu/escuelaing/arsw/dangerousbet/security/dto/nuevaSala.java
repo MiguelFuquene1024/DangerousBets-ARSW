@@ -9,9 +9,19 @@ public class nuevaSala {
 	
 	private String clave;
 	
-
+	private int valorsala;
 	
 	public nuevaSala() {
+	}
+
+	
+	public int getValorsala() {
+		return valorsala;
+	}
+
+
+	public void setValorsala(int valorsala) {
+		this.valorsala = valorsala;
 	}
 
 

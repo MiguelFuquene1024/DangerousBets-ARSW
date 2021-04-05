@@ -1,0 +1,29 @@
+.link{
+  color: black;
+  text-decoration: none;
+}
+body{
+	background:black;
+	overflow-x: hidden;
+	align-items: center;
+}
+#contenedor{
+	margin-top:2em;
+	margin-bottom:1em;
+	width:100%;
+	background:url('imagenes/poker.jfif');
+	background-size:100% auto;
+}
+
+#bloque1{
+	width:40%;
+	
+	height:100%;
+	float:left;
+}
+
+#bloque2{
+	width:60%;
+	display:inline-block;
+	height:100%;
+}

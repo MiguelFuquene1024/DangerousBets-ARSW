@@ -11,6 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/js/bootstrap.bundle.min.js"></script>
 	<script src="/js/apiclient.js"></script>
+	<script src="/js/salas.js"></script>
 	
 
 
@@ -47,13 +48,14 @@
 				</div>
 				
 				<div class="correo">
-					<label for="contrasena2" class="letra_formulario">Confirmar clave de acceso</label></br>
-					<input name="contrasena2" id="contrasena2" type="password" size="20">
+					<label for="contrasena2" class="letra_formulario">Cantidad a Apostar</label></br>
+					<input name="contrasena2" id="cdinero" type="number" size="20">
 				</div>
 			</div>
+			
 			<div class="boton_formulario">
-			<input name="" type="reset" value="Restablecer" class="Restablecer">
-			<input name="submit" type="button" onclick="apiclient.crearSala()" value="Enviar" class="Envir">
+			<input name="" id="restablecer" type="button" value="Restablecer" class="Restablecer">
+		<input name="submit" type="button" id="submit" value="Enviar" class="Envir">
 		
 		</div>
 	</div>

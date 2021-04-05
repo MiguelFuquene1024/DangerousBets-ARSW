@@ -5,6 +5,7 @@ var apiclient = (function () {
 	
 			$.getJSON("/monedas/"+ user ,function (data) {
 					callback(data);
+					
 				}
 			);
 		},
@@ -102,19 +103,20 @@ var apiclient = (function () {
 			console.log("vivo");
 			let nickname=$("#name").val()
 			let pass=$("#contrasena1").val()
-			
+			let cd=$("#cdinero").val()
 			const promise = $.post({
 				url: "/salas",
 				contentType: "application/json",
-				data: "{\"nombre\": \"" + nickname + "\",\"clave\":\"" + pass + "\"}",
+				data: "{\"valorsala\": \"" + cd +  "\",\"nombre\": \"" + nickname + "\",\"clave\":\"" + pass + "\"}",
 			});
 			promise.then(function (data) {
+				window.location.href="/salaDeEspera.html?name="+nickname;
 				console.log(data)
                 
             }, function (error) {
 
-				$("#nickname").after('<small class="error">nickname ya existe.</small>');
-                alert("No se pudo crear el usuario")
+				
+                alert("No se puede crear sala")
 
             })
 		},
@@ -123,10 +125,10 @@ var apiclient = (function () {
 		
 		anadirJugador: function(){
 			console.log("vivo");
-			let nickname=$("#nickname").val()
+			let nickname=$("#sala").val()
 			let pass=$("#contrasena").val()
 			let usuario = window.localStorage.usuario;
-			console.log(pass);
+			console.log(nickname);
 			const promise = $.post({
 				url: "/nuevoJugador",
 				contentType: "application/json",
@@ -139,9 +141,18 @@ var apiclient = (function () {
             }, function (error) {
 
 				
-                alert("No se pudo crear el usuario")
+                alert("No se pude anadir jugador")
 
             })
+		},
+		
+		
+		investigarSala : function (sala,callback) {
+			
+			$.getJSON("/investigarSala/"+ sala ,function (data,error) {
+					
+					callback(data,error);
+			});
 		}
 		
 		

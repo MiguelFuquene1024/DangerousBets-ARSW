@@ -8,8 +8,7 @@ var dinero=api.getMonedas(window.localStorage.usuario,function(plata){
 	$("#cantidadDeMonedas").html(plata);
 });
 var logrosOb=api.logrosObtenidos(function(numeroLogros){
-	console.log("holaMundo");
-	console.log(numeroLogros);
+
 	$("#racha_trofeos").html(numeroLogros[0]+"/"+numeroLogros[1]);
 
 });

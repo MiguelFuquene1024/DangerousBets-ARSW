@@ -84,7 +84,7 @@ public class WebController {
         }
         
         
-        this.sala.save(new Salas(this.sala.mayorSala(),sala.getNombre(),sala.getClave(),false));
+        this.sala.save(new Salas(this.sala.mayorSala(),sala.getValorsala(),sala.getNombre(),sala.getClave(),false));
         
         return new ResponseEntity<>("SALA CREADA", HttpStatus.CREATED);
 
@@ -92,11 +92,11 @@ public class WebController {
     
     @PostMapping("/nuevoJugador")
     public ResponseEntity<?> agregarJugador(@RequestBody NuevoJugador nj, BindingResult bindingResult){
-        System.out.println("================================================================");
+        
     	if (bindingResult.hasErrors()){
             return new ResponseEntity<>("Campos mal puestos", HttpStatus.BAD_REQUEST);
         }
-    	System.out.println("#############################################################");
+    	System.out.println("=====================================================");
     	System.out.println(nj.getContrasena()+" "+nj.getNombreSala()+" "+nj.getNickname());
         if(es.comprobar(nj.getNombreSala(),nj.getContrasena())) {
         	
@@ -104,17 +104,26 @@ public class WebController {
             return new ResponseEntity<>("JUGADOR AÑADIDO", HttpStatus.CREATED);
         }
         
-        
+        System.out.println("hola");
         return new ResponseEntity<>("JUGADOR NO AÑADIDO", HttpStatus.BAD_REQUEST);
 
     }
 
-	
+    @GetMapping("/investigarSala/{sala}")
+    public ResponseEntity<?> investigarSala(@PathVariable("sala") String s) {
+    		Salas sa=sala.costoSala(s);
+    		if(sa!=null) {
+    			return new ResponseEntity<>(sa,HttpStatus.ACCEPTED);
+    		}
+    		return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+    }
+    
 	@GetMapping("/logrosObtenidos/{user}")
     public ResponseEntity<?> logrosObtenidos(@PathVariable("user") String user) {
 
             return new ResponseEntity<>(s.consultaTrofeos(user),HttpStatus.ACCEPTED);
     }
+	
 	
 	
     @GetMapping("/logoutSuccessful")
