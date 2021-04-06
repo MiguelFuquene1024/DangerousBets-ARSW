@@ -18,13 +18,17 @@ function cambio(){
 		
 		
 	};
+	
 $(document).ready(function(){
 	$("#restablecer").click(function(){
 		$('input[type="text"]').val('');
 		$('input[type="password"]').val('');
 		$('input[type="number"]').val('');
 	});
-
+	$("#submit2").click(function(){
+		let nickname=$("#sala").val();
+		api.anadirJugador(nickname);
+	});
 	$("#submit").click(function(){
 		$(".error").remove();
 		let na = $("#name").val();

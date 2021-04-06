@@ -1,0 +1,58 @@
+
+body {
+	background:url('imagenes/salapoker.jpg');
+	
+}
+.privadas{
+	font-size:20px;
+	font-weight:700;
+	
+}
+label{
+	cursor:pointer;
+	color:blue;
+}
+label:hover{
+	color:red;
+}
+#salas_titulo{
+	width:40%;
+}
+.tabla{
+	width:70vw;
+	
+}
+tr{
+	
+	background:#FCFF80;
+	opacity:0.9;
+	border:4px solid #C2C200;
+}
+th{
+	padding-top:3%;
+	padding-bottom:3%;
+	text-align:center;
+	font-size:15px;
+	font-weight:700;
+
+}
+.nameSala{
+	width:30%;
+}
+.cantJugadores{
+	width:20%;
+}
+.vSala{
+	width:20%;
+}
+
+.unirseSala{
+	width:30%;
+}
+
+
+
+
+
+
+

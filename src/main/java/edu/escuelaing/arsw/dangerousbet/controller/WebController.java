@@ -96,9 +96,8 @@ public class WebController {
     	if (bindingResult.hasErrors()){
             return new ResponseEntity<>("Campos mal puestos", HttpStatus.BAD_REQUEST);
         }
-    	System.out.println("=====================================================");
-    	System.out.println(nj.getContrasena()+" "+nj.getNombreSala()+" "+nj.getNickname());
-        if(es.comprobar(nj.getNombreSala(),nj.getContrasena())) {
+
+        if(es.comprobar(nj.getNombreSala(),nj.getContrasena(),nj.getNickname())) {
         	
         	es.save(new EnSala(es.mayorSala(),nj.getNickname(),nj.getNombreSala()));
             return new ResponseEntity<>("JUGADOR AÑADIDO", HttpStatus.CREATED);
@@ -144,4 +143,11 @@ public class WebController {
     	
         return new ResponseEntity<>(moneda.getMejoresPosiciones(),HttpStatus.ACCEPTED);
     }
+    
+    @GetMapping("/salasPublicas")
+    public ResponseEntity<?> salasPublicas() {		
+        return new ResponseEntity<>(sala.getSalasPublicas(),HttpStatus.ACCEPTED);
+    }
+    
+
 }

@@ -16,9 +16,11 @@ public class Salas {
 	
 	private  String nombre;
 	
+	@Column(name="clave")
 	private String clave;
 	
 	private boolean publico;
+	
 
 	public Salas() {
 		
@@ -74,6 +76,9 @@ public class Salas {
 	public void setPublico(boolean publico) {
 		this.publico = publico;
 	}
+
+
+	
 	
 	
 

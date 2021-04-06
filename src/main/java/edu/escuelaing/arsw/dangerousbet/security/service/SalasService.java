@@ -1,5 +1,6 @@
 package edu.escuelaing.arsw.dangerousbet.security.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,6 +23,9 @@ public class SalasService {
 	
 	@Autowired
 	SalasRepository salasRepository;
+	
+	@Autowired
+	private EnSalaService es;
 	
 	public void save(Salas sala){
 		salasRepository.save(sala);
@@ -48,6 +52,24 @@ public class SalasService {
 		}catch(Exception e) {
 			return null;
 		}
+		
+	}
+
+
+	public List<Object[]> getSalasPublicas() {
+		TypedQuery<Salas> query= em.createQuery("SELECT s FROM Salas s WHERE s.publico is TRUE",Salas.class);
+		List<Salas> resultList =query.getResultList();
+		List<Object[]> salas=new ArrayList<>();
+		for(Salas s:resultList) {
+			
+			Object[] ob=new Object[2];
+			int num=es.cantidadDejugadores(s.getNombre());
+			ob[0]=s;
+			ob[1]=num;
+			salas.add(ob);
+		}
+		
+		return salas;
 		
 	}
 

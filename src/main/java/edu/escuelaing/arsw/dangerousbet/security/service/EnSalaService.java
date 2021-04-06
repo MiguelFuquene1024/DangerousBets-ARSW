@@ -43,31 +43,35 @@ public class EnSalaService {
 			return 1;
 		}
 	}
+	
+	public int cantidadDejugadores(String nombreSala) {
+
+			TypedQuery<EnSala> query2= em.createQuery("SELECT es FROM EnSala es WHERE nombre_sala LIKE '" + nombreSala +"'",EnSala.class);
+			
+			List<EnSala> resultList2 =query2.getResultList();
+			System.out.println(resultList2.size()+" "+"####################################################");
+			return resultList2.size();
+	}
 
 
-	public boolean comprobar(String nombreSala, String contrasena) {
+	public boolean comprobar(String nombreSala, String contrasena,String name) {
 		System.out.println(nombreSala+" "+contrasena);
 		TypedQuery<Salas> query= em.createQuery("SELECT s FROM Salas s WHERE nombre LIKE '" + nombreSala+"'",Salas.class);
 		
 		List<Salas> resultList =query.getResultList();
-		System.out.println(resultList.get(0).getClave());
-		System.out.println(resultList.get(0).getNombre());
-		System.out.println(resultList.get(0).getId());
-		System.out.println(resultList.get(0).getValorsala());
-		if(resultList.size()==0) {
-			System.out.println(1);
-			return false;
-		}
-		else if(resultList.get(0).isPublico()) {
-			System.out.println(4);
-			return true;
-		}
-		else if(resultList.get(0).getClave().equals(contrasena)) {
-			System.out.println(3);
-			return true;
-		}
-		System.out.println(2);
+		TypedQuery<EnSala> query2= em.createQuery("SELECT es FROM EnSala es WHERE nickname LIKE '" + name +"'",EnSala.class);
+		List<EnSala> resultList2 =query2.getResultList();
+		try {
+			if(resultList.size()==0 || resultList2.size()!=0){
+				return false;
+			}
+			else if(resultList.get(0).isPublico() || resultList.get(0).getClave().equals(contrasena)) {
+				return true;
+			}
+		}catch(Exception e) {}
 		return false;
 	}
+
+
 
 }

@@ -100,7 +100,6 @@ var apiclient = (function () {
 		
 		
 		crearSala: function(){
-			console.log("vivo");
 			let nickname=$("#name").val()
 			let pass=$("#contrasena1").val()
 			let cd=$("#cdinero").val()
@@ -123,20 +122,20 @@ var apiclient = (function () {
 		
 		
 		
-		anadirJugador: function(){
-			console.log("vivo");
-			let nickname=$("#sala").val()
+		anadirJugador: function(nickname){
+			
 			let pass=$("#contrasena").val()
 			let usuario = window.localStorage.usuario;
-			console.log(nickname);
 			const promise = $.post({
-				url: "/nuevoJugador",
+				url: "/nuevoJugador/"+name,
 				contentType: "application/json",
 				
 				data: "{\"nombreSala\": \"" + nickname + "\",\"nickname\":\"" + usuario + "\",\"contrasena\":\"" + pass + "\"}",
 			});
 			promise.then(function (data) {
 				console.log(data)
+				window.location.href="/salaDeEspera.html?name="+nickname;
+				
                 
             }, function (error) {
 
@@ -152,6 +151,13 @@ var apiclient = (function () {
 			$.getJSON("/investigarSala/"+ sala ,function (data,error) {
 					
 					callback(data,error);
+			});
+		},
+		
+		getSalasPublicas : function(callback){
+			$.getJSON("/salasPublicas" ,function (data) {
+					
+					callback(data);
 			});
 		}
 		
