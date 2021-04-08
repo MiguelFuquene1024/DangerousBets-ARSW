@@ -1,5 +1,6 @@
 body{
-	background:green;
+	background:url('imagenes/fondo_perfil.jpg');
+	background-size:100% auto;
 }
 #contenedor{
 	display:block;
@@ -26,7 +27,7 @@ body{
 	font-size:2.5vw;
 }
 #informacion .info{
-        background:red;
+
 	margin-top:4%;
 }
 #informacion .editar{
