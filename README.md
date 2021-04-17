@@ -1,6 +1,6 @@
 # DangerousBets-ARSW
 
-[Taiga](https://tree.taiga.io/project/julitom1-dangerousbets-1/backlog)
+[Taiga](https://tree.taiga.io/project/jsr25-dangerousbets-arsw-2021-1/timeline)
 
 ### Circleci
 [![CircleCI](https://circleci.com/gh/MiguelFuquene1024/DangerousBets-ARSW.svg?style=svg)](https://app.circleci.com/pipelines/github/MiguelFuquene1024/DangerousBets-ARSW)
@@ -36,7 +36,6 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
  -	Actualización del dinero dentro del juego
  -	Ranking de mejores jugadores
  -	Categorización de salas
- -	Lista de amigos por usuario
 
  ## Casos de Uso:
  
@@ -91,7 +90,7 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 
 ## Diagrama de despliegue
 
-![](img/despliegue.png)
+![](img/img_1.png)
 
 ## Diagrama entidad-Relación
 
