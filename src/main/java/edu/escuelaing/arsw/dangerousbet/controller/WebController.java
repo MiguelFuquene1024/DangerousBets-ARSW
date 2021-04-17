@@ -25,13 +25,18 @@ import edu.escuelaing.arsw.dangerousbet.security.dto.LoginUsuario;
 import edu.escuelaing.arsw.dangerousbet.security.dto.nuevaSala;
 import edu.escuelaing.arsw.dangerousbet.security.dto.NuevoJugador;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
+import edu.escuelaing.arsw.dangerousbet.security.entity.Tienda;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Usuario;
+import edu.escuelaing.arsw.dangerousbet.security.entity.UsuarioTienda;
 import edu.escuelaing.arsw.dangerousbet.security.entity.EnSala;
 import edu.escuelaing.arsw.dangerousbet.security.service.EnSalaService;
-import edu.escuelaing.arsw.dangerousbet.security.service.MonedaService;
+import edu.escuelaing.arsw.dangerousbet.security.service.PerfilService;
 import edu.escuelaing.arsw.dangerousbet.security.service.SalasService;
+import edu.escuelaing.arsw.dangerousbet.security.service.ServiceAll;
+import edu.escuelaing.arsw.dangerousbet.security.service.TiendaService;
 import edu.escuelaing.arsw.dangerousbet.security.service.UsuarioLogrosService;
 import edu.escuelaing.arsw.dangerousbet.security.service.UsuarioService;
+
 
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +49,10 @@ public class WebController {
 	private UsuarioLogrosService s;
 	
 	@Autowired
-	private MonedaService moneda;
+	private TiendaService tienda;
+	
+	@Autowired
+	private PerfilService perfil;
 	
 	@Autowired
 	private UsuarioService usuario;
@@ -54,6 +62,9 @@ public class WebController {
 	
 	@Autowired
 	private SalasService sala;
+	
+	@Autowired
+	private ServiceAll srvall;
     
     @GetMapping("/bienvenido")
     public String registroBienvenido(HttpServletRequest request) {
@@ -63,10 +74,10 @@ public class WebController {
         System.out.println("Login exitoso");
         return "redirect:/admin";
     }
-    @GetMapping("/monedas/{user}")
-    public ResponseEntity<?> getMonedas(@PathVariable("user") String user) {
+    @GetMapping("/perfil/{user}")
+    public ResponseEntity<?> getPerfil(@PathVariable("user") String user) {
     	
-    	return new ResponseEntity<>(moneda.getMonedas(user),HttpStatus.ACCEPTED);
+    	return new ResponseEntity<>(perfil.getPerfil(user),HttpStatus.ACCEPTED);
     }
     
     @GetMapping("/usuario/{user}")
@@ -141,13 +152,29 @@ public class WebController {
     @GetMapping("/getMejoresJugadores")
     public ResponseEntity<?> getMejoresJugadores() {	
     	
-        return new ResponseEntity<>(moneda.getMejoresPosiciones(),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(perfil.getMejoresPosiciones(),HttpStatus.ACCEPTED);
     }
+    @PostMapping("/comprarLogo")
+    public ResponseEntity<?> comprarLogo(@RequestBody UsuarioTienda ust) {	
+
+
+    	srvall.comprarLogo(ust);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+    
+    @GetMapping("/logosNoComprados/{user}")
+    public ResponseEntity<?> logosNoComprados(@PathVariable("user") String user) {		
+        return new ResponseEntity<>(tienda.logosNoComprados(user),HttpStatus.ACCEPTED);
+    }
+    
+  
     
     @GetMapping("/salasPublicas")
     public ResponseEntity<?> salasPublicas() {		
         return new ResponseEntity<>(sala.getSalasPublicas(),HttpStatus.ACCEPTED);
     }
+    
+   
     
 
 }

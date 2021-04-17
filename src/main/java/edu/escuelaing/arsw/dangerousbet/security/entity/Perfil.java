@@ -5,8 +5,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="dinero")
-public class Dinero {
+@Table(name="perfil")
+public class Perfil {
 
 	
 	@Id
@@ -14,6 +14,8 @@ public class Dinero {
 	
 
 	private int moneda;
+	
+	private String imagen_perfil;
 
 
 	public String getNickname() {
@@ -33,6 +35,16 @@ public class Dinero {
 
 	public void setMoneda(int moneda) {
 		this.moneda = moneda;
+	}
+
+
+	public String getImagen_perfil() {
+		return imagen_perfil;
+	}
+
+
+	public void setImagen_perfil(String imagen_perfil) {
+		this.imagen_perfil = imagen_perfil;
 	}
 	
 	

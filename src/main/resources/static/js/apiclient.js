@@ -1,14 +1,24 @@
 var apiclient = (function () {
   
 	return {
-		getMonedas : function (user,callback) {
+		getPerfil : function (user,callback) {
 	
-			$.getJSON("/monedas/"+ user ,function (data) {
+			$.getJSON("/perfil/"+ user ,function (data) {
 					callback(data);
 					
 				}
 			);
 		},
+		
+		logosNoComprados : function (user,callback) {
+	
+			$.getJSON("/logosNoComprados/"+ user ,function (data) {
+					callback(data);
+					
+				}
+			);
+		},
+		
                 getUsuario : function (user,callback) {
 
 			$.getJSON("/usuario/"+ user ,function (data) {
@@ -159,6 +169,26 @@ var apiclient = (function () {
 					
 					callback(data);
 			});
+		},
+		comprarLogo : function(recurso,user){
+			let promise = new Promise( (resolve, reject) => {
+
+	
+				var datos={usuario:user, tienda : recurso};
+				
+				datos = JSON.stringify(datos);
+				
+				var putPromise = $.ajax({
+				url: "/comprarLogo",
+				type: 'POST',
+				data: datos,
+				contentType: "application/json"
+				
+			});
+			resolve(putPromise);
+			});
+			
+			return promise;
 		}
 		
 		

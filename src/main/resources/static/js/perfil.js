@@ -31,8 +31,9 @@ var usuario = api.getUsuario(getQueryVariable("name"),function(obtenerUsuario){
 	
 });
 
-var monedas = api.getMonedas(getQueryVariable("name"),function(obtenerMonedas){
-        $("#cantidadMonedas").html(obtenerMonedas);
+var monedas = api.getPerfil(getQueryVariable("name"),function(obtenerMonedas){
+        $("#cantidadMonedas").html(obtenerMonedas.moneda);
+		$("#imagen_perfil").append('<img src="/estilos/imagenes/' + obtenerMonedas.imagen_perfil + '" width="63%">');
 }); 
 
 

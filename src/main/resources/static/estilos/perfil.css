@@ -11,8 +11,11 @@ body{
 	width:50%;
 	float:left;	
 }
+#imagen_perfil{
+	text-align:center;
+}
 #informacion{
-	margin-top:5%;
+	margin-top:3%;
 	position:relative;
 }
 #informacion .titulo{

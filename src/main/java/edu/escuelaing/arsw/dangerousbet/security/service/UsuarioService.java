@@ -1,6 +1,6 @@
 package edu.escuelaing.arsw.dangerousbet.security.service;
 
-import edu.escuelaing.arsw.dangerousbet.security.entity.Dinero;
+
 import edu.escuelaing.arsw.dangerousbet.security.entity.Usuario;
 import edu.escuelaing.arsw.dangerousbet.security.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

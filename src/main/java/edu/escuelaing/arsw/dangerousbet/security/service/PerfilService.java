@@ -9,23 +9,23 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.escuelaing.arsw.dangerousbet.security.entity.Dinero;
-import edu.escuelaing.arsw.dangerousbet.security.repository.MonedaRepository;
+import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
+import edu.escuelaing.arsw.dangerousbet.security.repository.PerfilRepository;
 
 @Service
 @Transactional
-public class MonedaService {
+public class PerfilService {
 
 	@Autowired
 	private EntityManager em;
 	
 	@Autowired
-	MonedaRepository monedaRepository;
+	PerfilRepository perfilRepository;
 	
 	public  String[][] getMejoresPosiciones(){
-		TypedQuery<Dinero> query= em.createQuery("SELECT d FROM Dinero d ORDER BY moneda desc", Dinero.class);
+		TypedQuery<Perfil> query= em.createQuery("SELECT d FROM Perfil d ORDER BY moneda desc", Perfil.class);
 		
-		List<Dinero> resultList2 =query.getResultList();
+		List<Perfil> resultList2 =query.getResultList();
 		String[][] lista=new String[10][2];
 		for(int i=0;i<10;i++) {
 				String[] s=new String[2];
@@ -40,11 +40,11 @@ public class MonedaService {
 		
 	}
 	
-	public  int getMonedas(String name){
+	public  Perfil getPerfil(String name){
 		
-		Dinero dinero=monedaRepository.findById(name).get();
+		Perfil perfil=perfilRepository.findById(name).get();
 		
-		return dinero.getMoneda();
+		return perfil;
 		
 	}
 }

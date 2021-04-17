@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.escuelaing.arsw.dangerousbet.security.entity.EnSala;
-import edu.escuelaing.arsw.dangerousbet.security.entity.Logros;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
 import edu.escuelaing.arsw.dangerousbet.security.repository.EnSalaRepository;
-import edu.escuelaing.arsw.dangerousbet.security.repository.MonedaRepository;
+
 
 @Service
 @Transactional
