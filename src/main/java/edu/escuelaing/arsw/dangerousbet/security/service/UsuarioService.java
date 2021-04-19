@@ -17,6 +17,7 @@ public class UsuarioService {
     UsuarioRepository usuarioRepository;
 
     public Optional<Usuario> getById(String nickName){
+
         return usuarioRepository.findById(nickName);
     }
 

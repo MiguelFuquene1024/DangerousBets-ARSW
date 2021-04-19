@@ -29,6 +29,7 @@ import edu.escuelaing.arsw.dangerousbet.security.entity.Tienda;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Usuario;
 import edu.escuelaing.arsw.dangerousbet.security.entity.UsuarioTienda;
 import edu.escuelaing.arsw.dangerousbet.security.entity.EnSala;
+import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
 import edu.escuelaing.arsw.dangerousbet.security.service.EnSalaService;
 import edu.escuelaing.arsw.dangerousbet.security.service.PerfilService;
 import edu.escuelaing.arsw.dangerousbet.security.service.SalasService;
@@ -167,11 +168,27 @@ public class WebController {
         return new ResponseEntity<>(tienda.logosNoComprados(user),HttpStatus.ACCEPTED);
     }
     
+    @GetMapping("/logosComprados/{user}")
+    public ResponseEntity<?> logosComprados(@PathVariable("user") String user) {	
+    	System.out.println("=================================");
+        return new ResponseEntity<>(srvall.logosComprados(user),HttpStatus.ACCEPTED);
+    }
   
     
     @GetMapping("/salasPublicas")
     public ResponseEntity<?> salasPublicas() {		
         return new ResponseEntity<>(sala.getSalasPublicas(),HttpStatus.ACCEPTED);
+    }
+    
+    @PutMapping("/actualizarDatos/{user}")
+    public ResponseEntity<?> actualizarDatos(@PathVariable("user") String user,@RequestBody Usuario us) {	
+    	srvall.actualizarDatos(us,user);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+    @PutMapping("/actualizarDatosPerfil/{user}")
+    public ResponseEntity<?> actualizarDatosPerfil(@PathVariable("user") String user,@RequestBody Perfil pf) {	
+    	srvall.actualizarDatosPerfil(pf,user);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
     
    

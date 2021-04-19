@@ -47,4 +47,9 @@ public class PerfilService {
 		return perfil;
 		
 	}
+
+	public void save(Perfil p) {
+		perfilRepository.save(p);
+		
+	}
 }

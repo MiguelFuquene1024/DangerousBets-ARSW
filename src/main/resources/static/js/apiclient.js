@@ -18,6 +18,16 @@ var apiclient = (function () {
 				}
 			);
 		},
+		logosComprados : function (user,callback) {
+	
+			$.getJSON("/logosComprados/"+ user ,function (data) {
+					callback(data);
+					
+				}
+			);
+		},
+		
+		
 		
                 getUsuario : function (user,callback) {
 
@@ -184,6 +194,42 @@ var apiclient = (function () {
 				data: datos,
 				contentType: "application/json"
 				
+			});
+			resolve(putPromise);
+			});
+			
+			return promise;
+		},
+		
+		actualizarDatos : function(nombre,correo,nickname){
+			let promise = new Promise( (resolve, reject) => {
+				var datos={name:nombre, correo : correo};
+				datos = JSON.stringify(datos);
+				
+				
+				var putPromise = $.ajax({
+				url: "/actualizarDatos/" + nickname,
+				type: 'PUT',
+				data: datos,
+				contentType: "application/json"
+			});
+			resolve(putPromise);
+			});
+			
+			return promise;
+		},
+		
+		actualizarDatosPerfil : function(imagenP,nickname){
+			let promise = new Promise( (resolve, reject) => {
+				var datos={imagen_perfil:imagenP};
+				datos = JSON.stringify(datos);
+				
+				
+				var putPromise = $.ajax({
+				url: "/actualizarDatosPerfil/" + nickname,
+				type: 'PUT',
+				data: datos,
+				contentType: "application/json"
 			});
 			resolve(putPromise);
 			});

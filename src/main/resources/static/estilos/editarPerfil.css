@@ -1,0 +1,46 @@
+body{
+	background:url('imagenes/fondo_perfil.jpg');
+	background-size:100% auto;
+}
+
+#imagen_perfil{
+	width:300px;
+	position:relative;
+}
+
+#imagen_perfil button{
+	
+	position:absolute;
+	top:45%;
+}
+
+#imagen_perfil #siguiente{
+	left:0%;
+}
+
+#imagen_perfil #anterior{
+	left:100%;
+}
+#informacion{
+	margin-top:10px;
+}
+#informacion .titulo{
+	line-height:25px;
+	font-weight:700;
+	font-size:22px;
+	padding:0;
+	margin:0;
+}
+input{
+
+	width:150px;
+	display:block;
+}
+#guardarCambios{
+	margin-top:15px;
+}
+.error{
+	color:red;
+	display:inline-block;
+}
+

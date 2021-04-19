@@ -1,0 +1,132 @@
+CREATE OR REPLACE FUNCTION addDinero()
+  RETURNS trigger 
+ language plpgsql AS
+$$
+begin 
+	
+	insert into dinero(nickname,moneda,imagen_perfil) values(new.nickname,5000,'en_racha.png');
+	return new;
+end;
+$$
+insert into dinero values('yarit',80000,'en_racha.png');
+insert into dinero values('ramos',10000,'en_racha.png');
+insert into dinero values('santiago',9000,'en_racha.png');
+insert into dinero values('felicidad',7500,'en_racha.png');
+insert into dinero values('bonys',9700,'en_racha.png');
+insert into dinero values('ramos2',9999,'en_racha.png');
+insert into dinero values('yarit10',3000,'en_racha.png');
+insert into dinero values('yarit5',10000,'en_racha.png');
+insert into dinero values('yarit3',10000,'en_racha.png');
+insert into dinero values('MiguelAngel',10000,'en_racha.png');
+
+create trigger ADDMONEDA
+after insert on usuario
+ FOR EACH ROW
+execute procedure addDinero();
+
+create table dinero(
+	nickname varchar(26),
+	moneda int,
+	imagen_perfil varchar(26)
+);
+
+
+drop table dinero 
+
+create table usuarios_logros(
+	id int,
+	nickname varchar(26),
+	logros_id int
+);
+drop table usuarios_logros;
+ALTER TABLE usuario_tienda ADD CONSTRAINT id_usuario_tienda primary key(id); 
+ALTER TABLE tienda ADD CONSTRAINT id_tienda primary key(id); 
+ALTER TABLE usuario_tienda ADD FOREIGN KEY (tienda) REFERENCES tienda (recurso);
+ALTER TABLE usuarios_logros ADD FOREIGN KEY (nickname) REFERENCES usuario (nickname);
+ALTER TABLE usuarios_logros ADD FOREIGN KEY (logros_id) REFERENCES logros (id);
+
+create table logros(
+	id int,
+	usuario varchar(60),
+	recurso varchar(26)
+);
+ alter table tienda 
+  add constraint UQ_alumnos_documento
+  unique (recurso);
+create table salas(
+	id int,
+	nombre varchar(60),
+	clave varchar(26),
+	valorsala int,
+	publico boolean
+);
+create table usuario_tienda(
+	usuario varchar(26),
+	tienda varchar(26)
+);
+insert into usuario_tienda values('yarit','en_racha.png');
+insert into usuario_tienda values('ramos','en_racha.png');
+
+create table tienda(
+	id int,
+	tipo varchar(26),
+	recurso varchar(26),
+	valor int
+);
+
+drop table tienda;
+insert into tienda values(0,'logo','en_racha.png',3000);
+insert into tienda values(1,'logo','cala.png',2000);
+insert into tienda values(2,'logo','calavera.jpg',3200);
+insert into tienda values(3,'logo','calavera_poker.png',4000);
+insert into tienda values(4,'logo','cartas_calavera.png',10000);
+insert into tienda values(5,'logo','kakerui.png',5000);
+insert into tienda values(6,'logo','kakerui_moneda.png',3200);
+insert into tienda values(7,'logo','perfil_cartas.png',1000);
+insert into tienda values(8,'logo','perfil_moneda.png',1500);
+insert into tienda values(9,'logo','perfil_siete.png',1500);
+
+
+
+insert into salas values(1,'sala_uno',null,0,true);
+
+DELETE FROM usuario_tienda WHERE id = 5;
+DELETE FROM ensala WHERE id = 1;
+drop table salas
+
+create table enSala(
+	id int,
+	nombre_sala varchar(60),
+	nickname varchar(26)
+);
+
+drop table enSala;
+
+insert into usuarios_logros values(1,'yarit',1);
+
+
+
+ALTER TABLE usuarios_logros ADD CONSTRAINT id_usuarios_logros primary key(id); 
+ALTER TABLE logros ADD CONSTRAINT id_logros primary key(id); 
+
+insert into usuarios_logros values(1,'yarit',1);
+insert into usuarios_logros values(2,'yarit',4);
+insert into usuarios_logros values(3,'yarit',7);
+insert into usuarios_logros values(4,'yarit',8);
+
+insert into usuarios_logros values(5,'yarit5',1);
+insert into usuarios_logros values(6,'yarit5',3);
+insert into usuarios_logros values(7,'yarit5',4);
+insert into usuarios_logros values(8,'yarit5',5);
+insert into usuarios_logros values(9,'yarit',5);
+
+
+
+insert into logros values(1,'Gana la primera ronda','medalla.png');
+insert into logros values(2,'Gana 3 rondas consecutivas','en_racha.png');
+insert into logros values(3,'Gana por Full-House','full_house.png');
+insert into logros values(4,'Gana por escalera','escalera.png');
+insert into logros values(5,'Gana por Color','color.png');
+insert into logros values(6,'Gana el juego','ganar_juego.png');
+insert into logros values(7,'Apuesta todo y Gana','apostar_todo.png');
+insert into logros values(8,'Gana porque todos se retiran','abandono.png');
