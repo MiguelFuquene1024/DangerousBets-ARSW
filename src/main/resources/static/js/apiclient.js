@@ -142,19 +142,21 @@ var apiclient = (function () {
 		
 		
 		
-		anadirJugador: function(nickname){
+		anadirJugador: function(sala){
 			
 			let pass=$("#contrasena").val()
 			let usuario = window.localStorage.usuario;
+			var datos=usuario;
+			datos = JSON.stringify(datos);
 			const promise = $.post({
-				url: "/nuevoJugador/"+name,
+				url: "/nuevoJugador/"+sala+"/"+pass,
 				contentType: "application/json",
-				
-				data: "{\"nombreSala\": \"" + nickname + "\",\"nickname\":\"" + usuario + "\",\"contrasena\":\"" + pass + "\"}",
+				type:'PUT',
+				data: datos
 			});
 			promise.then(function (data) {
 				console.log(data)
-				window.location.href="/salaDeEspera.html?name="+nickname;
+				window.location.href="/salaDeEspera.html?name="+sala;
 				
                 
             }, function (error) {

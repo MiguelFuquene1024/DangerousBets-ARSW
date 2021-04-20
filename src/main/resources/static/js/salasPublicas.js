@@ -11,7 +11,7 @@ function salasPublicas(datos){
 
 	for(numero in datos){
 		
-		s=s+'<tr class="jugadores"><th>'+ datos[numero][0].nombre +'</th><th>' + datos[numero][1] +'/8</th><th>'+ datos[numero][0].valorsala +'</th><th><label id="'+ datos[numero][0].nombre +'" class="link">Unirse a Sala</label></th></tr>';
+		s=s+'<tr class="jugadores"><th>'+ datos[numero].nombre +'</th><th>' + datos[numero].jugadores.length +'/8</th><th>'+ datos[numero].valorsala +'</th><th><label id="'+ datos[numero].nombre +'" class="link">Unirse a Sala</label></th></tr>';
 		
 
 	}

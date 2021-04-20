@@ -1,43 +1,63 @@
 package edu.escuelaing.arsw.dangerousbet.security.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="salas")
+
 public class Salas {
 	
-	@Id
-	private int id;
 	
 	private int valorsala;
 	
 	private  String nombre;
 	
-	@Column(name="clave")
+
 	private String clave;
 	
 	private boolean publico;
 	
-
+	private List<String> jugadores=new ArrayList<>();
+	
 	public Salas() {
 		
 	}
-	
-	public Salas(int id2, int valorsala2,String nombre2, String clave2, boolean publico2) {
-		id=id2;
+
+
+	public Salas(int valorsala2,String nombre2, String clave2, boolean publico2) {
 		nombre=nombre2;
 		clave=clave2;
 		publico=publico2;
 		valorsala=valorsala2;
+
 	}
 
-	public int getId() {
-		return id;
-	}
 	
+	
+	public List<String> getJugadores() {
+		return jugadores;
+	}
+
+
+	public void setJugadores(List<String> jugadores) {
+		this.jugadores = jugadores;
+	}
+	public void agregarJugador(String jugador) {
+		if(!jugadores.contains(jugador)) {
+			jugadores.add(jugador);
+		}
+	}
+	public void eliminarJugador(String Jugador) {
+		if(jugadores.contains(Jugador)) {
+			jugadores.remove(Jugador);
+		}
+	}
+
+
 	public int getValorsala() {
 		return valorsala;
 	}
@@ -46,9 +66,7 @@ public class Salas {
 		this.valorsala = valorsala;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+
 
 	public String getNombre() {
 		return nombre;

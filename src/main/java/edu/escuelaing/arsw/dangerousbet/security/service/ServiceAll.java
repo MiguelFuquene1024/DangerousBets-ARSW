@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import edu.escuelaing.arsw.dangerousbet.persistence.SalasPersistence;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
+import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Tienda;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Usuario;
 import edu.escuelaing.arsw.dangerousbet.security.entity.UsuarioTienda;
@@ -31,10 +33,9 @@ public class ServiceAll {
 	private UsuarioService usuario;
 	
 	@Autowired
-	private EnSalaService es;
+	private SalasPersistence slp;
 	
-	@Autowired
-	private SalasService sala;
+
 
 	public void comprarLogo(UsuarioTienda ut) {
 
@@ -61,6 +62,28 @@ public class ServiceAll {
 		p.setImagen_perfil(pf.getImagen_perfil());
 		perfil.save(p);
 	}
+
+	public void crearSala(Salas sala2) {
+		slp.agregarSala(sala2);
+		
+	}
+
+	public void agregarJugador(String sala,String clave ,String nj) {
+		slp.agregarJugador(sala, clave,nj);
+		
+	}
+
+	public Salas obtenerSala(String s2) {
+		
+		return slp.obtenerSala(s2);
+	}
+
+	public List<Salas> getSalasPublicas() {
+
+		return slp.getSalasPublicas();
+	}
+	
+	
 
 
 

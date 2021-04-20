@@ -30,9 +30,7 @@ import edu.escuelaing.arsw.dangerousbet.security.entity.Usuario;
 import edu.escuelaing.arsw.dangerousbet.security.entity.UsuarioTienda;
 import edu.escuelaing.arsw.dangerousbet.security.entity.EnSala;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
-import edu.escuelaing.arsw.dangerousbet.security.service.EnSalaService;
 import edu.escuelaing.arsw.dangerousbet.security.service.PerfilService;
-import edu.escuelaing.arsw.dangerousbet.security.service.SalasService;
 import edu.escuelaing.arsw.dangerousbet.security.service.ServiceAll;
 import edu.escuelaing.arsw.dangerousbet.security.service.TiendaService;
 import edu.escuelaing.arsw.dangerousbet.security.service.UsuarioLogrosService;
@@ -58,11 +56,9 @@ public class WebController {
 	@Autowired
 	private UsuarioService usuario;
 	
-	@Autowired
-	private EnSalaService es;
+
 	
-	@Autowired
-	private SalasService sala;
+
 	
 	@Autowired
 	private ServiceAll srvall;
@@ -90,43 +86,26 @@ public class WebController {
     }
     
     @PostMapping("/salas")
-    public ResponseEntity<?> crearSalas(@RequestBody nuevaSala sala, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-            return new ResponseEntity<>("Campos mal puestos", HttpStatus.BAD_REQUEST);
-        }
-        
-        
-        this.sala.save(new Salas(this.sala.mayorSala(),sala.getValorsala(),sala.getNombre(),sala.getClave(),false));
-        
+    public ResponseEntity<?> crearSalas(@RequestBody Salas sala){
+    	
+    	srvall.crearSala(sala);
         return new ResponseEntity<>("SALA CREADA", HttpStatus.CREATED);
 
     }
     
-    @PostMapping("/nuevoJugador")
-    public ResponseEntity<?> agregarJugador(@RequestBody NuevoJugador nj, BindingResult bindingResult){
-        
-    	if (bindingResult.hasErrors()){
-            return new ResponseEntity<>("Campos mal puestos", HttpStatus.BAD_REQUEST);
-        }
+    @PutMapping("/nuevoJugador/{sala}/{clave}")
+    public ResponseEntity<?> agregarJugador(@PathVariable("sala") String sala,@PathVariable("clave") String clave,@RequestBody String nj){
 
-        if(es.comprobar(nj.getNombreSala(),nj.getContrasena(),nj.getNickname())) {
-        	
-        	es.save(new EnSala(es.mayorSala(),nj.getNickname(),nj.getNombreSala()));
-            return new ResponseEntity<>("JUGADOR AÑADIDO", HttpStatus.CREATED);
-        }
-        
-        System.out.println("hola");
-        return new ResponseEntity<>("JUGADOR NO AÑADIDO", HttpStatus.BAD_REQUEST);
+    	srvall.agregarJugador(sala,clave,nj);
+    	return new ResponseEntity<>(HttpStatus.ACCEPTED);
 
     }
 
     @GetMapping("/investigarSala/{sala}")
     public ResponseEntity<?> investigarSala(@PathVariable("sala") String s) {
-    		Salas sa=sala.costoSala(s);
-    		if(sa!=null) {
-    			return new ResponseEntity<>(sa,HttpStatus.ACCEPTED);
-    		}
-    		return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+
+    	return new ResponseEntity<>(srvall.obtenerSala(s),HttpStatus.ACCEPTED);
+    
     }
     
 	@GetMapping("/logrosObtenidos/{user}")
@@ -170,14 +149,14 @@ public class WebController {
     
     @GetMapping("/logosComprados/{user}")
     public ResponseEntity<?> logosComprados(@PathVariable("user") String user) {	
-    	System.out.println("=================================");
+
         return new ResponseEntity<>(srvall.logosComprados(user),HttpStatus.ACCEPTED);
     }
   
     
     @GetMapping("/salasPublicas")
     public ResponseEntity<?> salasPublicas() {		
-        return new ResponseEntity<>(sala.getSalasPublicas(),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(srvall.getSalasPublicas(),HttpStatus.ACCEPTED);
     }
     
     @PutMapping("/actualizarDatos/{user}")

@@ -26,8 +26,8 @@ $(document).ready(function(){
 		$('input[type="number"]').val('');
 	});
 	$("#submit2").click(function(){
-		let nickname=$("#sala").val();
-		api.anadirJugador(nickname);
+		let salas=$("#sala").val();
+		api.anadirJugador(salas);
 	});
 	$("#submit").click(function(){
 		$(".error").remove();
@@ -50,7 +50,7 @@ $(document).ready(function(){
 			flag = false;
 		}
 
-		api.getMonedas( window.localStorage.usuario,function(data){
+		api.getPerfil( window.localStorage.usuario,function(data){
 
 			if(cd>data){
 				
