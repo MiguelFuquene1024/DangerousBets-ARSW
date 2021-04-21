@@ -31,25 +31,49 @@ function priv(mesa){
 	});
 }
 
-
-
-var name=getQueryVariable("name");
-$(document).ready(function(){
+function perfilJugadores(){
 	
 	api.investigarSala(name,async function(mesa){
+		for(numero in mesa.jugadores){
+			console.log(jugadores_actuales.includes(mesa.jugadores[numero]));
+			if(jugadores_actuales.includes(mesa.jugadores[numero])==false){
+				await api.getPerfil(mesa.jugadores[numero],function(perfil){
+					
+			
+					$("#jugadores").append('<div id="' + perfil.nickname + '" class="jugador"><div class="superior"><img src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100%"></div><div class="inferior"><label>'+ perfil.nickname +'<label></div></div>');
+				});
+			}else{
+				let ind=jugadores_actuales.indexOf(mesa.jugadores[numero]);
+				jugadores_actuales.splice(ind,1);
+			}
+		}
+		for(numero in jugadores_actuales){
+			console.log(jugadores_actuales[numero]);
+			$("#"+jugadores_actuales[numero]).remove();
+		}
+		
+		jugadores_actuales=mesa.jugadores;
+	});
+}
+
+var name=getQueryVariable("name");
+var jugadores_actuales=[];
+$(document).ready(async function(){
+	
+	await api.investigarSala(name,async function(mesa){
 		
 		$("#mesa_vacio").html(mesa.nombre);
 		$("#clave_vacio").html(mesa.clave);
+		jugadores_actuales=mesa.jugadores;
 		for(numero in mesa.jugadores){
-			console.log(mesa.jugadores[numero]);
-			await api.getPerfil(mesa.jugadores[numero],function(perfil){
-				
-				console.log(perfil);
-				$("#jugadores").append('<div class="jugador"><div class="superior"><img src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100%"></div><div class="inferior"><label>'+ perfil.nickname +'<label></div></div>');
-			});
-			
+			console.log(jugadores_actuales.includes(mesa.jugadores[numero]));
+				await api.getPerfil(mesa.jugadores[numero],function(perfil){			
+					$("#jugadores").append('<div id="' + perfil.nickname + '"class="jugador"><div class="superior"><img src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100%"></div><div class="inferior"><label>'+ perfil.nickname +'<label></div></div>');
+				});				
 		}
+		jugadores_actuales=mesa.jugadores;
 		priv(mesa);
+		setInterval(perfilJugadores, 3000);
 		
 	});
 	
@@ -62,6 +86,7 @@ $(document).ready(function(){
 		api.eliminarJugador(name,window.localStorage.usuario);
 		
 	});
+	
 	
 
 });
