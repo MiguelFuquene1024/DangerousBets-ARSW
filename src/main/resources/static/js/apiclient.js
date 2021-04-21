@@ -123,10 +123,12 @@ var apiclient = (function () {
 			let nickname=$("#name").val()
 			let pass=$("#contrasena1").val()
 			let cd=$("#cdinero").val()
+			var datos={valorsala:cd, nombre:nickname,clave:pass,jugadores:[window.localStorage.usuario]};
+			datos = JSON.stringify(datos);
 			const promise = $.post({
 				url: "/salas",
 				contentType: "application/json",
-				data: "{\"valorsala\": \"" + cd +  "\",\"nombre\": \"" + nickname + "\",\"clave\":\"" + pass + "\"}",
+				data: datos
 			});
 			promise.then(function (data) {
 				window.location.href="/salaDeEspera.html?name="+nickname;
@@ -147,7 +149,6 @@ var apiclient = (function () {
 			let pass=$("#contrasena").val()
 			let usuario = window.localStorage.usuario;
 			var datos=usuario;
-			datos = JSON.stringify(datos);
 			const promise = $.post({
 				url: "/nuevoJugador/"+sala+"/"+pass,
 				contentType: "application/json",
@@ -237,7 +238,47 @@ var apiclient = (function () {
 			});
 			
 			return promise;
+		},
+		
+		privacidadSala : function(mesa){
+			let promise = new Promise( (resolve, reject) => {
+			
+		
+				
+				var putPromise = $.ajax({
+				url: "/privacidadSala/" + mesa,
+				type: 'PUT',
+				
+				contentType: "application/json"
+			});
+			resolve(putPromise);
+			});
+			
+			return promise;
+		},
+		
+		eliminarJugador : function(sala,usuario){
+			
+			var datos=usuario;
+			const promise = $.post({
+				url: "/eliminarJugador/"+sala,
+				contentType: "application/json",
+				type:'PUT',
+				data: datos
+			});
+			promise.then(function (data) {
+				console.log(data)
+				window.location.href="/salasPublicas.html";
+				
+                
+            }, function (error) {
+
+				
+                alert("No se pude anadir jugador")
+
+            })
 		}
+		
 		
 		
 		

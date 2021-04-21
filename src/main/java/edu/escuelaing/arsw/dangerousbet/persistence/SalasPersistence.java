@@ -21,4 +21,6 @@ public interface SalasPersistence {
 
 	public List<Salas> getSalasPublicas();
 
+	public void privacidadSala(String sala);
+
 }

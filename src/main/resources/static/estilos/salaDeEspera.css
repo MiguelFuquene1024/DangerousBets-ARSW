@@ -74,8 +74,7 @@ body{
 }
 #boton_comenzar,
 .botonP_P,
-#boton_publico,
-#boton_privacidad,
+#boton_priv,
 #boton_salir{
 	width:15%;
 	height:90%;
@@ -86,8 +85,8 @@ body{
 #boton_comenzar{
 	right:5%;
 }
-#boton_publico,
-#boton_privacidad,
+
+#boton_priv,
 .botonP_P{
 	left:43%;
 }

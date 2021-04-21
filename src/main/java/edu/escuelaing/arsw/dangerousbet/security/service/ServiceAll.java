@@ -82,6 +82,16 @@ public class ServiceAll {
 
 		return slp.getSalasPublicas();
 	}
+
+	public void privacidadSala(String sala) {
+		slp.privacidadSala(sala);
+		
+	}
+
+	public void eliminarJugador(String sala, String nj) {
+		slp.eliminarJugador(sala,nj);
+		
+	}
 	
 	
 

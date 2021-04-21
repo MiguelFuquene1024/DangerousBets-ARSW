@@ -100,6 +100,21 @@ public class WebController {
     	return new ResponseEntity<>(HttpStatus.ACCEPTED);
 
     }
+    @PutMapping("/eliminarJugador/{sala}")
+    public ResponseEntity<?> eliminarJugador(@PathVariable("sala") String sala,@RequestBody String nj){
+    	System.out.println(nj);
+    	srvall.eliminarJugador(sala,nj);
+    	return new ResponseEntity<>(HttpStatus.ACCEPTED);
+
+    }
+    
+    @PutMapping("/privacidadSala/{sala}")
+    public ResponseEntity<?> privacidadSala(@PathVariable("sala") String sala){
+
+    	srvall.privacidadSala(sala);
+    	return new ResponseEntity<>(HttpStatus.ACCEPTED);
+
+    }
 
     @GetMapping("/investigarSala/{sala}")
     public ResponseEntity<?> investigarSala(@PathVariable("sala") String s) {

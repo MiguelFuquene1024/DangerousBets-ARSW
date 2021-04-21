@@ -36,14 +36,9 @@ public class InMmemorySalas implements SalasPersistence{
 		if(salas.containsKey(sala)) {
 
 			if(salas.get(sala).isPublico() || salas.get(sala).getClave().equals(clave)) {
-				System.out.println(sala);
-				System.out.println(clave);
-				System.out.println(jugador);
-				System.out.println("====================");
+
 				salas.get(sala).agregarJugador(jugador);
-				System.out.println(sala);
-				System.out.println(clave);
-				System.out.println(jugador);
+
 			}
 		
 		}
@@ -78,6 +73,14 @@ public class InMmemorySalas implements SalasPersistence{
 			}
 		}
 		return sp;
+	}
+
+	@Override
+	public void privacidadSala(String sala) {
+		if(salas.containsKey(sala)) {
+			salas.get(sala).setPublico(!salas.get(sala).isPublico());
+		}
+		
 	}
 	
 	
