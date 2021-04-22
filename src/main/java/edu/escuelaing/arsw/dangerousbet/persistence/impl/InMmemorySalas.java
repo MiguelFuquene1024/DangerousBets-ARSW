@@ -1,8 +1,13 @@
 package edu.escuelaing.arsw.dangerousbet.persistence.impl;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -11,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 import edu.escuelaing.arsw.dangerousbet.persistence.SalaPersistenceException;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalasPersistence;
+import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
+
 
 
 
@@ -24,6 +31,22 @@ public class InMmemorySalas implements SalasPersistence{
 	public InMmemorySalas() {
 		Salas s=new Salas(0,"Sala Publica",null,true);
 		salas.put(s.getNombre(), s);
+		Timer timer=new Timer(5000,new ActionListener() {
+
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				for(Entry<String,Salas> entry:salas.entrySet()) {
+					
+					if(entry.getValue().getJugadores().size()==0) {
+						eliminarSala(entry.getKey());
+					}
+				}
+				
+			}
+		});
+		
+		timer.start();
 
 	}
 	
@@ -35,17 +58,17 @@ public class InMmemorySalas implements SalasPersistence{
 		}
 	}
 	
-	public void agregarJugador(String sala,String clave,String jugador) throws SalaPersistenceException {
+	public void agregarJugador(String sala,String clave,Perfil jugador) throws SalaPersistenceException {
 	
 		
 		if(salas.containsKey(sala)) {
 
-			if(salas.get(sala).isPublico() || salas.get(sala).getClave().equals(clave)) {
+			if((salas.get(sala).isPublico() || salas.get(sala).getClave().equals(clave)) && jugador.getMoneda()>=salas.get(sala).getValorsala()) {
 
-				salas.get(sala).agregarJugador(jugador);
+				salas.get(sala).agregarJugador(jugador.getNickname());
 
 			}else {
-				throw new SalaPersistenceException("Contraseña equivocada");
+				throw new SalaPersistenceException("No puede ingresar a la sala");
 			}
 		}else {
 			throw new SalaPersistenceException("No existe esta sala");
@@ -59,7 +82,7 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 	
 	public void eliminarSala(String sala) {
-		if(salas.containsKey(sala)) {
+		if(salas.containsKey(sala) && !salas.get(sala).getNombre().equals("Sala Publica")) {
 			salas.remove(sala);
 		}
 	}

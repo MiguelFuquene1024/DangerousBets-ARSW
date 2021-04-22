@@ -36,7 +36,7 @@ public class ServiceAll {
 	@Autowired
 	private SalasPersistence slp;
 	
-
+	
 
 	public void comprarLogo(UsuarioTienda ut) throws serviceException{
 
@@ -65,14 +65,15 @@ public class ServiceAll {
 	}
 
 	public void crearSala(Salas sala2) throws SalaPersistenceException{
-
+			
 			slp.agregarSala(sala2);
 		
 		
 	}
 
 	public void agregarJugador(String sala,String clave ,String nj) throws SalaPersistenceException{
-		slp.agregarJugador(sala, clave,nj);
+		Perfil us=perfil.getPerfil(nj);
+		slp.agregarJugador(sala, clave,us);
 		
 	}
 

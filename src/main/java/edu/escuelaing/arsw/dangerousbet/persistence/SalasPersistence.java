@@ -2,7 +2,9 @@ package edu.escuelaing.arsw.dangerousbet.persistence;
 
 import java.util.List;
 
+import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
+import edu.escuelaing.arsw.dangerousbet.security.entity.Usuario;
 
 
 public interface SalasPersistence {
@@ -10,7 +12,7 @@ public interface SalasPersistence {
 	
 	public void agregarSala(Salas sala) throws SalaPersistenceException;
 	
-	public void agregarJugador(String sala,String clave,String jugador) throws SalaPersistenceException;
+	public void agregarJugador(String sala,String clave,Perfil jugador) throws SalaPersistenceException;
 	
 	
 	public void eliminarJugador(String sala,String jugador);
