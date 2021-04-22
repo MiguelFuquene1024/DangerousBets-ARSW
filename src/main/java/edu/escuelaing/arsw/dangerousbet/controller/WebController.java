@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import edu.escuelaing.arsw.dangerousbet.persistence.SalaPersistenceException;
 import edu.escuelaing.arsw.dangerousbet.security.dto.JwtDto;
 import edu.escuelaing.arsw.dangerousbet.security.dto.LoginUsuario;
 import edu.escuelaing.arsw.dangerousbet.security.dto.nuevaSala;
@@ -35,7 +36,7 @@ import edu.escuelaing.arsw.dangerousbet.security.service.ServiceAll;
 import edu.escuelaing.arsw.dangerousbet.security.service.TiendaService;
 import edu.escuelaing.arsw.dangerousbet.security.service.UsuarioLogrosService;
 import edu.escuelaing.arsw.dangerousbet.security.service.UsuarioService;
-
+import edu.escuelaing.arsw.dangerousbet.security.service.serviceException;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -73,8 +74,11 @@ public class WebController {
     }
     @GetMapping("/perfil/{user}")
     public ResponseEntity<?> getPerfil(@PathVariable("user") String user) {
-    	
-    	return new ResponseEntity<>(perfil.getPerfil(user),HttpStatus.ACCEPTED);
+    	try {
+    		return new ResponseEntity<>(perfil.getPerfil(user),HttpStatus.ACCEPTED);
+    	}catch(Exception e) {
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	}
     }
     
     @GetMapping("/usuario/{user}")
@@ -86,18 +90,24 @@ public class WebController {
     }
     
     @PostMapping("/salas")
-    public ResponseEntity<?> crearSalas(@RequestBody Salas sala){
-    	
-    	srvall.crearSala(sala);
-        return new ResponseEntity<>("SALA CREADA", HttpStatus.CREATED);
-
+    public ResponseEntity<?> crearSalas(@RequestBody Salas sala) throws SalaPersistenceException{
+    	try {
+    		srvall.crearSala(sala);
+    		return new ResponseEntity<>(HttpStatus.CREATED);
+    	}
+    	catch(SalaPersistenceException ex) {
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	}
     }
     
     @PutMapping("/nuevoJugador/{sala}/{clave}")
-    public ResponseEntity<?> agregarJugador(@PathVariable("sala") String sala,@PathVariable("clave") String clave,@RequestBody String nj){
-
-    	srvall.agregarJugador(sala,clave,nj);
-    	return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    public ResponseEntity<?> agregarJugador(@PathVariable("sala") String sala,@PathVariable("clave") String clave,@RequestBody String nj) throws SalaPersistenceException{
+    	try {
+	    	srvall.agregarJugador(sala,clave,nj);
+	    	return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    	}catch(SalaPersistenceException ex) {
+    		return new ResponseEntity<>(ex.getMessage(),HttpStatus.BAD_REQUEST);
+    	}
 
     }
     @PutMapping("/eliminarJugador/{sala}")
@@ -150,11 +160,14 @@ public class WebController {
         return new ResponseEntity<>(perfil.getMejoresPosiciones(),HttpStatus.ACCEPTED);
     }
     @PostMapping("/comprarLogo")
-    public ResponseEntity<?> comprarLogo(@RequestBody UsuarioTienda ust) {	
+    public ResponseEntity<?> comprarLogo(@RequestBody UsuarioTienda ust) throws serviceException{	
 
-
-    	srvall.comprarLogo(ust);
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    	try {
+	    	srvall.comprarLogo(ust);
+	        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    	}catch(serviceException sx) {
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	}
     }
     
     @GetMapping("/logosNoComprados/{user}")

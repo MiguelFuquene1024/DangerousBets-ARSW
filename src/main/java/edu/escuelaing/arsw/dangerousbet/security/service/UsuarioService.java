@@ -26,6 +26,7 @@ public class UsuarioService {
     }
 
     public void save(Usuario usuario){
+    	System.out.println(usuario.getNickname()+"   ============== "+usuario.getContrasena());
         usuarioRepository.save(usuario);
     }
   

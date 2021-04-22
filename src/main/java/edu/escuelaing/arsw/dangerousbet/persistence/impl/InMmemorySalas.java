@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Service;
 
+import edu.escuelaing.arsw.dangerousbet.persistence.SalaPersistenceException;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalasPersistence;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
 
@@ -26,11 +27,15 @@ public class InMmemorySalas implements SalasPersistence{
 
 	}
 	
-	public void agregarSala(Salas sala) {
-		salas.put(sala.getNombre(), sala);
+	public void agregarSala(Salas sala) throws SalaPersistenceException{
+		if(!salas.containsKey(sala.getNombre())) {
+			salas.put(sala.getNombre(), sala);
+		}else {
+			throw new SalaPersistenceException("Ya existe sala");
+		}
 	}
 	
-	public void agregarJugador(String sala,String clave,String jugador) {
+	public void agregarJugador(String sala,String clave,String jugador) throws SalaPersistenceException {
 	
 		
 		if(salas.containsKey(sala)) {
@@ -39,8 +44,11 @@ public class InMmemorySalas implements SalasPersistence{
 
 				salas.get(sala).agregarJugador(jugador);
 
+			}else {
+				throw new SalaPersistenceException("Contraseña equivocada");
 			}
-		
+		}else {
+			throw new SalaPersistenceException("No existe esta sala");
 		}
 	}
 	

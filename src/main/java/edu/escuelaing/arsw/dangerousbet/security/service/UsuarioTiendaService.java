@@ -23,16 +23,21 @@ public class UsuarioTiendaService {
 	UsuarioTiendaRepository usuarioTiendaRepository;
 
 
-	public void save(UsuarioTienda usuarioTienda){
-		System.out.println(usuarioTienda.getId());
-		usuarioTiendaRepository.save(usuarioTienda);
+	public void save(UsuarioTienda usuarioTienda) throws serviceException{
+		TypedQuery<String> query= em.createQuery("SELECT ust.tienda FROM UsuarioTienda ust WHERE ust.tienda LIKE '" + usuarioTienda.getTienda()+"' AND ust.usuario LIKE '"+usuarioTienda.getUsuario() +"'", String.class);
+		if(query.getResultList().size()==0) {
+			usuarioTiendaRepository.save(usuarioTienda);
+		}else {
+			throw new serviceException("Ya esta comprado");
+		}
+		
     }
 	public int mayorIdUsuarioLogro(){
-		System.out.println("hola3");
+
 		TypedQuery<Integer> query= em.createQuery("SELECT ust.id FROM UsuarioTienda ust ORDER BY id desc", Integer.class);
 
 		List<Integer> resultList2 =query.getResultList();
-		System.out.println("hola5");
+		
 		return resultList2.get(0)+1;
     }
 	

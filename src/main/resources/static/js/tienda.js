@@ -18,8 +18,9 @@ function noComprados(logos){
 			
 		}	
 		$(".boton_imagen").click(async function(){
-				await api.comprarLogo($(this).attr("id"),window.localStorage.usuario);
-				await (api.logosNoComprados(window.localStorage.usuario,noComprados));
+				let promise=await api.comprarLogo($(this).attr("id"),window.localStorage.usuario);
+				api.logosNoComprados(window.localStorage.usuario,noComprados);
+
 		});
 }
 

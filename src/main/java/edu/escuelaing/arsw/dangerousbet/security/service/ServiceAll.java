@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import edu.escuelaing.arsw.dangerousbet.persistence.SalaPersistenceException;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalasPersistence;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
@@ -37,7 +38,7 @@ public class ServiceAll {
 	
 
 
-	public void comprarLogo(UsuarioTienda ut) {
+	public void comprarLogo(UsuarioTienda ut) throws serviceException{
 
 		int numero = ust.mayorIdUsuarioLogro();
 		ust.save(new UsuarioTienda(numero,ut.getUsuario(),ut.getTienda()));
@@ -63,12 +64,14 @@ public class ServiceAll {
 		perfil.save(p);
 	}
 
-	public void crearSala(Salas sala2) {
-		slp.agregarSala(sala2);
+	public void crearSala(Salas sala2) throws SalaPersistenceException{
+
+			slp.agregarSala(sala2);
+		
 		
 	}
 
-	public void agregarJugador(String sala,String clave ,String nj) {
+	public void agregarJugador(String sala,String clave ,String nj) throws SalaPersistenceException{
 		slp.agregarJugador(sala, clave,nj);
 		
 	}

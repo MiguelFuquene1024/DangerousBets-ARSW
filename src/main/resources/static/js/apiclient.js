@@ -4,6 +4,7 @@ var apiclient = (function () {
 		getPerfil : function (user,callback) {
 	
 			$.getJSON("/perfil/"+ user ,function (data) {
+			
 					callback(data);
 					
 				}
@@ -64,6 +65,7 @@ var apiclient = (function () {
 		hacerPost : function(){
 			let nickname=$("#nickname").val()
 			let pass=$("#contrasena").val()
+			
 			const promise = $.post({
 				url: "/auth/login",
 				contentType: "application/json",
@@ -71,14 +73,14 @@ var apiclient = (function () {
 			});
 			promise.then(function (data) {
 				console.log(data)
-				console.log(data.nombreUsuario)
-				console.log(data.authorities[0].authority)
+				//console.log(data.nombreUsuario)
+				//console.log(data.authorities[0].authority)
 				localStorage.removeItem("usuario")
-				localStorage.removeItem("token")
-				localStorage.removeItem("authority")
-				localStorage.setItem("usuario",data.nombreUsuario)
-				localStorage.setItem("token",data.token)
-				localStorage.setItem("authority",data.authorities[0].authority)
+				//localStorage.removeItem("token")
+				//localStorage.removeItem("authority")
+				localStorage.setItem("usuario",data)
+				//localStorage.setItem("token",data.token)
+				//localStorage.setItem("authority",data.authorities[0].authority)
 				window.location.href="/menu.html";
             }, function (error) {
                 alert("No se pudo conectar")
@@ -89,9 +91,10 @@ var apiclient = (function () {
 
 		postRegistro : 	function(){
 			let nickname=$("#nickname").val()
-			let pass=$("#contrasena").val()
+			let pass=$("#contrasena1").val()
 			let name=$("#nombre").val()
 			let correo=$("#correo1").val()
+			console.log(pass);
 			const promise = $.post({
 				url: "/auth/register",
 				contentType: "application/json",
@@ -137,7 +140,7 @@ var apiclient = (function () {
             }, function (error) {
 
 				
-                alert("No se puede crear sala")
+                alert("El nombre de la sala ya existe")
 
             })
 		},
@@ -160,10 +163,10 @@ var apiclient = (function () {
 				window.location.href="/salaDeEspera.html?name="+sala;
 				
                 
-            }, function (error) {
+            }, function (data,error) {
 
 				
-                alert("No se pude anadir jugador")
+                alert("No se pudo acceder a la sala");
 
             })
 		},
@@ -199,6 +202,12 @@ var apiclient = (function () {
 				
 			});
 			resolve(putPromise);
+			});
+			
+			promise.then((resultado) =>{
+				
+			}).catch((error) => {
+				alert("No se puede comprar");
 			});
 			
 			return promise;

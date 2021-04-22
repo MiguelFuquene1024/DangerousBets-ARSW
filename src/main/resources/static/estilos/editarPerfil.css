@@ -7,19 +7,24 @@ body{
 	width:300px;
 	position:relative;
 }
-
-#imagen_perfil button{
-	
+#imagen_perfil #anterior:hover,
+#imagen_perfil #siguiente:hover{
+	cursor:pointer;
+}
+#imagen_perfil #anterior,
+#imagen_perfil #siguiente{
+	width:20%;
 	position:absolute;
-	top:45%;
+	top:44%;
+	
 }
 
 #imagen_perfil #siguiente{
-	left:0%;
+	left:-30%;
 }
 
 #imagen_perfil #anterior{
-	left:100%;
+	left:107%;
 }
 #informacion{
 	margin-top:10px;

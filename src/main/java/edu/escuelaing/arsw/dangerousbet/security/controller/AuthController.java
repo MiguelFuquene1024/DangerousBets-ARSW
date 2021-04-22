@@ -46,14 +46,16 @@ public class AuthController {
     JwtProvider jwtProvider;
 
     @PostMapping("/register")
-    public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return new ResponseEntity<>("Campos mal puestos", HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<?> nuevo(@RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult){
+        //if(bindingResult.hasErrors()){
+         //   return new ResponseEntity<>("Campos mal puestos", HttpStatus.BAD_REQUEST);
+        //}
         if(usuarioService.existsById(nuevoUsuario.getNickname())){
             return new ResponseEntity<>("Ese nombre ya Exite", HttpStatus.BAD_REQUEST);
         }
-        Usuario usuario = new Usuario(nuevoUsuario.getName(),passwordEncoder.encode(nuevoUsuario.getContrasena()), nuevoUsuario.getNickname(), nuevoUsuario.getCorreo());
+        //Usuario usuario = new Usuario(nuevoUsuario.getName(),passwordEncoder.encode(nuevoUsuario.getContrasena()), nuevoUsuario.getNickname(), nuevoUsuario.getCorreo());
+        System.out.println(nuevoUsuario.getContrasena());
+        Usuario usuario = new Usuario(nuevoUsuario.getName(),nuevoUsuario.getContrasena(), nuevoUsuario.getNickname(), nuevoUsuario.getCorreo());
         Set<Rol> roles = new HashSet<>();
         roles.add(rolService.getById(0).get());
         usuario.setRoles(roles);
@@ -61,16 +63,26 @@ public class AuthController {
         return new ResponseEntity<>("Usuario creado",HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-            return new ResponseEntity<>("Campos mal puestos", HttpStatus.BAD_REQUEST);
-        }
-        Authentication authentication =
-                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNickname(),loginUsuario.getContrasena()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtProvider.generateToken(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        JwtDto jwtDto= new JwtDto(jwt,userDetails.getUsername(),userDetails.getAuthorities());
-        return new ResponseEntity<>(jwtDto,HttpStatus.CREATED);
+    public ResponseEntity<?> login(@RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
+        //if (bindingResult.hasErrors()){
+         //   return new ResponseEntity<>("Campos mal puestos", HttpStatus.BAD_REQUEST);
+        //}
+    	//System.out.println(loginUsuario.getNickname()+"   "+loginUsuario.getContrasena());
+        //Authentication authentication =
+          //      authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginUsuario.getNickname(),loginUsuario.getContrasena()));
+        //SecurityContextHolder.getContext().setAuthentication(authentication);
+        //String jwt = jwtProvider.generateToken(authentication);
+        //UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        //JwtDto jwtDto= new JwtDto(jwt,userDetails.getUsername(),userDetails.getAuthorities());
+        //return new ResponseEntity<>(jwtDto,HttpStatus.CREATED);
+    	if(usuarioService.existsById(loginUsuario.getNickname())) {
+    		Usuario us=usuarioService.getById(loginUsuario.getNickname()).get();
+    		System.out.println(us.getContrasena()+"==="+loginUsuario.getContrasena());
+    		if(us.getContrasena().equals(loginUsuario.getContrasena())) {
+    			return new ResponseEntity<>(loginUsuario.getNickname(),HttpStatus.ACCEPTED);
+    		}
+    	}
+    	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	
     }
 }

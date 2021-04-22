@@ -8,9 +8,9 @@ import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
 public interface SalasPersistence {
 	
 	
-	public void agregarSala(Salas sala);
+	public void agregarSala(Salas sala) throws SalaPersistenceException;
 	
-	public void agregarJugador(String sala,String clave,String jugador);
+	public void agregarJugador(String sala,String clave,String jugador) throws SalaPersistenceException;
 	
 	
 	public void eliminarJugador(String sala,String jugador);
