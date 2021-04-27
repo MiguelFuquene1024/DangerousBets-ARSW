@@ -1,5 +1,7 @@
 package edu.escuelaing.arsw.dangerousbet.game;
 
+import java.util.List;
+
 public interface Juego {
 
     void jugar();
@@ -7,5 +9,6 @@ public interface Juego {
     boolean verificar();
     String ganador();
     void abandonar(String nickanme);
+    List<String> darCarta(int ronda);
 
 }
