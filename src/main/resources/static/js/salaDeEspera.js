@@ -15,18 +15,17 @@ function getQueryVariable(variable) {
    return window.localStorage.usuario;
 }
 
-function priv(mesa){
-	$(".botonP_P").remove();
-	if(mesa.publico){
-		$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-success botonP_P" type="button" class="btn btn-primary">Publico</button>');
-	}else{
-		$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-danger botonP_P" type="button" class="btn btn-danger">Privado</button>');
-	}
-	$(".botonP_P").click(async function(){
-		await api.privacidadSala(name);
-		api.investigarSala(name,function(mesa){
-			console.log(mesa);
-			priv(mesa);
+function priv(){
+	api.investigarSala(name,function(mesa){		
+		$(".botonP_P").remove();
+		if(mesa.publico){
+			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-success botonP_P" type="button" class="btn btn-primary">Publico</button>');
+		}else{
+			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-danger botonP_P" type="button" class="btn btn-danger">Privado</button>');
+		}
+		$(".botonP_P").click(async function(){
+			let valor=await api.privacidadSala(name);
+			priv();
 		});
 	});
 }
@@ -38,8 +37,6 @@ function perfilJugadores(){
 			console.log(jugadores_actuales.includes(mesa.jugadores[numero]));
 			if(jugadores_actuales.includes(mesa.jugadores[numero])==false){
 				await api.getPerfil(mesa.jugadores[numero],function(perfil){
-					
-			
 					$("#jugadores").append('<div id="' + perfil.nickname + '" class="jugador"><div class="superior"><img src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100%"></div><div class="inferior"><label>'+ perfil.nickname +'<label></div></div>');
 				});
 			}else{
@@ -72,8 +69,10 @@ $(document).ready(async function(){
 				});				
 		}
 		jugadores_actuales=mesa.jugadores;
-		priv(mesa);
+
+		setInterval(priv, 3000);
 		setInterval(perfilJugadores, 3000);
+		
 		
 	});
 	
