@@ -9,6 +9,6 @@ public interface Juego {
     boolean verificar();
     String ganador();
     void abandonar(String nickanme);
-    List<String> darCarta(int ronda);
+    void darCarta();
 
 }

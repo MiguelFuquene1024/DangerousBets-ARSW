@@ -14,6 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Service;
 
+import edu.escuelaing.arsw.dangerousbet.game.Player;
+import edu.escuelaing.arsw.dangerousbet.game.impl.Poker;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalaPersistenceException;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalasPersistence;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
@@ -27,6 +29,7 @@ public class InMmemorySalas implements SalasPersistence{
 	
 
 	private final ConcurrentHashMap<String,Salas> salas=new ConcurrentHashMap<>();
+	private final ConcurrentHashMap<String,Poker> juegos=new ConcurrentHashMap<>();
 	
 	public InMmemorySalas() {
 		Salas s=new Salas(0,"Sala Publica",null,true);
@@ -112,6 +115,35 @@ public class InMmemorySalas implements SalasPersistence{
 			salas.get(sala).setPublico(!salas.get(sala).isPublico());
 		}
 		
+	}
+
+	@Override
+	public void comenzarJuego(String nameSala) {
+		System.out.println("#######################################################################33");
+		System.out.println(nameSala);
+		nameSala=nameSala.replace("%20", " ");
+		juegos.put(nameSala, new Poker());
+		salas.get(nameSala).setIniciada(true);
+		List<Integer> dinero=new ArrayList<>();
+		for(int i=0;i<salas.get(nameSala).getJugadores().size();i++) {
+			dinero.add(salas.get(nameSala).getValorsala());
+		}
+		juegos.get(nameSala).iniciarPartida(salas.get(nameSala).getJugadores(), dinero);
+		juegos.get(nameSala).jugar();
+	}
+	
+	@Override
+	public Player obtenerPlayer(String sala,String name) {
+		System.out.println("#######################################################################33");
+		System.out.println(sala+" "+name);
+		sala=sala.replace("%20", " ");
+		return juegos.get(sala).getJugador(name);
+	}
+	
+	@Override
+	public List<List<String>> obtenerMesa(String sala){
+
+		return juegos.get(sala).getCartasMesa();
 	}
 	
 	

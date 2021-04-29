@@ -18,15 +18,23 @@ function getQueryVariable(variable) {
 function priv(){
 	api.investigarSala(name,function(mesa){		
 		$(".botonP_P").remove();
-		if(mesa.publico){
+		if(mesa.iniciada){
+			window.location.href="/juego.html?name="+name;
+		}
+		
+		else if(mesa.publico){
 			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-success botonP_P" type="button" class="btn btn-primary">Publico</button>');
-		}else{
+		}
+		
+		else{
 			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-danger botonP_P" type="button" class="btn btn-danger">Privado</button>');
 		}
 		$(".botonP_P").click(async function(){
 			let valor=await api.privacidadSala(name);
 			priv();
+			
 		});
+		
 	});
 }
 
@@ -72,13 +80,17 @@ $(document).ready(async function(){
 
 		setInterval(priv, 3000);
 		setInterval(perfilJugadores, 3000);
-		
+
 		
 	});
 	
 				
 	
 	$("#boton_comenzar").click(function(){
+		
+		api.comenzarJuego(name);
+		juegoComenzado=true;
+		
 	});
 
 	$("#boton_salir").click(function(){

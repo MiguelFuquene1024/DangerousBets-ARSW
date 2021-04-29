@@ -3,6 +3,7 @@ package edu.escuelaing.arsw.dangerousbet.controller;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -180,7 +181,7 @@ public class WebController {
 
         return new ResponseEntity<>(srvall.logosComprados(user),HttpStatus.ACCEPTED);
     }
-  
+    
     
     @GetMapping("/salasPublicas")
     public ResponseEntity<?> salasPublicas() {		
@@ -198,7 +199,23 @@ public class WebController {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
     
-   
+    @PostMapping("/comenzarJuego")
+    public ResponseEntity<?> comenzarJuego(@RequestBody String nameSala) throws serviceException{	
+
+    		
+	    	srvall.comenzarJuego(nameSala);
+	        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+
+    }
+    
+    @GetMapping("/obtenerPlayer/{sala}/{jugador}")
+    public ResponseEntity<?> obtenerPlayer(@PathVariable("sala") String sala, @PathVariable("jugador") String jugador) {		
+        return new ResponseEntity<>(srvall.obtenerPlayer(sala, jugador),HttpStatus.ACCEPTED);
+    }
+    @GetMapping("/obtenerMesa/{sala}")
+    public ResponseEntity<?> obtenerMesa(@PathVariable("sala") String sala) {		
+        return new ResponseEntity<>(srvall.obtenerMesa(sala),HttpStatus.ACCEPTED);
+    }
     
 
 }

@@ -23,6 +23,8 @@ public class Salas {
 	
 	private List<String> jugadores=new ArrayList<>();
 	
+	private boolean iniciada=false;
+	
 	public Salas() {
 		
 	}
@@ -93,6 +95,16 @@ public class Salas {
 
 	public void setPublico(boolean publico) {
 		this.publico = publico;
+	}
+
+
+	public boolean isIniciada() {
+		return iniciada;
+	}
+
+
+	public void setIniciada(boolean iniciada) {
+		this.iniciada = iniciada;
 	}
 
 

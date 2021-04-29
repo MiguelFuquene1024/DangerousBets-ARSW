@@ -287,6 +287,45 @@ var apiclient = (function () {
                 alert("No se pude anadir jugador")
 
             })
+		},
+		comenzarJuego : function(sala){
+			
+			const promise = $.post({
+				url: "/comenzarJuego/",
+				contentType: "application/json",
+				type:'POST',
+				data: sala
+			});
+			promise.then(function (data) {
+				console.log(data)
+
+				
+                
+            }, function (error) {
+
+				
+                alert("No se pude comenzar juego")
+
+            })
+		},
+		
+		investigarPokerPlayer : function (sala,user,callback) {
+	
+			$.getJSON("/obtenerPlayer/"+ sala + "/" + user ,function (data) {
+			
+					callback(data);
+					
+				}
+			);
+		},
+		obtenerMesa : function (sala,callback) {
+	
+			$.getJSON("/obtenerMesa/"+ sala ,function (data) {
+			
+					callback(data);
+					
+				}
+			);
 		}
 		
 		
