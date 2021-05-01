@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import edu.escuelaing.arsw.dangerousbet.game.JuegoException;
 import edu.escuelaing.arsw.dangerousbet.game.Player;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalaPersistenceException;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalasPersistence;
@@ -109,6 +110,19 @@ public class ServiceAll {
 
 	public List<List<String>> obtenerMesa(String sala){
 		return slp.obtenerMesa(sala);
+		
+	}
+	
+	public void pasarJugador(String sala) throws JuegoException{
+		slp.pasarJugador(sala);;
+		
+	}
+	public void apostar(String sala,int apuesta) throws JuegoException{
+		slp.apostar(sala, apuesta);;
+		
+	}
+	public void abandonarJuego(String sala){
+		slp.abandonarJuego(sala);
 		
 	}
 

@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.stereotype.Service;
 
+import edu.escuelaing.arsw.dangerousbet.game.JuegoException;
 import edu.escuelaing.arsw.dangerousbet.game.Player;
 import edu.escuelaing.arsw.dangerousbet.game.impl.Poker;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalaPersistenceException;
@@ -144,6 +145,21 @@ public class InMmemorySalas implements SalasPersistence{
 	public List<List<String>> obtenerMesa(String sala){
 
 		return juegos.get(sala).getCartasMesa();
+	}
+	
+	@Override
+	public void pasarJugador(String sala) throws JuegoException{
+
+		juegos.get(sala).pasar();
+	}
+	@Override
+	public void apostar(String sala,int apuesta) throws JuegoException{
+
+		juegos.get(sala).apostar2(apuesta);
+	}
+	@Override
+	public void abandonarJuego(String sala){
+		juegos.get(sala).abandonar();
 	}
 	
 	

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import edu.escuelaing.arsw.dangerousbet.game.JuegoException;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalaPersistenceException;
 import edu.escuelaing.arsw.dangerousbet.security.dto.JwtDto;
 import edu.escuelaing.arsw.dangerousbet.security.dto.LoginUsuario;
@@ -215,6 +216,34 @@ public class WebController {
     @GetMapping("/obtenerMesa/{sala}")
     public ResponseEntity<?> obtenerMesa(@PathVariable("sala") String sala) {		
         return new ResponseEntity<>(srvall.obtenerMesa(sala),HttpStatus.ACCEPTED);
+    }
+    
+    @PutMapping("/pasarJugador/{sala}")
+    public ResponseEntity<?> pasarJugador(@PathVariable("sala") String sala) throws JuegoException{	
+
+    	try {
+	    	srvall.pasarJugador(sala);
+	        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    	}catch(JuegoException sx) {
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	}
+    }
+    
+    @PutMapping("/apostarJuego/{sala}")
+    public ResponseEntity<?> apostarJuego(@PathVariable("sala") String sala, @RequestBody int apuesta) throws JuegoException{	
+
+    	try {
+	    	srvall.apostar(sala, apuesta);
+	        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    	}catch(JuegoException sx) {
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	}
+    }
+    
+    @PutMapping("/abandonarJuego/{sala}")
+    public ResponseEntity<?> abandonarJuego(@PathVariable("sala") String sala){	
+    	srvall.abandonarJuego(sala);
+		return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
     
 

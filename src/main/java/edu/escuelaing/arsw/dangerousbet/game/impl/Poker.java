@@ -27,7 +27,8 @@ public class Poker implements Juego {
     private Integer apuesta;
     private boolean estadoCartas;
     private int turno;
-    private Timer timer;
+    private int finRonda;  
+    private Timer timer;      
     private int ronda;
     
     public Poker() {
@@ -51,17 +52,19 @@ public class Poker implements Juego {
     @Override
     public void jugar() {
     	ronda=1;
+    	
     	cartasMesa=new ArrayList<>();
     	cartas = new HashMap<String, List<String>>();
         for(Player player: jugadores){
-            if(player.isJugar()){
+        		player.setJugar(true);
                 repartir(player.getNickName());
                 apuestas.put(player.getNickName(),0);
-            }
+            
         }
         turno=0;
+        finRonda=0;
         jugadores.get(turno).setTurno(true);
-        timer=new Timer(7000,new ActionListener() {
+        timer=new Timer(25000,new ActionListener() {
 
 
 			@Override
@@ -86,14 +89,28 @@ public class Poker implements Juego {
     	jugadores.get(turno).setTurno(false);
     	turno+=1;
     	if(turno==jugadores.size()) {
+    		turno=0;
+    	}
+    	if(turno==finRonda) {
     		darCarta();
     		turno=0;
-    		
+    		finRonda=0;
     	}
-    	jugadores.get(turno).setTurno(true);
-    	timer.restart();
+    	if(!jugadores.get(turno).isJugar()) {
+    		pasarJugador();
+    	}
+    	else {
+	    	jugadores.get(turno).setTurno(true);
+	    	timer.restart();
+    	}
+    	
     	
     }
+	
+	public void pasar() throws JuegoException {
+		if (apuesta > apuestas.get(jugadores.get(turno).getNickName())) throw new JuegoException(JuegoException.DEBE_IGUALAR);
+		pasarJugador();
+	}
     
     @Override
     public void apostar(String nickanme, Integer valor) throws JuegoException {
@@ -105,7 +122,11 @@ public class Poker implements Juego {
             Integer temp = apuestas.get(nickanme) + valor;
             if (apuesta > temp) throw new JuegoException(JuegoException.DEBE_IGUALAR);
             apuestas.put(nickanme, temp);
-            apuesta = temp;
+            if(temp>apuesta) {
+            	apuesta = temp;
+                finRonda=turno;
+            }
+            pasarJugador();
         }
 
     }
@@ -121,8 +142,10 @@ public class Poker implements Juego {
     }
 
     @Override
-    public void abandonar(String nickanme) {
-        cartas.remove(nickanme);
+    public void abandonar() {
+    	getJugador(jugadores.get(turno).getNickName()).setJugar(false);
+    	cartas.remove(jugadores.get(turno).getNickName());
+    	getJugador(jugadores.get(turno).getNickName()).setCartas(new ArrayList<>());
     }
 
     @Override
@@ -170,6 +193,11 @@ public class Poker implements Juego {
 		}
 		
 		return null;
+	}
+
+	public void apostar2(int apuesta2) throws JuegoException {
+		apostar(jugadores.get(turno).getNickName(),apuesta2);
+		
 	}
 
 

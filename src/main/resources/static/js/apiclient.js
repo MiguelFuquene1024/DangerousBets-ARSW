@@ -326,6 +326,60 @@ var apiclient = (function () {
 					
 				}
 			);
+		},
+		pasarJugador : function(sala){
+			
+			const promise = $.post({
+				url: "/pasarJugador/"+sala,
+				contentType: "application/json",
+				type:'PUT'
+			});
+			promise.then(function (data) {
+				console.log(data)
+                
+            }, function (error) {
+
+                alert("No se pude anadir jugador")
+
+            })
+		},
+		apostar : function(sala,apuesta){
+			
+			var datos=apuesta;
+			const promise = $.post({
+				url: "/apostarJuego/"+sala,
+				contentType: "application/json",
+				type:'PUT',
+				data: apuesta
+			});
+			promise.then(function (data) {
+				console.log(data)
+				
+                
+            }, function (error) {
+
+				
+                alert("No se pude anadir jugador")
+
+            })
+		},
+		abandonarJuego : function(sala){
+			
+			const promise = $.post({
+				url: "/abandonarJuego/"+sala,
+				contentType: "application/json",
+				type:'PUT'
+			});
+			promise.then(function (data) {
+				console.log(data)
+				
+                
+            }, function (error) {
+
+				
+                alert("No se pude anadir jugador")
+
+            })
 		}
 		
 		

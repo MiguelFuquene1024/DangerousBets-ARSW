@@ -8,7 +8,7 @@ public interface Juego {
     void apostar(String nickanme,Integer valor) throws JuegoException;
     boolean verificar();
     String ganador();
-    void abandonar(String nickanme);
+    void abandonar();
     void darCarta();
 
 }
