@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class PokerTests {
 
-    @Test
+  /*  @Test
     public void agregarJugadores(){
         Poker poker = new Poker();
         List<String> nickNames = new ArrayList<>();
@@ -41,7 +41,7 @@ public class PokerTests {
         poker.apostar("Juan",apuesta1);
         poker.apostar("Juan",apuesta2);
         Assertions.assertTrue(poker.getApuestaByJugador("Juan")==(apuesta1+apuesta2));
-    }
+    }*/
 /*
     @Test
     public void abandonarRondaSinrecibirCartas(){
@@ -80,7 +80,7 @@ public class PokerTests {
         Assertions.assertTrue(!poker.isJugador(nickNames.get(ite)));
 
     }
-*/
+*//*
     @Test
     public void seDebeIgualarLaApuesta(){
         Poker poker = new Poker();
@@ -124,6 +124,6 @@ public class PokerTests {
         }
     }
 
-
+*/
 
 }

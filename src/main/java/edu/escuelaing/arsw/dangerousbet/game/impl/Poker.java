@@ -30,6 +30,7 @@ public class Poker implements Juego {
     private int finRonda;  
     private Timer timer;      
     private int ronda;
+    private String estadoDeJuego;
     
     public Poker() {
         apuesta = 0;
@@ -56,6 +57,7 @@ public class Poker implements Juego {
     	cartasMesa=new ArrayList<>();
     	cartas = new HashMap<String, List<String>>();
         for(Player player: jugadores){
+        		
         		player.setJugar(true);
                 repartir(player.getNickName());
                 apuestas.put(player.getNickName(),0);
@@ -200,5 +202,13 @@ public class Poker implements Juego {
 		
 	}
 
+	public String getEstadoDeJuego() {
+		return estadoDeJuego;
+	}
+
+	public void setEstadoDeJuego(String estadoDeJuego) {
+		this.estadoDeJuego = estadoDeJuego;
+	}
+	
 
 }
