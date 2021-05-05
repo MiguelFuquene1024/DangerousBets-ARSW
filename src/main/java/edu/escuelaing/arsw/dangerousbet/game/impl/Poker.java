@@ -33,6 +33,7 @@ public class Poker implements Juego {
     private int finRonda;  
     private Timer timer; 
     private int cronometro;
+    private VerificarGanadorPoker verificarGanadorPoker;
     
     	
     private int ronda;
@@ -43,6 +44,7 @@ public class Poker implements Juego {
         apuestas = new HashMap<String, Integer>();
         jugadores = new ArrayList<>();
         estadoCartas = false;
+        verificarGanadorPoker= new VerificarGanadorPoker();
     }
 
     public void iniciarPartida(List<String> nicknames, List<Integer> monedas){
@@ -160,8 +162,30 @@ public class Poker implements Juego {
     }
 
     @Override
-    public boolean verificar() {
-        return false;
+    public String verificar() {
+        String ganador =verificarGanadorPoker.escaleraRealColor(cartasMesa,jugadores);
+        if(ganador.equals("")){
+            ganador=verificarGanadorPoker.poker(cartasMesa,jugadores);
+            if(ganador.equals("")){
+                ganador=verificarGanadorPoker.full(cartasMesa,jugadores);
+                if(ganador.equals("")){
+                    ganador=verificarGanadorPoker.colorCartas(cartasMesa,jugadores);
+                    if(ganador.equals("")){
+                        ganador=verificarGanadorPoker.trio(cartasMesa,jugadores);
+                        if(ganador.equals("")){
+                            ganador=verificarGanadorPoker.doblesParejas(cartasMesa,jugadores);
+                            if(ganador.equals("")){
+                                ganador=verificarGanadorPoker.pareajas(cartasMesa,jugadores);
+                                if(ganador.equals("")){
+                                    ganador=verificarGanadorPoker.cartaAlta(cartasMesa,jugadores);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return ganador;
     }
 
     @Override
@@ -180,7 +204,8 @@ public class Poker implements Juego {
     public void darCarta() {
     	baraja.getCarta();
     	if(ronda==4){
-    		System.out.println("BUSCAR GANADOR");
+    	    String ganador = verificar();
+    		System.out.println(ganador);
     		jugar();
     	}
     	else {
