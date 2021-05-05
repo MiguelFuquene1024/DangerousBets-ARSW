@@ -14,7 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.swing.Timer;
+
+import java.util.Timer; 
+import java.util.TimerTask; 
+
 
 public class Poker implements Juego {
 
@@ -28,7 +31,10 @@ public class Poker implements Juego {
     private boolean estadoCartas;
     private int turno;
     private int finRonda;  
-    private Timer timer;      
+    private Timer timer; 
+    private int cronometro;
+    
+    	
     private int ronda;
  
     public Poker() {
@@ -48,7 +54,25 @@ public class Poker implements Juego {
         }
 
     }
+    private void iniciarCronometro(){
+    	 TimerTask timerTask = new TimerTask() { 
 
+             @Override 
+             public void run() { 
+             	if (cronometro==0) {
+             		pasarJugador();
+             	}else {
+             		cronometro-=1;
+             	}
+             	
+             } 
+            }; 
+        cronometro=25;
+ 		timer = new Timer(); 
+ 	    timer.schedule(timerTask,1000,1000); 
+    }
+    
+    
     @Override
     public void jugar() {
     	ronda=1;
@@ -71,22 +95,18 @@ public class Poker implements Juego {
         turno=0;
         finRonda=0;
         jugadores.get(turno).setTurno(true);
-        timer=new Timer(25000,new ActionListener() {
-
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-						pasarJugador();
-			}
-		});
-		timer.start();
+        iniciarCronometro();
     }
 
     
     
-    public List<List<String>> getCartasMesa() {
- 
-		return cartasMesa;
+    public  List<Object> EstadoActualJuego() {
+    	List<Object> mesaActual=new ArrayList<>();
+    	mesaActual.add(cronometro);
+    	mesaActual.add(jugadores);
+    	mesaActual.add(cartasMesa);
+    	mesaActual.add(apuesta);
+		return mesaActual;
 	}
 
 	public void setCartasMesa(List<List<String>> cartasMesa) {
@@ -95,12 +115,12 @@ public class Poker implements Juego {
 
 	public void pasarJugador() {
     	jugadores.get(turno).setTurno(false);
+    	timer.cancel();
     	turno+=1;
     	if(turno==jugadores.size()) {
     		turno=0;
     	}
     	if(turno==finRonda) {
-    		
     		darCarta();
     		
     	}
@@ -109,6 +129,7 @@ public class Poker implements Juego {
     	}
     	else {
 	    	jugadores.get(turno).setTurno(true);
+	    	iniciarCronometro();
     	}
     	
     	
@@ -160,7 +181,6 @@ public class Poker implements Juego {
     	baraja.getCarta();
     	if(ronda==4){
     		System.out.println("BUSCAR GANADOR");
-    		timer.stop();
     		jugar();
     	}
     	else {
@@ -177,6 +197,8 @@ public class Poker implements Juego {
     		finRonda=0;
     		ronda+=1;
     		jugadores.get(turno).setTurno(true);
+    		iniciarCronometro();
+    		
     	}
     	
 

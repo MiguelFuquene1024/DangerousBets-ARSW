@@ -16,45 +16,46 @@ function getQueryVariable(variable) {
 }
 
 function actualizarJuego(){
-	console.log("hola");
-	api.investigarPokerPlayer(name,window.localStorage.usuario,function(datos){
-		//console.log(datos);
-		console.log("hola2");
-		for(numero in datos){
+	api.obtenerMesa(name,function(datos){
+		console.log(datos);
+		for(numero in datos[1]){
 			let rnumero=parseInt(numero) +1;
-			if(datos[numero].nickName==window.localStorage.usuario){
+			if(datos[1][numero].nickName==window.localStorage.usuario){
 				console.log("#jugador"+rnumero+" img.img1");
 	
-				$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/"+datos[numero].cartas[1]+"-"+datos[numero].cartas[0]+".png");
-				$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/"+datos[numero].cartas[3]+"-"+datos[numero].cartas[2]+".png");
+				$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[1]+"-"+datos[1][numero].cartas[0]+".png");
+				$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[3]+"-"+datos[1][numero].cartas[2]+".png");
 			}else{
 				$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/atras.png");
 				$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/atras.png");
 			}
-			console.log(datos[numero].turno);
-			if(datos[numero].turno){
+			console.log(datos[1][numero].turno);
+			if(datos[1][numero].turno){
 				$("#jugador"+ rnumero +" img.img3").attr('style','border:8px solid yellow');
 				
 			}else{
 				$("#jugador"+ rnumero +" .img3").attr('style','border:0px');
 			}
-		}		
-	});
-	api.obtenerMesa(name,function(datos){
-	
-		$(".borrar").remove();
+		}
+		
 		for(let i=0;i<5;i++){
 	
-			if(i>=datos.length){
+			if(i>=datos[2].length){
 				$("#jugadormesa img.carta"+i).attr('src','/estilos/imagenes/carta-blanca.png')
 			}
 			else{
 			
-				$("#jugadormesa img.carta"+i).attr('src','/estilos/imagenes/'+datos[i][1]+'-'+datos[i][0]+'.png');
+				$("#jugadormesa img.carta"+i).attr('src','/estilos/imagenes/'+datos[2][i][1]+'-'+datos[2][i][0]+'.png');
 			}
+		}
+		if(datos[0]<10){
+			$("#cronometro").html("0"+datos[0]);
+		}else{
+			$("#cronometro").html(datos[0]);
 		}
 		
 	});
+
 	
 }
 
@@ -75,7 +76,7 @@ $(document).ready(function(){
 			});
 		}
 	});
-	setInterval(actualizarJuego, 2000);
+	setInterval(actualizarJuego, 1000);
 
 	$("#boton_pasar").click(function(){
 		api.pasarJugador(name);

@@ -108,7 +108,7 @@ public class ServiceAll {
 		return slp.obtenerPlayer(sala, nj);
 	}
 
-	public List<List<String>> obtenerMesa(String sala){
+	public List<Object> obtenerMesa(String sala){
 		return slp.obtenerMesa(sala);
 		
 	}

@@ -32,7 +32,7 @@ public interface SalasPersistence {
 
 	public List<Player> obtenerPlayer(String sala, String name);
 
-	public List<List<String>> obtenerMesa(String sala);
+	public List<Object> obtenerMesa(String sala);
 
 	public void pasarJugador(String sala) throws JuegoException;
 

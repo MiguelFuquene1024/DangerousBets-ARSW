@@ -142,9 +142,9 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 	
 	@Override
-	public List<List<String>> obtenerMesa(String sala){
+	public List<Object> obtenerMesa(String sala){
 
-		return juegos.get(sala).getCartasMesa();
+		return juegos.get(sala).EstadoActualJuego();
 	}
 	
 	@Override
