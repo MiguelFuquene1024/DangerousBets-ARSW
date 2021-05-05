@@ -33,6 +33,7 @@ public class Poker implements Juego {
     private int finRonda;  
     private Timer timer; 
     private int cronometro;
+    private int apuestaTotalMesa;
     
     	
     private int ronda;
@@ -105,7 +106,8 @@ public class Poker implements Juego {
     	mesaActual.add(cronometro);
     	mesaActual.add(jugadores);
     	mesaActual.add(cartasMesa);
-    	mesaActual.add(apuesta);
+    	mesaActual.add(apuestaTotalMesa);
+    	mesaActual.add(apuestas);
 		return mesaActual;
 	}
 

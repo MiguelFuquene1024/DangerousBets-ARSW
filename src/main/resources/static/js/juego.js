@@ -20,11 +20,18 @@ function actualizarJuego(){
 		console.log(datos);
 		for(numero in datos[1]){
 			let rnumero=parseInt(numero) +1;
+			$(".monedas_apuestasmesa").html(datos[3]);
+			$("#monedas_propias"+rnumero+" label.mpropias").html(datos[1][numero].moneda);
 			if(datos[1][numero].nickName==window.localStorage.usuario){
 				console.log("#jugador"+rnumero+" img.img1");
-	
 				$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[1]+"-"+datos[1][numero].cartas[0]+".png");
 				$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[3]+"-"+datos[1][numero].cartas[2]+".png");
+				
+				if(datos[1][numero].turno){
+					$(".botones_juego").attr("disabled","true");
+				}else{
+					$(".botones_juego").removeAttr("disabled");
+				}
 			}else{
 				$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/atras.png");
 				$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/atras.png");
@@ -53,6 +60,7 @@ function actualizarJuego(){
 		}else{
 			$("#cronometro").html(datos[0]);
 		}
+
 		
 	});
 
@@ -72,7 +80,7 @@ $(document).ready(function(){
 				let rnumero=parseInt(numero) +1;
 				await api.getPerfil(mesa.jugadores[numero],function(perfil){
 				
-				$("#mesa_poker").append('<div id="jugador'+ rnumero + '" class="jugador"><div id="monedas_apuestas'+ rnumero +'" class="monedas_apuestas"></div><div id="monedas_propias'+ rnumero +'" class="monedas_propias"></div><img class="img1" src="/estilos/imagenes/carta-blanca.png"><img class="img2" src="/estilos/imagenes/carta-blanca.png"><img class="img3" src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100px" height="auto"></div>');
+				$("#mesa_poker").append('<div id="jugador'+ rnumero + '" class="jugador"><div id="monedas_apuestas'+ rnumero +'" class="monedas_apuestas"><label class="mapuestas"></label></div><div id="monedas_propias'+ rnumero +'" class="monedas_propias"><label class="mpropias"></label></div><img class="img1" src="/estilos/imagenes/carta-blanca.png"><img class="img2" src="/estilos/imagenes/carta-blanca.png"><img class="img3" src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100px" height="auto"></div>');
 			});
 		}
 	});
