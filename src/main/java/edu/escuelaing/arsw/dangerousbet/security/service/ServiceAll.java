@@ -104,7 +104,7 @@ public class ServiceAll {
 		
 	}
 	
-	public Player obtenerPlayer(String sala, String nj) {
+	public List<Player> obtenerPlayer(String sala, String nj) {
 		return slp.obtenerPlayer(sala, nj);
 	}
 

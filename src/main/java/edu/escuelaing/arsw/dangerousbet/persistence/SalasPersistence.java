@@ -30,7 +30,7 @@ public interface SalasPersistence {
 	public void comenzarJuego(String nameSala);
 
 
-	public Player obtenerPlayer(String sala, String name);
+	public List<Player> obtenerPlayer(String sala, String name);
 
 	public List<List<String>> obtenerMesa(String sala);
 

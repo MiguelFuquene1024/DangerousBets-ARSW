@@ -30,8 +30,7 @@ public class Poker implements Juego {
     private int finRonda;  
     private Timer timer;      
     private int ronda;
-    private String estadoDeJuego;
-    
+ 
     public Poker() {
         apuesta = 0;
         baraja = new Baraja();
@@ -56,8 +55,14 @@ public class Poker implements Juego {
     	
     	cartasMesa=new ArrayList<>();
     	cartas = new HashMap<String, List<String>>();
+    	
         for(Player player: jugadores){
-        		
+        		/*try {
+        			System.out.println("//////////////////////////////////////////////////");
+					this.wait(2000);
+				} catch (InterruptedException e1) {
+					System.out.println("no espere");
+				}*/
         		player.setJugar(true);
                 repartir(player.getNickName());
                 apuestas.put(player.getNickName(),0);
@@ -80,6 +85,7 @@ public class Poker implements Juego {
     
     
     public List<List<String>> getCartasMesa() {
+ 
 		return cartasMesa;
 	}
 
@@ -94,16 +100,15 @@ public class Poker implements Juego {
     		turno=0;
     	}
     	if(turno==finRonda) {
+    		
     		darCarta();
-    		turno=0;
-    		finRonda=0;
+    		
     	}
-    	if(!jugadores.get(turno).isJugar()) {
+    	else if(!jugadores.get(turno).isJugar()) {
     		pasarJugador();
     	}
     	else {
 	    	jugadores.get(turno).setTurno(true);
-	    	timer.restart();
     	}
     	
     	
@@ -153,24 +158,33 @@ public class Poker implements Juego {
     @Override
     public void darCarta() {
     	baraja.getCarta();
-    	if (ronda==1){
-        	for(int i=0;i<3;i++) {
-        		cartasMesa.add(baraja.getCarta());
-        	}
-        }
-    	else if(ronda==3){
+    	if(ronda==4){
     		System.out.println("BUSCAR GANADOR");
     		timer.stop();
+    		jugar();
     	}
     	else {
-        	cartasMesa.add(baraja.getCarta());
-        }
-    	ronda+=1;
+    		if (ronda==1){
+	        	for(int i=0;i<3;i++){
+	        		cartasMesa.add(baraja.getCarta());
+	        	}	
+    		}
+    	
+	    	else {
+	        	cartasMesa.add(baraja.getCarta());
+	        }
+        	turno=0;
+    		finRonda=0;
+    		ronda+=1;
+    		jugadores.get(turno).setTurno(true);
+    	}
+    	
 
     }
 
     public void repartir(String nickname) {
     	List<String> cartas = baraja.getCarta();
+    	cartas.addAll(baraja.getCarta());
         this.cartas.put(nickname, cartas);
         getJugador(nickname).setCartas(cartas);
     }
@@ -202,13 +216,7 @@ public class Poker implements Juego {
 		
 	}
 
-	public String getEstadoDeJuego() {
-		return estadoDeJuego;
-	}
-
-	public void setEstadoDeJuego(String estadoDeJuego) {
-		this.estadoDeJuego = estadoDeJuego;
-	}
+	
 	
 
 }

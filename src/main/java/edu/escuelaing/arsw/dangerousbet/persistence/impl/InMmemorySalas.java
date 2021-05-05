@@ -134,11 +134,11 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 	
 	@Override
-	public Player obtenerPlayer(String sala,String name) {
+	public List<Player> obtenerPlayer(String sala,String name) {
 		System.out.println("#######################################################################33");
 		System.out.println(sala+" "+name);
 		sala=sala.replace("%20", " ");
-		return juegos.get(sala).getJugador(name);
+		return juegos.get(sala).getJugadores();
 	}
 	
 	@Override

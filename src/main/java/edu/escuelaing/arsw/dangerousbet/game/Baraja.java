@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Baraja {
     List<Integer> valores = new ArrayList<>();
-    String[] casa = {"Corazon","Pica","Trebol","Diamante"};
+    String[] casa = {"corazones","picas","treboles","diamantes"};
 
     public Baraja() {
 
@@ -20,14 +20,13 @@ public class Baraja {
 
     public List<String> getCarta(){
         List<String> list=new ArrayList<>();
-        for(int i=0;i<2;i++ ){
-            Random r = new Random();
-            int casaval =r.nextInt(4);
-            Random r2 = new Random();
-            int valor = r2.nextInt(13);
-            list.add(casa[casaval]);
-            list.add(String.valueOf(valores.get(valor)));
-        }
+        Random r = new Random();
+        int casaval =r.nextInt(4);
+        Random r2 = new Random();
+        int valor = r2.nextInt(13);
+        list.add(casa[casaval]);
+        list.add(String.valueOf(valores.get(valor)));
+        
 
         return list;
     }
