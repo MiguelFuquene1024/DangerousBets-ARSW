@@ -33,11 +33,9 @@ public class Poker implements Juego {
     private int finRonda;  
     private Timer timer; 
     private int cronometro;
-<<<<<<< HEAD
     private int apuestaTotalMesa;
-=======
     private VerificarGanadorPoker verificarGanadorPoker;
->>>>>>> f736c5319dc4440ab5cf46422125d7566fe7a57a
+
     
     	
     private int ronda;
@@ -66,7 +64,7 @@ public class Poker implements Juego {
              @Override 
              public void run() { 
              	if (cronometro==0) {
-             		pasarJugador();
+             		cambiarTurno();
              	}else {
              		cronometro-=1;
              	}
@@ -87,12 +85,6 @@ public class Poker implements Juego {
     	cartas = new HashMap<String, List<String>>();
     	
         for(Player player: jugadores){
-        		/*try {
-        			System.out.println("//////////////////////////////////////////////////");
-					this.wait(2000);
-				} catch (InterruptedException e1) {
-					System.out.println("no espere");
-				}*/
         		player.setJugar(true);
                 repartir(player.getNickName());
                 apuestas.put(player.getNickName(),0);
@@ -119,9 +111,8 @@ public class Poker implements Juego {
 	public void setCartasMesa(List<List<String>> cartasMesa) {
 		this.cartasMesa = cartasMesa;
 	}
-
-	public void pasarJugador() {
-    	jugadores.get(turno).setTurno(false);
+	public void cambiarTurno() {
+		jugadores.get(turno).setTurno(false);
     	timer.cancel();
     	turno+=1;
     	if(turno==jugadores.size()) {
@@ -129,10 +120,13 @@ public class Poker implements Juego {
     	}
     	if(turno==finRonda) {
     		darCarta();
-    		
-    	}
-    	else if(!jugadores.get(turno).isJugar()) {
+    	}else {
     		pasarJugador();
+    	}
+	}
+	public void pasarJugador() {
+    	if(!jugadores.get(turno).isJugar()) {
+    		cambiarTurno();
     	}
     	else {
 	    	jugadores.get(turno).setTurno(true);
@@ -144,7 +138,7 @@ public class Poker implements Juego {
 	
 	public void pasar() throws JuegoException {
 		if (apuesta > apuestas.get(jugadores.get(turno).getNickName())) throw new JuegoException(JuegoException.DEBE_IGUALAR);
-		pasarJugador();
+		cambiarTurno();
 	}
     
     @Override
@@ -161,7 +155,7 @@ public class Poker implements Juego {
             	apuesta = temp;
                 finRonda=turno;
             }
-            pasarJugador();
+            cambiarTurno();
         }
 
     }
@@ -172,6 +166,7 @@ public class Poker implements Juego {
         if(ganador.equals("")){
             ganador=verificarGanadorPoker.poker(cartasMesa,jugadores);
             if(ganador.equals("")){
+       
                 ganador=verificarGanadorPoker.full(cartasMesa,jugadores);
                 if(ganador.equals("")){
                     ganador=verificarGanadorPoker.colorCartas(cartasMesa,jugadores);
@@ -190,6 +185,7 @@ public class Poker implements Juego {
                 }
             }
         }
+ 
         return ganador;
     }
 
@@ -203,6 +199,7 @@ public class Poker implements Juego {
     	getJugador(jugadores.get(turno).getNickName()).setJugar(false);
     	cartas.remove(jugadores.get(turno).getNickName());
     	getJugador(jugadores.get(turno).getNickName()).setCartas(new ArrayList<>());
+    	cambiarTurno();
     }
 
     @Override
@@ -210,7 +207,7 @@ public class Poker implements Juego {
     	baraja.getCarta();
     	if(ronda==4){
     	    String ganador = verificar();
-    		System.out.println(ganador);
+    	    System.out.println(ganador);
     		jugar();
     	}
     	else {
@@ -225,13 +222,8 @@ public class Poker implements Juego {
 	        }
         	turno=0;
     		finRonda=0;
-    		ronda+=1;
-    		jugadores.get(turno).setTurno(true);
-    		iniciarCronometro();
-    		
+    		pasarJugador();
     	}
-    	
-
     }
 
     public void repartir(String nickname) {

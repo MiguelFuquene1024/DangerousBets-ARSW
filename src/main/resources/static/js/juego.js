@@ -24,17 +24,32 @@ function actualizarJuego(){
 			$("#monedas_propias"+rnumero+" label.mpropias").html(datos[1][numero].moneda);
 			if(datos[1][numero].nickName==window.localStorage.usuario){
 				console.log("#jugador"+rnumero+" img.img1");
-				$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[1]+"-"+datos[1][numero].cartas[0]+".png");
-				$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[3]+"-"+datos[1][numero].cartas[2]+".png");
-				
-				if(datos[1][numero].turno){
-					$(".botones_juego").attr("disabled","true");
+				if(datos[1][numero].cartas[0]!=undefined){
+					$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[1]+"-"+datos[1][numero].cartas[0]+".png");
 				}else{
+					$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
+				}if(datos[1][numero].cartas[3]!=undefined){
+					$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[3]+"-"+datos[1][numero].cartas[2]+".png");
+				}else{
+					$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
+				}
+				if(datos[1][numero].turno){
 					$(".botones_juego").removeAttr("disabled");
+				}else{
+					$(".botones_juego").attr("disabled","true");
 				}
 			}else{
-				$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/atras.png");
-				$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/atras.png");
+				if(datos[1][numero].cartas[0]!=undefined){
+					$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/atras.png");
+				}else{
+					$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
+				}
+				if(datos[1][numero].cartas[3]!=undefined){
+					$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/atras.png");
+				}else{
+					$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
+				}
+				
 			}
 			console.log(datos[1][numero].turno);
 			if(datos[1][numero].turno){
