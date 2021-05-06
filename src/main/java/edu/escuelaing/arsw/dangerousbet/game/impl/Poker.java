@@ -204,13 +204,14 @@ public class Poker implements Juego {
 
     @Override
     public void darCarta() {
-    	baraja.getCarta();
+    	
     	if(ronda==4){
     	    String ganador = verificar();
     	    System.out.println(ganador);
     		jugar();
     	}
     	else {
+			baraja.getCarta();
     		if (ronda==1){
 	        	for(int i=0;i<3;i++){
 	        		cartasMesa.add(baraja.getCarta());
@@ -222,6 +223,7 @@ public class Poker implements Juego {
 	        }
         	turno=0;
     		finRonda=0;
+			ronda+=1;
     		pasarJugador();
     	}
     }
