@@ -51,8 +51,8 @@ $(document).ready(function(){
 		}
 
 		api.getPerfil( window.localStorage.usuario,function(data){
-
-			if(cd>data){
+			console.log(data);
+			if(cd>data.moneda){
 				
 				$("#cdinero").after('<small class="error">No tienes suficiente dinero.</small>');
 				

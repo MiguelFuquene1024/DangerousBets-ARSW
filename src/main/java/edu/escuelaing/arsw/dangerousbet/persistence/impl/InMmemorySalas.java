@@ -67,7 +67,7 @@ public class InMmemorySalas implements SalasPersistence{
 		
 		if(salas.containsKey(sala)) {
 
-			if((salas.get(sala).isPublico() || salas.get(sala).getClave().equals(clave)) && jugador.getMoneda()>=salas.get(sala).getValorsala()) {
+			if((salas.get(sala).getJugadores().size()<6 || !salas.get(sala).isIniciada() || salas.get(sala).isPublico() || salas.get(sala).getClave().equals(clave)) && jugador.getMoneda()>=salas.get(sala).getValorsala()) {
 
 				salas.get(sala).agregarJugador(jugador.getNickname());
 
@@ -103,7 +103,7 @@ public class InMmemorySalas implements SalasPersistence{
 	public List<Salas> getSalasPublicas() {
 		List<Salas> sp=new ArrayList<Salas>();
 		for(Entry<String,Salas> entry:salas.entrySet()) {
-			if(entry.getValue().isPublico()) {
+			if(entry.getValue().getJugadores().size()<6 && !entry.getValue().isIniciada() && entry.getValue().isPublico()) {
 				sp.add(entry.getValue());
 			}
 		}
@@ -119,23 +119,26 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 
 	@Override
-	public void comenzarJuego(String nameSala) {
-		System.out.println("#######################################################################33");
-		System.out.println(nameSala);
-		nameSala=nameSala.replace("%20", " ");
-		juegos.put(nameSala, new Poker());
-		salas.get(nameSala).setIniciada(true);
-		List<Integer> dinero=new ArrayList<>();
-		for(int i=0;i<salas.get(nameSala).getJugadores().size();i++) {
-			dinero.add(salas.get(nameSala).getValorsala());
+	public void comenzarJuego(String nameSala) throws SalaPersistenceException {
+
+		if(!salas.get(nameSala).isIniciada() && salas.get(nameSala).getJugadores().size()>1) {
+			salas.get(nameSala).setIniciada(true);
+			
+			juegos.put(nameSala, new Poker());
+			salas.get(nameSala).setIniciada(true);
+			List<Integer> dinero=new ArrayList<>();
+			for(int i=0;i<salas.get(nameSala).getJugadores().size();i++) {
+				dinero.add(5000);
+			}
+			juegos.get(nameSala).iniciarPartida(salas.get(nameSala).getJugadores(), dinero);
+			juegos.get(nameSala).jugar();
+		}else {
+			throw new SalaPersistenceException("Debe haber minimo 3 jugadores para iniciar el juego");
 		}
-		juegos.get(nameSala).iniciarPartida(salas.get(nameSala).getJugadores(), dinero);
-		juegos.get(nameSala).jugar();
 	}
 	
 	@Override
 	public List<Player> obtenerPlayer(String sala,String name) {
-		System.out.println("#######################################################################33");
 		System.out.println(sala+" "+name);
 		sala=sala.replace("%20", " ");
 		return juegos.get(sala).getJugadores();
@@ -154,12 +157,18 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 	@Override
 	public void apostar(String sala,int apuesta) throws JuegoException{
-
+	
 		juegos.get(sala).apostar2(apuesta);
 	}
 	@Override
 	public void abandonarJuego(String sala){
 		juegos.get(sala).abandonar();
+	}
+
+	@Override
+	public Salas getSalas(String nameSala) {
+		Salas s=salas.get(nameSala);
+		return s;
 	}
 	
 	

@@ -25,10 +25,11 @@ public class Salas {
 	
 	private boolean iniciada=false;
 	
+	
 	public Salas() {
 		
 	}
-
+	
 
 	public Salas(int valorsala2,String nombre2, String clave2, boolean publico2) {
 		nombre=nombre2;

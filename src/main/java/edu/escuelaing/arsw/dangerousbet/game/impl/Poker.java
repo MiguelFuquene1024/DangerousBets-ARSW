@@ -79,17 +79,18 @@ public class Poker implements Juego {
     
     @Override
     public void jugar() {
+    	apuesta=0;
+    	apuestaTotalMesa=0;
     	ronda=1;
-    	
     	cartasMesa=new ArrayList<>();
     	cartas = new HashMap<String, List<String>>();
-    	
         for(Player player: jugadores){
         		player.setJugar(true);
                 repartir(player.getNickName());
-                apuestas.put(player.getNickName(),0);
+                
             
         }
+        resetApuestas();
         turno=0;
         finRonda=0;
         jugadores.get(turno).setTurno(true);
@@ -135,7 +136,12 @@ public class Poker implements Juego {
     	
     	
     }
-	
+	private void sumarApuestas() {
+		for(Player p:jugadores) {
+			apuestaTotalMesa=apuestaTotalMesa+p.getMisApuestas();
+            p.setMoneda(p.getMoneda()-p.getMisApuestas());
+		}
+	}
 	public void pasar() throws JuegoException {
 		if (apuesta > apuestas.get(jugadores.get(turno).getNickName())) throw new JuegoException(JuegoException.DEBE_IGUALAR);
 		cambiarTurno();
@@ -143,20 +149,18 @@ public class Poker implements Juego {
     
     @Override
     public void apostar(String nickanme, Integer valor) throws JuegoException {
-        if (!apuestas.containsKey(nickanme)) {
-            if (apuesta > valor) throw new JuegoException(JuegoException.DEBE_IGUALAR);
-            apuestas.put(nickanme, valor);
-            apuesta = valor;
-        } else {
+    		
             Integer temp = apuestas.get(nickanme) + valor;
             if (apuesta > temp) throw new JuegoException(JuegoException.DEBE_IGUALAR);
             apuestas.put(nickanme, temp);
+
+            jugadores.get(turno).setMisApuestas(temp);
             if(temp>apuesta) {
             	apuesta = temp;
                 finRonda=turno;
             }
             cambiarTurno();
-        }
+        
 
     }
 
@@ -222,12 +226,20 @@ public class Poker implements Juego {
 	        	cartasMesa.add(baraja.getCarta());
 	        }
         	turno=0;
+        	apuesta=0;
     		finRonda=0;
 			ronda+=1;
+			sumarApuestas();
+			resetApuestas();
     		pasarJugador();
     	}
     }
-
+    private void resetApuestas() {
+    	for(Player p:jugadores) {
+    		p.setMisApuestas(0);
+    		apuestas.put(p.getNickName(),0);
+    	}
+    }
     public void repartir(String nickname) {
     	List<String> cartas = baraja.getCarta();
     	cartas.addAll(baraja.getCarta());
@@ -258,6 +270,7 @@ public class Poker implements Juego {
 	}
 
 	public void apostar2(int apuesta2) throws JuegoException {
+		
 		apostar(jugadores.get(turno).getNickName(),apuesta2);
 		
 	}

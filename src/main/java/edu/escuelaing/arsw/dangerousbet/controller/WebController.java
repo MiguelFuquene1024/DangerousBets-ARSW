@@ -201,11 +201,14 @@ public class WebController {
     }
     
     @PostMapping("/comenzarJuego")
-    public ResponseEntity<?> comenzarJuego(@RequestBody String nameSala) throws serviceException{	
-
+    public ResponseEntity<?> comenzarJuego(@RequestBody String nameSala) throws serviceException,SalaPersistenceException{	
+    		try {
     		
-	    	srvall.comenzarJuego(nameSala);
-	        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+		    	srvall.comenzarJuego(nameSala);
+		        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    		}catch(SalaPersistenceException ex) {
+    			return new ResponseEntity<>(HttpStatus.BAD_REQUEST); 
+    		}
 
     }
     

@@ -86,9 +86,11 @@ img{
 	top:35.5%;
 }
 .botones_juego{
-	margin-bottom:20px;
+	margin-bottom:5px;
 }
 #cronometro{
+	position:relative;
+	top:8px;
 	text-align:center;
 	margin-left:30px;
 	width:60px;
@@ -97,4 +99,9 @@ img{
 	font-weight:700;
 	background:red;
 	border:2px solid black;
+}
+#numero{
+	width:100px;
+	height:32px;
+	
 }

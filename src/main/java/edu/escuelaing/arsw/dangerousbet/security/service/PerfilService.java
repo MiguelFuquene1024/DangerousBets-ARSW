@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
+import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
 import edu.escuelaing.arsw.dangerousbet.security.repository.PerfilRepository;
 
 @Service
@@ -50,6 +51,15 @@ public class PerfilService {
 
 	public void save(Perfil p) {
 		perfilRepository.save(p);
+		
+	}
+
+	public void restarDineroDejuego(Salas sala) {
+		for(String nick:sala.getJugadores()) {
+			Perfil perfil=perfilRepository.findById(nick).get();
+			perfil.setMoneda(perfil.getMoneda()-sala.getValorsala());
+			save(perfil);
+		}
 		
 	}
 }

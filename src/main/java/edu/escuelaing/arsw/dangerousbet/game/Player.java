@@ -6,6 +6,7 @@ import java.util.List;
 public class Player {
     private String nickName;
     private int moneda;
+    private int misApuestas;
     private boolean jugar;
     private List<String> cartas;
     private boolean turno;
@@ -53,6 +54,14 @@ public class Player {
 
 	public void setTurno(boolean turno) {
 		this.turno = turno;
+	}
+
+	public int getMisApuestas() {
+		return misApuestas;
+	}
+
+	public void setMisApuestas(int misApuestas) {
+		this.misApuestas = misApuestas;
 	}
     
 }

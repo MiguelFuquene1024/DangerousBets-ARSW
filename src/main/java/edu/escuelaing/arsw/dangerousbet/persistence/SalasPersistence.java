@@ -27,7 +27,7 @@ public interface SalasPersistence {
 
 	public void privacidadSala(String sala);
 
-	public void comenzarJuego(String nameSala);
+	public void comenzarJuego(String nameSala) throws SalaPersistenceException;
 
 
 	public List<Player> obtenerPlayer(String sala, String name);
@@ -39,5 +39,7 @@ public interface SalasPersistence {
 	public void apostar(String sala, int apuesta) throws JuegoException;
 
 	public void abandonarJuego(String sala);
+
+	public Salas getSalas(String nameSala);
 
 }

@@ -29,7 +29,7 @@ $(document).ready(function(){
 	$(document).ready(function(){	
 		setInterval(function(){
 			api.getSalasPublicas(salasPublicas);
-		}, 3000);			
+		}, 1000);			
 		
 	});
 });

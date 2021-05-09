@@ -15,34 +15,14 @@ function getQueryVariable(variable) {
    return window.localStorage.usuario;
 }
 
-function priv(){
-	api.investigarSala(name,function(mesa){		
-		$(".botonP_P").remove();
-		if(mesa.iniciada){
-			window.location.href="/juego.html?name="+name;
-		}
-		
-		else if(mesa.publico){
-			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-success botonP_P" type="button" class="btn btn-primary">Publico</button>');
-		}
-		
-		else{
-			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-danger botonP_P" type="button" class="btn btn-danger">Privado</button>');
-		}
-		$(".botonP_P").click(async function(){
-			let valor=await api.privacidadSala(name);
-			priv();
-			
-		});
-		
-	});
-}
+
 
 function perfilJugadores(){
 	
 	api.investigarSala(name,async function(mesa){
+		
 		for(numero in mesa.jugadores){
-			console.log(jugadores_actuales.includes(mesa.jugadores[numero]));
+			
 			if(jugadores_actuales.includes(mesa.jugadores[numero])==false){
 				await api.getPerfil(mesa.jugadores[numero],function(perfil){
 					$("#jugadores").append('<div id="' + perfil.nickname + '" class="jugador"><div class="superior"><img src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100%"></div><div class="inferior"><label>'+ perfil.nickname +'<label></div></div>');
@@ -58,6 +38,36 @@ function perfilJugadores(){
 		}
 		
 		jugadores_actuales=mesa.jugadores;
+		
+		//Privacidad Sala
+		$(".botonP_P").remove();
+		if(mesa.iniciada){
+			window.location.href="/juego.html?name="+name;
+		}
+		
+		else if(mesa.publico){
+			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-success botonP_P" type="button">Publico</button>');
+		}
+		
+		else{
+			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-danger botonP_P" type="button">Privado</button>');
+		}
+		$(".botonP_P").click(function(){
+			let valor=api.privacidadSala(name);
+
+		});
+		
+		//Dueño de la sala
+		console.log(mesa.jugadores[0]);
+	
+		if(mesa.jugadores[0]!=window.localStorage.usuario){
+			$("#boton_comenzar").attr("disabled","true");
+			$("#boton_priv").attr("disabled","true");
+		}else{
+			$("#boton_comenzar").removeAttr("disabled");
+			$("#boton_priv").removeAttr("disabled")
+		}
+		
 	});
 }
 
@@ -71,15 +81,14 @@ $(document).ready(async function(){
 		$("#clave_vacio").html(mesa.clave);
 		jugadores_actuales=mesa.jugadores;
 		for(numero in mesa.jugadores){
-			console.log(jugadores_actuales.includes(mesa.jugadores[numero]));
+			
 				await api.getPerfil(mesa.jugadores[numero],function(perfil){			
 					$("#jugadores").append('<div id="' + perfil.nickname + '"class="jugador"><div class="superior"><img src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100%"></div><div class="inferior"><label>'+ perfil.nickname +'<label></div></div>');
 				});				
 		}
 		jugadores_actuales=mesa.jugadores;
 
-		setInterval(priv, 3000);
-		setInterval(perfilJugadores, 3000);
+		setInterval(perfilJugadores, 1000);
 
 		
 	});

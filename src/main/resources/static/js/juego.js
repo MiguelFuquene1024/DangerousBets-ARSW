@@ -1,3 +1,5 @@
+function preparar(){
+
 var api = apiclient;
 var juegoComenzado=false;
 if (window.localStorage.usuario==undefined){
@@ -17,11 +19,11 @@ function getQueryVariable(variable) {
 
 function actualizarJuego(){
 	api.obtenerMesa(name,function(datos){
-		console.log(datos);
 		for(numero in datos[1]){
 			let rnumero=parseInt(numero) +1;
 			$(".monedas_apuestasmesa").html(datos[3]);
 			$("#monedas_propias"+rnumero+" label.mpropias").html(datos[1][numero].moneda);
+			$("#monedas_apuestas"+rnumero+" label.mapuestas").html(datos[1][numero].misApuestas);
 			if(datos[1][numero].nickName==window.localStorage.usuario){
 				console.log("#jugador"+rnumero+" img.img1");
 				if(datos[1][numero].cartas[0]!=undefined){
@@ -51,7 +53,6 @@ function actualizarJuego(){
 				}
 				
 			}
-			console.log(datos[1][numero].turno);
 			if(datos[1][numero].turno){
 				$("#jugador"+ rnumero +" img.img3").attr('style','border:8px solid yellow');
 				
@@ -99,17 +100,20 @@ $(document).ready(function(){
 			});
 		}
 	});
-	setInterval(actualizarJuego, 1000);
+	setInterval(actualizarJuego, 500);
 
 	$("#boton_pasar").click(function(){
+		$(".botones_juego").attr("disabled","true");
 		api.pasarJugador(name);
 		
 	});
 	$("#boton_apostar").click(function(){
-		api.apostar(name,300);
+		$(".botones_juego").attr("disabled","true");
+		api.apostar(name,$("#numero").val());
 		
 	});
 	$("#boton_abandonar").click(function(){
+		$(".botones_juego").attr("disabled","true");
 		api.abandonarJuego(name);
 		
 	});
@@ -119,3 +123,5 @@ $(document).ready(function(){
 	
 
 });
+}
+preparar();

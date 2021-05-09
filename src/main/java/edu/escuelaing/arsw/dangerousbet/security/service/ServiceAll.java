@@ -99,9 +99,10 @@ public class ServiceAll {
 		
 	}
 
-	public void comenzarJuego(String nameSala) {
+	public void comenzarJuego(String nameSala) throws SalaPersistenceException {
+		nameSala=nameSala.replace("%20", " ");
 		slp.comenzarJuego(nameSala);
-		
+		perfil.restarDineroDejuego(slp.getSalas(nameSala));
 	}
 	
 	public List<Player> obtenerPlayer(String sala, String nj) {
