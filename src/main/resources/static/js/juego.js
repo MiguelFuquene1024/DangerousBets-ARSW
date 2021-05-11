@@ -37,10 +37,37 @@ function actualizarJuego(){
 				}
 				if(datos[1][numero].turno){
 					$(".botones_juego").removeAttr("disabled");
+					console.log(datos[4]);
+					console.log(datos[1][numero].misApuestas);
+	
+					if(datos[4]>datos[1][numero].misApuestas){
+						$("#boton_pasar").attr("disabled","true");
+						apu_grande= parseInt(datos[4])-datos[1][numero].misApuestas;
+						$("#apuesta_extra").html("Debes apostar minimo " + apu_grande);
+						
+					}else{
+						$("#apuesta_extra").html("");
+
+						
+					}
+					
 				}else{
 					$(".botones_juego").attr("disabled","true");
+					
 				}
-			}else{
+			}else if(datos[5]=="buscarGanador"){
+				if(datos[1][numero].cartas[0]!=undefined){
+					$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[1]+"-"+datos[1][numero].cartas[0]+".png");
+				}else{
+					$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
+				}if(datos[1][numero].cartas[3]!=undefined){
+					$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/"+datos[1][numero].cartas[3]+"-"+datos[1][numero].cartas[2]+".png");
+				}else{
+					$("#jugador"+rnumero+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
+				}
+			}
+			
+			else{	
 				if(datos[1][numero].cartas[0]!=undefined){
 					$("#jugador"+rnumero+" img.img1").attr("src","/estilos/imagenes/atras.png");
 				}else{
@@ -54,7 +81,9 @@ function actualizarJuego(){
 				
 			}
 			if(datos[1][numero].turno){
+				
 				$("#jugador"+ rnumero +" img.img3").attr('style','border:8px solid yellow');
+				
 				
 			}else{
 				$("#jugador"+ rnumero +" .img3").attr('style','border:0px');
@@ -76,7 +105,7 @@ function actualizarJuego(){
 		}else{
 			$("#cronometro").html(datos[0]);
 		}
-
+		
 		
 	});
 
@@ -88,6 +117,7 @@ function actualizarJuego(){
 var name=getQueryVariable("name");
 var jugadores_actuales=[];
 var numeroJugador=0;
+
 $(document).ready(function(){
 		
 	api.investigarSala(name, async function(mesa){
@@ -96,7 +126,7 @@ $(document).ready(function(){
 				let rnumero=parseInt(numero) +1;
 				await api.getPerfil(mesa.jugadores[numero],function(perfil){
 				
-				$("#mesa_poker").append('<div id="jugador'+ rnumero + '" class="jugador"><div id="monedas_apuestas'+ rnumero +'" class="monedas_apuestas"><label class="mapuestas"></label></div><div id="monedas_propias'+ rnumero +'" class="monedas_propias"><label class="mpropias"></label></div><img class="img1" src="/estilos/imagenes/carta-blanca.png"><img class="img2" src="/estilos/imagenes/carta-blanca.png"><img class="img3" src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100px" height="auto"></div>');
+				$("#mesa_poker").append('<div id="jugador'+ rnumero + '" class="jugador"><div id="monedas_apuestas'+ rnumero +'" class="monedas_apuestas"><label class="mapuestas"></label></div><div id="monedas_propias'+ rnumero +'" class="monedas_propias"><label class="mpropias"></label></div><img class="img1" src="/estilos/imagenes/carta-blanca.png"><img class="img2" src="/estilos/imagenes/carta-blanca.png"><img class="img3" src="/estilos/imagenes/'+ perfil.imagen_perfil +'" width="100px" height="auto"><label>'+ perfil.nickname +'</label></div>');
 			});
 		}
 	});
@@ -109,8 +139,7 @@ $(document).ready(function(){
 	});
 	$("#boton_apostar").click(function(){
 		$(".botones_juego").attr("disabled","true");
-		api.apostar(name,$("#numero").val());
-		
+		api.apostar(name, $("#numero").val());
 	});
 	$("#boton_abandonar").click(function(){
 		$(".botones_juego").attr("disabled","true");

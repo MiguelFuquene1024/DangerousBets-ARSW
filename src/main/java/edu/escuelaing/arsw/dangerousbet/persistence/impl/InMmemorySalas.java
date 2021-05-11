@@ -131,7 +131,7 @@ public class InMmemorySalas implements SalasPersistence{
 				dinero.add(5000);
 			}
 			juegos.get(nameSala).iniciarPartida(salas.get(nameSala).getJugadores(), dinero);
-			juegos.get(nameSala).jugar();
+			//juegos.get(nameSala).jugar();
 		}else {
 			throw new SalaPersistenceException("Debe haber minimo 3 jugadores para iniciar el juego");
 		}

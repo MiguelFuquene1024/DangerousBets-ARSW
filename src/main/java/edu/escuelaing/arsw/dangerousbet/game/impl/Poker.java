@@ -35,10 +35,10 @@ public class Poker implements Juego {
     private int cronometro;
     private int apuestaTotalMesa;
     private VerificarGanadorPoker verificarGanadorPoker;
-
-    
-    	
-    private int ronda;
+	private String estadoPartida;
+	private String ganador;  
+	    	
+	private int ronda;
  
     public Poker() {
         apuesta = 0;
@@ -47,6 +47,7 @@ public class Poker implements Juego {
         jugadores = new ArrayList<>();
         estadoCartas = false;
         verificarGanadorPoker= new VerificarGanadorPoker();
+        estadoPartida="cargandoPagina";
     }
 
     public void iniciarPartida(List<String> nicknames, List<Integer> monedas){
@@ -56,6 +57,16 @@ public class Poker implements Juego {
             player.setMoneda(monedas.get(i));
             jugadores.add(player);
         }
+        TimerTask timerTask = new TimerTask() { 
+            @Override 
+            public void run() { 
+            	jugar();
+            
+            } 
+           }; 
+		Timer timerInicioJuego = new Timer(); 
+		timerInicioJuego.schedule(timerTask,4000);
+        
 
     }
     private void iniciarCronometro(){
@@ -71,6 +82,7 @@ public class Poker implements Juego {
              	
              } 
             }; 
+    
         cronometro=25;
  		timer = new Timer(); 
  	    timer.schedule(timerTask,1000,1000); 
@@ -79,6 +91,7 @@ public class Poker implements Juego {
     
     @Override
     public void jugar() {
+    	
     	apuesta=0;
     	apuestaTotalMesa=0;
     	ronda=1;
@@ -95,6 +108,7 @@ public class Poker implements Juego {
         finRonda=0;
         jugadores.get(turno).setTurno(true);
         iniciarCronometro();
+        estadoPartida="enPartida";
     }
 
     
@@ -105,13 +119,15 @@ public class Poker implements Juego {
     	mesaActual.add(jugadores);
     	mesaActual.add(cartasMesa);
     	mesaActual.add(apuestaTotalMesa);
-    	mesaActual.add(apuestas);
+    	mesaActual.add(apuesta);
+    	mesaActual.add(estadoPartida);
 		return mesaActual;
 	}
 
 	public void setCartasMesa(List<List<String>> cartasMesa) {
 		this.cartasMesa = cartasMesa;
 	}
+	
 	public void cambiarTurno() {
 		jugadores.get(turno).setTurno(false);
     	timer.cancel();
@@ -139,7 +155,7 @@ public class Poker implements Juego {
 	private void sumarApuestas() {
 		for(Player p:jugadores) {
 			apuestaTotalMesa=apuestaTotalMesa+p.getMisApuestas();
-            p.setMoneda(p.getMoneda()-p.getMisApuestas());
+            
 		}
 	}
 	public void pasar() throws JuegoException {
@@ -149,12 +165,16 @@ public class Poker implements Juego {
     
     @Override
     public void apostar(String nickanme, Integer valor) throws JuegoException {
-    		
+    	timer.cancel();
+    	if(jugadores.get(turno).getMoneda() < valor) throw new JuegoException(JuegoException.NO_TIENE_SUFICIENTE_DINERO);
             Integer temp = apuestas.get(nickanme) + valor;
+            
             if (apuesta > temp) throw new JuegoException(JuegoException.DEBE_IGUALAR);
+            
             apuestas.put(nickanme, temp);
 
             jugadores.get(turno).setMisApuestas(temp);
+            jugadores.get(turno).setMoneda(jugadores.get(turno).getMoneda()-valor);
             if(temp>apuesta) {
             	apuesta = temp;
                 finRonda=turno;
@@ -200,19 +220,54 @@ public class Poker implements Juego {
 
     @Override
     public void abandonar() {
+    	timer.cancel();
     	getJugador(jugadores.get(turno).getNickName()).setJugar(false);
     	cartas.remove(jugadores.get(turno).getNickName());
     	getJugador(jugadores.get(turno).getNickName()).setCartas(new ArrayList<>());
-    	cambiarTurno();
+    	int cont=0;
+    	Player playerWin=null;
+    	for(Player p:jugadores) {
+    		if(p.isJugar()) {
+    			cont+=1;
+    			playerWin=p;
+    		}
+    	}
+    	if(cont==1) {
+    		sumarApuestas();
+    		darDineroGanador(playerWin);  		
+    	}else {
+    		cambiarTurno();
+    	}
     }
-
+    public void darDineroGanador(Player player) {
+    	player.setMoneda(player.getMoneda()+apuestaTotalMesa);
+    	jugar();
+    }
+    
     @Override
     public void darCarta() {
     	
     	if(ronda==4){
-    	    String ganador = verificar();
-    	    System.out.println(ganador);
-    		jugar();
+    		estadoPartida="buscarGanador";
+    		ganador = verificar();
+    		sumarApuestas();
+    		TimerTask timerTask = new TimerTask() { 
+    			@Override 
+                public void run() { 
+    				for(Player p:jugadores) {
+    					if(p.getNickName().equals(ganador)) {
+    						darDineroGanador(p); 
+    						break;
+    					}
+    				}
+    				
+    				
+    			} 
+            }; 
+            Timer finRonda = new Timer(); 
+            finRonda.schedule(timerTask,7000);
+    		
+    		
     	}
     	else {
 			baraja.getCarta();

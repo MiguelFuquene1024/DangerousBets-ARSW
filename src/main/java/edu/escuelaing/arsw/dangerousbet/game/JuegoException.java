@@ -6,4 +6,6 @@ public class JuegoException extends Exception{
         super(message);
     }
     public static String DEBE_IGUALAR="Se debe igualar al valor ya apostado o apostar mas";
+    
+    public static String NO_TIENE_SUFICIENTE_DINERO="No tiene suficiente dinero";
 }

@@ -237,6 +237,7 @@ public class WebController {
 
     	try {
 	    	srvall.apostar(sala, apuesta);
+			System.out.println(apuesta);
 	        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     	}catch(JuegoException sx) {
     		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

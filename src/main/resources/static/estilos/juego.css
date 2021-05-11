@@ -3,7 +3,9 @@ body{
 	background-size:100% 100%;
 	
 }
-
+#apuesta_extra{
+	font-weight:700;
+}
 #mesa_poker{
 	position:relative;
 	background:url('imagenes/mesapoker.png');
@@ -11,6 +13,7 @@ body{
 	width:850px;
 	height:606px;
 	margin-top:100px;
+	padding:10%;
 
 }
 #mesa_poker .jugador{
