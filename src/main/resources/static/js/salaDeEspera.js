@@ -57,7 +57,7 @@ function perfilJugadores(){
 
 		});
 		
-		//Dueño de la sala
+		//Dueño de la sal
 		
 	
 		if(mesa.jugadores[0]!=window.localStorage.usuario){
