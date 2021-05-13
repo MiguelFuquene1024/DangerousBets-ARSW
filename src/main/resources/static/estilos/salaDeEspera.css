@@ -98,7 +98,8 @@ body{
 	margin:0;padding:0;
 }
 #nombre_mesa,
-#contrasena{
+#contrasena,
+#invocar_chat{
 	position:absolute;
 	font-size:1.5vw;
 	line-height:1.5vw;
@@ -109,6 +110,55 @@ body{
 	left:30%;
 	margin:0;padding:0;
 }
+#invocar_chat{
+	left:2%;
+	width:5%;
+	height:50%;
+	margin-top:1%;
+	
+}
 #contrasena{
 	left:60%;
+}
+#chat{
+	width:80%;
+	height:20vw;
+	word-wrap: break-word;
+	margin-left:3%;
+	display:none;
+	font-size:1.5vw;
+	line-height:1.5vw;
+}
+#chat p{
+	line-height:1.5vw;
+}
+#chat label,
+#chat br{
+	line-height:0vw;
+}
+
+#mensajes_recibidos{
+	width:100%;
+	background:white;
+	height:80%;
+	border:2px solid black;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	word-wrap: break-word;
+	padding:3%;
+}
+#mi_chat{
+	width:100%;
+	height:20%;
+	word-wrap: break-word;
+}
+#mensaje{
+	width:70%;
+	height:2vw;
+}
+#enviar_mensaje{
+	width:25%;
+	height:2.5vw;
+	font-size:1.3vw;
+	line-height:0vw;
 }

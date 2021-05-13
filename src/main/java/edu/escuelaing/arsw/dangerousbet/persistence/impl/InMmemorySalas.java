@@ -28,7 +28,7 @@ import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
 @Service
 public class InMmemorySalas implements SalasPersistence{
 	
-
+	
 	private final ConcurrentHashMap<String,Salas> salas=new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<String,Poker> juegos=new ConcurrentHashMap<>();
 	
@@ -170,6 +170,17 @@ public class InMmemorySalas implements SalasPersistence{
 		Salas s=salas.get(nameSala);
 		return s;
 	}
+
+	@Override
+	public void nuevoMensaje(String sala, String mensaje) {
+		salas.get(sala).nuevoMensajes(mensaje);
+	}
+	
+	@Override
+	public ArrayList recibirMensaje(String sala, String usuario) {
+		return salas.get(sala).devolverMensajes(usuario);
+	}
+	
 	
 	
 }

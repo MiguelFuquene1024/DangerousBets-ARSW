@@ -37,7 +37,8 @@ public class Poker implements Juego {
     private VerificarGanadorPoker verificarGanadorPoker;
 	private String estadoPartida;
 	private String ganador;  
-	    	
+	
+	
 	private int ronda;
  
     public Poker() {

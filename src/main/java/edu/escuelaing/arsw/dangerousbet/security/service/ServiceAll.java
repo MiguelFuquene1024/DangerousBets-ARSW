@@ -1,5 +1,6 @@
 package edu.escuelaing.arsw.dangerousbet.security.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -126,6 +127,12 @@ public class ServiceAll {
 		slp.abandonarJuego(sala);
 		
 	}
-
+	public void nuevoMensaje(String sala,String mensaje) {
+		slp.nuevoMensaje(sala, mensaje);
+	}
+	
+	public ArrayList recibirMensaje(String sala,String usuario) {
+		return slp.recibirMensaje(sala, usuario);
+	}
 
 }

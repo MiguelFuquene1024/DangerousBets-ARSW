@@ -1,5 +1,6 @@
 package edu.escuelaing.arsw.dangerousbet.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.escuelaing.arsw.dangerousbet.game.JuegoException;
@@ -41,5 +42,9 @@ public interface SalasPersistence {
 	public void abandonarJuego(String sala);
 
 	public Salas getSalas(String nameSala);
+	
+	public void nuevoMensaje(String sala,String mensaje);
+
+	public ArrayList recibirMensaje(String sala, String usuario);
 
 }

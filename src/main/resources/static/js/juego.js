@@ -1,5 +1,6 @@
-function preparar(){
 
+function preparar(){
+//const express=require('express');
 var api = apiclient;
 var juegoComenzado=false;
 if (window.localStorage.usuario==undefined){
@@ -18,6 +19,7 @@ function getQueryVariable(variable) {
 }
 
 function actualizarJuego(){
+	
 	api.obtenerMesa(name,function(datos){
 		for(numero in datos[1]){
 			let rnumero=parseInt(numero) +1;
@@ -108,6 +110,12 @@ function actualizarJuego(){
 		
 		
 	});
+	
+	api.recibirMensaje(name,window.localStorage.usuario,function(data){
+		for(numero in data){
+			$("#mensajes_recibidos").append('<p>'+ data[numero] +'</p>');
+		}
+	});
 
 	
 }
@@ -146,6 +154,32 @@ $(document).ready(function(){
 		api.abandonarJuego(name);
 		
 	});
+	
+	$("#invocar_chat").click(function(){
+		
+		if($("#chat").css("display")=="none"){
+			$("#chat").css("display","block");
+		}else{
+			$("#chat").css("display","none")
+		}
+		
+	});
+	
+	$("#enviar_mensaje").click(function(){
+		let mensaje='<label style="font-weight:700;">' + window.localStorage.usuario + ": </label>"+ $("#mensaje").val();
+		
+		api.nuevoMensaje(name,mensaje);
+		$('input[type="text"]').val('');
+	});
+	$("input").keypress(function(tecla){
+		
+        if(tecla.which==13){
+			let mensaje='<label style="font-weight:700;">' + window.localStorage.usuario + ": </label>"+ $("#mensaje").val();
+			
+			api.nuevoMensaje(name,mensaje);
+			$('input[type="text"]').val('');
+		}
+    });
 		
 
 	
