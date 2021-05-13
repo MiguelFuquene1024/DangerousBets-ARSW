@@ -1,5 +1,5 @@
 body{
-	background:url('imagenes/trofeos3.jpg');
+	background:url('imagenes/negro.jpg');
 	background-size:100% 100%;
 	
 }
@@ -35,6 +35,7 @@ body{
 	height:30%;
 	text-align:center;
 	font-weight:700;
+        color:red;
 }
 #logros_titulo{
 	width:60%;

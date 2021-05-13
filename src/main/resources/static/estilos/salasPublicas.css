@@ -1,6 +1,6 @@
 
 body {
-	background:url('imagenes/salapoker.jpg');
+	background:url('imagenes/fondonegro.jpg');
 	
 }
 .privadas{
@@ -10,7 +10,7 @@ body {
 }
 label{
 	cursor:pointer;
-	color:blue;
+	color:#02E398;
 }
 label:hover{
 	color:red;
@@ -24,9 +24,9 @@ label:hover{
 }
 tr{
 	
-	background:#FCFF80;
+	background:#19A831;
 	opacity:0.9;
-	border:4px solid #C2C200;
+	border:4px solid #006B12;
 }
 th{
 	padding-top:3%;
