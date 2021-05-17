@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 
 import edu.escuelaing.arsw.dangerousbet.game.JuegoException;
 import edu.escuelaing.arsw.dangerousbet.game.Player;
+import edu.escuelaing.arsw.dangerousbet.game.impl.Poker;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalaPersistenceException;
 import edu.escuelaing.arsw.dangerousbet.persistence.SalasPersistence;
 import edu.escuelaing.arsw.dangerousbet.security.entity.Perfil;
@@ -49,7 +50,7 @@ public class ServiceAll {
 	}
 
 	public List<Tienda> logosComprados(String user) {
-		System.out.println("=================================");
+		
 		return tienda.logosComprados(user);
 
 	}
@@ -101,7 +102,10 @@ public class ServiceAll {
 	}
 
 	public void comenzarJuego(String nameSala) throws SalaPersistenceException {
+		
 		nameSala=nameSala.replace("%20", " ");
+
+		
 		slp.comenzarJuego(nameSala);
 		perfil.restarDineroDejuego(slp.getSalas(nameSala));
 	}
@@ -110,8 +114,14 @@ public class ServiceAll {
 		return slp.obtenerPlayer(sala, nj);
 	}
 
-	public List<Object> obtenerMesa(String sala){
-		return slp.obtenerMesa(sala);
+	public Poker obtenerMesa(String sala){
+		Poker poker=slp.obtenerMesa(sala);
+		Salas s=obtenerSala(sala);
+		if(s.getJugadores().size()==1 && s.isIniciada() && !s.isRecompensaEntregada()) {
+			s.setRecompensaEntregada(true);
+			perfil.sumarRecompensa(s,poker.getJugadores().size());
+		}
+		return poker;
 		
 	}
 	

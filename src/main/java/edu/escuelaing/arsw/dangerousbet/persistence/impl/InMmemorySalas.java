@@ -44,6 +44,10 @@ public class InMmemorySalas implements SalasPersistence{
 					
 					if(entry.getValue().getJugadores().size()==0) {
 						eliminarSala(entry.getKey());
+						if(salas.containsKey(entry.getKey())){
+							juegos.remove(entry.getKey());
+							
+						}
 					}
 				}
 				
@@ -56,6 +60,7 @@ public class InMmemorySalas implements SalasPersistence{
 	
 	public void agregarSala(Salas sala) throws SalaPersistenceException{
 		if(!salas.containsKey(sala.getNombre())) {
+			
 			salas.put(sala.getNombre(), sala);
 		}else {
 			throw new SalaPersistenceException("Ya existe sala");
@@ -83,12 +88,22 @@ public class InMmemorySalas implements SalasPersistence{
 		if(salas.containsKey(sala)) {
 			salas.get(sala).eliminarJugador(jugador);
 		}
+		if(juegos.containsKey(sala)) {
+			juegos.get(sala).eliminarJugador(jugador);
+			
+		}
+		
+		
+		
+		
+		
 	}
 	
 	public void eliminarSala(String sala) {
 		if(salas.containsKey(sala) && !salas.get(sala).getNombre().equals("Sala Publica")) {
 			salas.remove(sala);
 		}
+		
 	}
 
 	@Override
@@ -138,16 +153,21 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 	
 	@Override
-	public List<Player> obtenerPlayer(String sala,String name) {
-		System.out.println(sala+" "+name);
+	public List<Player> obtenerPlayer(String sala,String name) {		
+		
 		sala=sala.replace("%20", " ");
+		
 		return juegos.get(sala).getJugadores();
 	}
 	
 	@Override
-	public List<Object> obtenerMesa(String sala){
-
-		return juegos.get(sala).EstadoActualJuego();
+	public Poker obtenerMesa(String sala){
+		for(Player player:juegos.get(sala).getJugadores()) {
+			if(player.isEliminado()) {
+				eliminarJugador(sala,player.getNickName());
+			}
+		}
+		return juegos.get(sala);
 	}
 	
 	@Override

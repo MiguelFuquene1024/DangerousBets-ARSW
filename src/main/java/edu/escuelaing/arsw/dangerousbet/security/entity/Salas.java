@@ -22,7 +22,8 @@ public class Salas {
 	
 	private  String nombre;
 	
-
+	private boolean recompensaEntregada=false;
+	
 	private String clave;
 	
 	private boolean publico;
@@ -34,7 +35,8 @@ public class Salas {
 	
 	
 	public Salas() {
-		
+		chat=new HashMap<>();
+		numeroChat=new HashMap<>();
 	}
 	
 
@@ -56,6 +58,11 @@ public class Salas {
 
 	public void setJugadores(List<String> jugadores) {
 		this.jugadores = jugadores;
+		for(String s:this.jugadores) {
+			chat.put(s, new ArrayList<>());
+			numeroChat.put(s,0 );
+		}
+		
 	}
 	public void agregarJugador(String jugador) {
 		if(!jugadores.contains(jugador)) {
@@ -126,9 +133,11 @@ public class Salas {
 		}
 	}
 	
-	public ArrayList devolverMensajes(String jugador) {
+	public ArrayList<String> devolverMensajes(String jugador) {
 		ArrayList<String> msg=new ArrayList<>(); 
+		
 		for(int i=numeroChat.get(jugador);i<chat.get(jugador).size();i++) {
+			
 			msg.add(chat.get(jugador).get(i));
 		}
 		numeroChat.put(jugador,chat.get(jugador).size());
@@ -136,6 +145,16 @@ public class Salas {
 		
 	}
 
+
+	public boolean isRecompensaEntregada() {
+		return recompensaEntregada;
+	}
+
+
+	public void setRecompensaEntregada(boolean recompensaEntregada) {
+		this.recompensaEntregada = recompensaEntregada;
+	}
+	
 	
 	
 	

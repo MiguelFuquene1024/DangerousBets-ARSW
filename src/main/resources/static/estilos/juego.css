@@ -166,3 +166,11 @@ img{
 #contenedor{
 	margin-top:10px;
 }
+#boton_abandonar_Juego{
+	position:absolute;
+	right:10px;
+	top:5px;
+	width:120px;
+	height:60px;
+
+}

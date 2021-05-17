@@ -9,6 +9,9 @@ public class Player {
     private int misApuestas;
     private boolean jugar;
     private List<String> cartas;
+    private int numeroJugador;
+    private boolean eliminado=false;
+    
     private boolean turno;
     public Player() {
         jugar = true;
@@ -63,5 +66,22 @@ public class Player {
 	public void setMisApuestas(int misApuestas) {
 		this.misApuestas = misApuestas;
 	}
+
+	public int getNumeroJugador() {
+		return numeroJugador;
+	}
+
+	public void setNumeroJugador(int numeroJugador) {
+		this.numeroJugador = numeroJugador;
+	}
+
+	public boolean isEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(boolean eliminado) {
+		this.eliminado = eliminado;
+	}
+	
     
 }

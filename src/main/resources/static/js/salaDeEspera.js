@@ -20,7 +20,7 @@ function getQueryVariable(variable) {
 function perfilJugadores(){
 	
 	api.investigarSala(name,async function(mesa){
-		
+	
 		for(numero in mesa.jugadores){
 			
 			if(jugadores_actuales.includes(mesa.jugadores[numero])==false){
