@@ -73,12 +73,12 @@ public class ServiceAll {
 		p.setImagen_perfil(pf.getImagen_perfil());
 		perfil.save(p);
 	}
-
+	public ArrayList<List<String>> obtenerCartasJugador(String token,String sala){
+		String jugador = jwtProvider.getNombreUsuarioFromToken(token);
+		return slp.obtenerCartasJugador(jugador, sala);
+	}
 	public void crearSala(Salas sala2) throws SalaPersistenceException{
-			
 			slp.agregarSala(sala2);
-		
-		
 	}
 
 	public void agregarJugador(String sala,String clave ,String nj) throws SalaPersistenceException{

@@ -510,7 +510,18 @@ public class Poker implements Juego {
 		this.numeroDeJuegos = numeroDeJuegos;
 	}
 	
-
+	public ArrayList<List<String>> obtenerCartasJugadores(String jugador){
+		Player yo=getJugador(jugador);
+		ArrayList<List<String>> car=new ArrayList<>();
+		for(Player p:jugadores) {
+			if(p.equals(yo) || estadoPartida.equals("buscarGanador")) {
+				car.add(p.obtenerCartas());
+			}else {
+				car.add(new ArrayList<>());
+			}
+		}
+		return car;
+	}
 	
 	
 

@@ -101,6 +101,9 @@ public class InMmemorySalas implements SalasPersistence{
 	public String obtenerClaveDeAcceso(String jugador,String sala) {
 		return salas.get(sala).obtenerClaveDeAcceso(jugador);
 	}
+	public ArrayList<List<String>> obtenerCartasJugador(String jugador,String sala) {
+		return juegos.get(sala).obtenerCartasJugadores(jugador);
+	}
 	public void eliminarSala(String sala) {
 		if(salas.containsKey(sala) && !salas.get(sala).getNombre().equals("Sala Publica")) {
 			salas.remove(sala);

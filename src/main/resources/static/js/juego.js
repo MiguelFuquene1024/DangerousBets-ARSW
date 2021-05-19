@@ -24,109 +24,105 @@ function getQueryVariable(variable) {
 function actualizarJuego(){
 	
 	api.obtenerMesa(name,function(datos){
-		console.log(datos);
-		for(numero in datos.jugadores){
-			if(datos.estadoPartida=="finJuego"){
-				setTimeout(function(){
-					window.location.href="/menu.html";
-				}, 5000);
-			}
-			$(".monedas_apuestasmesa").html(datos.apuestaTotalMesa);
-			$("#monedas_propias"+ datos.jugadores[numero].numeroJugador +" label.mpropias").html(datos.jugadores[numero].moneda);
-			$("#monedas_apuestas"+ datos.jugadores[numero].numeroJugador +" label.mapuestas").html(datos.jugadores[numero].misApuestas);
-			
-			if(datos.jugadores[numero].nickName==window.localStorage.usuario){
-				
-				if(datos.jugadores[numero].cartas[0]!=undefined){
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/"+datos.jugadores[numero].cartas[1]+"-"+datos.jugadores[numero].cartas[0]+".png");
-				}else{
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
-				}if(datos.jugadores[numero].cartas[3]!=undefined){
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/"+datos.jugadores[numero].cartas[3]+"-"+datos.jugadores[numero].cartas[2]+".png");
-				}else{
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
+		api.obtenerCartaJugadores(window.localStorage.usuario,function(cartas){
+		
+			console.log(datos);
+			console.log(cartas);
+			for(numero in datos.jugadores){
+				if(datos.estadoPartida=="finJuego"){
+					setTimeout(function(){
+						window.location.href="/menu.html";
+					}, 5000);
 				}
-				if(datos.jugadores[numero].turno){
-					$(".botones_juego").removeAttr("disabled");
+				$(".monedas_apuestasmesa").html(datos.apuestaTotalMesa);
+				$("#monedas_propias"+ datos.jugadores[numero].numeroJugador +" label.mpropias").html(datos.jugadores[numero].moneda);
+				$("#monedas_apuestas"+ datos.jugadores[numero].numeroJugador +" label.mapuestas").html(datos.jugadores[numero].misApuestas);
+				
+				if(datos.jugadores[numero].nickName==window.localStorage.usuario){
 					
+					if(datos.jugadores[numero].jugar){
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/"+datos.jugadores[numero].cartas[1]+"-"+datos.jugadores[numero].cartas[0]+".png");
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/"+datos.jugadores[numero].cartas[3]+"-"+datos.jugadores[numero].cartas[2]+".png");
+					}else{
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
+					}
+					if(datos.jugadores[numero].turno){
+						$(".botones_juego").removeAttr("disabled");
 						
-					if(datos.apuesta>datos.jugadores[numero].misApuestas && datos.jugadores[numero].moneda!=0){
-						$("#boton_pasar").attr("disabled","true");
-						apu_grande= parseInt(datos.apuesta)-datos.jugadores[numero].misApuestas;
-						if(datos.jugadores[numero].moneda>=apu_grande){
-							$("#apuesta_extra").html("Debes apostar minimo " + apu_grande);
-						}else{
-							$("#apuesta_extra").html("Debes apostar minimo " + datos.jugadores[numero].moneda);
+							
+						if(datos.apuesta>datos.jugadores[numero].misApuestas && datos.jugadores[numero].moneda!=0){
+							$("#boton_pasar").attr("disabled","true");
+							apu_grande= parseInt(datos.apuesta)-datos.jugadores[numero].misApuestas;
+							if(datos.jugadores[numero].moneda>=apu_grande){
+								$("#apuesta_extra").html("Debes apostar minimo " + apu_grande);
+							}else{
+								$("#apuesta_extra").html("Debes apostar minimo " + datos.jugadores[numero].moneda);
+							}
+							
+							
+						}else if(datos.jugadores[numero].moneda==0){
+							$("#boton_apostar").attr("disabled","true");
+						}
+						else{
+							$("#apuesta_extra").html("");
+
+							
 						}
 						
-						
-					}else if(datos.jugadores[numero].moneda==0){
-						$("#boton_apostar").attr("disabled","true");
-					}
-					else{
-						$("#apuesta_extra").html("");
-
+					}else{
+						$(".botones_juego").attr("disabled","true");
 						
 					}
-					
-				}else{
-					$(".botones_juego").attr("disabled","true");
+				}else if(datos.estadoPartida=="buscarGanador"){
+					if(datos.jugadores[numero].jugar){
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/"+cartas[numero][1]+"-"+cartas[numero][0]+".png");
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/"+cartas[numero][3]+"-"+cartas[numero][2]+".png");
+					}else{
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
+					}
+				}
+				
+				else{	
+					if(datos.jugadores[numero].jugar){
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/atras.png");
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/atras.png");
+					}else{
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
+					}
 					
 				}
-			}else if(datos.estadoPartida=="buscarGanador"){
-				if(datos.jugadores[numero].cartas[0]!=undefined){
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/"+datos.jugadores[numero].cartas[1]+"-"+datos.jugadores[numero].cartas[0]+".png");
+				if(datos.jugadores[numero].turno){
+					
+					$("#jugador"+ datos.jugadores[numero].numeroJugador +" img.img3").attr('style','border:8px solid yellow');
+					
+					
 				}else{
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
-				}if(datos.jugadores[numero].cartas[3]!=undefined){
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/"+datos.jugadores[numero].cartas[3]+"-"+datos.jugadores[numero].cartas[2]+".png");
-				}else{
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
+					if(datos.jugadores[numero].eliminado){
+						$("#jugador"+datos.jugadores[numero].numeroJugador).remove();
+					}
+					$("#jugador"+ datos.jugadores[numero].numeroJugador +" .img3").attr('style','border:0px');
 				}
 			}
 			
-			else{	
-				if(datos.jugadores[numero].cartas[0]!=undefined){
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/atras.png");
-				}else{
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
+			for(let i=0;i<5;i++){
+		
+				if(i>=datos.cartasMesa.length){
+					$("#jugadormesa img.carta"+i).attr('src','/estilos/imagenes/carta-blanca.png')
 				}
-				if(datos.jugadores[numero].cartas[3]!=undefined){
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/atras.png");
-				}else{
-					$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
-				}
+				else{
 				
+					$("#jugadormesa img.carta"+i).attr('src','/estilos/imagenes/'+datos.cartasMesa[i][1]+'-'+datos.cartasMesa[i][0]+'.png');
+				}
 			}
-			if(datos.jugadores[numero].turno){
-				
-				$("#jugador"+ datos.jugadores[numero].numeroJugador +" img.img3").attr('style','border:8px solid yellow');
-				
-				
+			if(datos.cronometro<10){
+				$("#cronometro").html("0"+datos.cronometro);
 			}else{
-				if(datos.jugadores[numero].eliminado){
-					$("#jugador"+datos.jugadores[numero].numeroJugador).remove();
-				}
-				$("#jugador"+ datos.jugadores[numero].numeroJugador +" .img3").attr('style','border:0px');
+				$("#cronometro").html(datos.cronometro);
 			}
-		}
-		
-		for(let i=0;i<5;i++){
-	
-			if(i>=datos.cartasMesa.length){
-				$("#jugadormesa img.carta"+i).attr('src','/estilos/imagenes/carta-blanca.png')
-			}
-			else{
-			
-				$("#jugadormesa img.carta"+i).attr('src','/estilos/imagenes/'+datos.cartasMesa[i][1]+'-'+datos.cartasMesa[i][0]+'.png');
-			}
-		}
-		if(datos.cronometro<10){
-			$("#cronometro").html("0"+datos.cronometro);
-		}else{
-			$("#cronometro").html(datos.cronometro);
-		}
-		
+		});
 		
 	});
 	

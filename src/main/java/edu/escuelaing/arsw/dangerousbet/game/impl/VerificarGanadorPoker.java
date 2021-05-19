@@ -13,8 +13,8 @@ public class VerificarGanadorPoker implements VerificarGanador {
     public String escaleraRealColor(List<List<String>> cartasMesa, List<Player> jugadores) {
         String ganador = "";
         for(Player p : jugadores){
-            if(p.isJugar() && verificarColor(cartasMesa,p.getCartas())){
-                if(escaleraRealverificar(cartasMesa,p.getCartas())){
+            if(p.isJugar() && verificarColor(cartasMesa,p.obtenerCartas())){
+                if(escaleraRealverificar(cartasMesa,p.obtenerCartas())){
                     ganador = p.getNickName();
                 }
             }
@@ -26,8 +26,8 @@ public class VerificarGanadorPoker implements VerificarGanador {
     public String escaleraDeColor(List<List<String>> cartasMesa, List<Player> jugadores) {
     	String ganador = "";
     	for (Player pj: jugadores){
-            if(pj.isJugar() && verificarColor(cartasMesa,pj.getCartas())) {
-                List<Integer> list = valoreColorCartas(cartasMesa,pj.getCartas());
+            if(pj.isJugar() && verificarColor(cartasMesa,pj.obtenerCartas())) {
+                List<Integer> list = valoreColorCartas(cartasMesa,pj.obtenerCartas());
                 List<Integer> list2 = list.stream().sorted().collect(Collectors.toList());
                 if(compararEscalera(list2)){
                     ganador=pj.getNickName();
@@ -52,7 +52,7 @@ public class VerificarGanadorPoker implements VerificarGanador {
     public String poker(List<List<String>> cartasMesa, List<Player> jugadores) {
         String ganador = "";
         for(Player p : jugadores){
-            if(p.isJugar() && verificarPoker(cartasMesa,p.getCartas())){
+            if(p.isJugar() && verificarPoker(cartasMesa,p.obtenerCartas())){
                 ganador=p.getNickName();
             }
         }
@@ -63,8 +63,8 @@ public class VerificarGanadorPoker implements VerificarGanador {
     public String full(List<List<String>> cartasMesa, List<Player> jugadores) {
         String ganador = "";
         for(Player p : jugadores){
-            if(p.isJugar() && verificarTrios(cartasMesa,p.getCartas())){
-                if(verificarPares(cartasMesa,p.getCartas())){
+            if(p.isJugar() && verificarTrios(cartasMesa,p.obtenerCartas())){
+                if(verificarPares(cartasMesa,p.obtenerCartas())){
                     ganador=p.getNickName();
                 }
 
@@ -77,7 +77,7 @@ public class VerificarGanadorPoker implements VerificarGanador {
     public String colorCartas(List<List<String>> cartasMesa, List<Player> jugadores) {
         String ganador = "";
         for(Player p : jugadores){
-            if(p.isJugar() && verificarColor(cartasMesa,p.getCartas())){
+            if(p.isJugar() && verificarColor(cartasMesa,p.obtenerCartas())){
                 ganador=p.getNickName();
             }
         }
@@ -88,7 +88,7 @@ public class VerificarGanadorPoker implements VerificarGanador {
     public String escalera(List<List<String>> cartasMesa, List<Player> jugadores) {
     	String ganador = "";
     	for(Player pj: jugadores) {
-            List<Integer> list = valoresCartas(cartasMesa, pj.getCartas());
+            List<Integer> list = valoresCartas(cartasMesa, pj.obtenerCartas());
             List<Integer> list2 = list.stream().sorted().collect(Collectors.toList());
             if(compararEscalera(list2)){
                 ganador=pj.getNickName();
@@ -111,7 +111,7 @@ public class VerificarGanadorPoker implements VerificarGanador {
     public String trio(List<List<String>> cartasMesa, List<Player> jugadores) {
         String ganador = "";
         for(Player p : jugadores){
-            if(p.isJugar() && verificarTrios(cartasMesa,p.getCartas())){
+            if(p.isJugar() && verificarTrios(cartasMesa,p.obtenerCartas())){
                 ganador=p.getNickName();
             }
         }
@@ -122,7 +122,7 @@ public class VerificarGanadorPoker implements VerificarGanador {
     public String doblesParejas(List<List<String>> cartasMesa, List<Player> jugadores) {
     	String ganador = "";
         for(Player p : jugadores){
-            if(p.isJugar() && verificarDoblePares(cartasMesa,p.getCartas())){
+            if(p.isJugar() && verificarDoblePares(cartasMesa,p.obtenerCartas())){
                 ganador=p.getNickName();
             }
         }
@@ -133,7 +133,7 @@ public class VerificarGanadorPoker implements VerificarGanador {
     public String pareajas(List<List<String>> cartasMesa, List<Player> jugadores) {
         String ganador = "";
         for(Player p : jugadores){
-            if(p.isJugar() && verificarPares(cartasMesa,p.getCartas())){
+            if(p.isJugar() && verificarPares(cartasMesa,p.obtenerCartas())){
                 ganador=p.getNickName();
             }
         }
@@ -143,12 +143,12 @@ public class VerificarGanadorPoker implements VerificarGanador {
     @Override
     public String cartaAlta(List<List<String>> cartasMesa, List<Player> jugadores) {
         String ganador = jugadores.get(0).getNickName();
-        int maxcarta= Math.max(Integer.parseInt(jugadores.get(0).getCartas().get(1)),
-                Integer.parseInt(jugadores.get(0).getCartas().get(3)));
+        int maxcarta= Math.max(Integer.parseInt(jugadores.get(0).obtenerCartas().get(1)),
+                Integer.parseInt(jugadores.get(0).obtenerCartas().get(3)));
         for(int i =1; i<jugadores.size();i++){
         	if(jugadores.get(i).isJugar()) {
-	            int tempmax=Math.max(Integer.parseInt(jugadores.get(i).getCartas().get(1)),
-	                    Integer.parseInt(jugadores.get(i).getCartas().get(3)));
+	            int tempmax=Math.max(Integer.parseInt(jugadores.get(i).obtenerCartas().get(1)),
+	                    Integer.parseInt(jugadores.get(i).obtenerCartas().get(3)));
 	            if(maxcarta<tempmax){
 	                ganador=jugadores.get(i).getNickName();
 	                maxcarta=tempmax;
