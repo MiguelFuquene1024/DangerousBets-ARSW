@@ -5,6 +5,7 @@ import edu.escuelaing.arsw.dangerousbet.game.VerificarGanador;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VerificarGanadorPoker implements VerificarGanador {
 
@@ -24,7 +25,27 @@ public class VerificarGanadorPoker implements VerificarGanador {
     @Override
     public String escaleraDeColor(List<List<String>> cartasMesa, List<Player> jugadores) {
     	String ganador = "";
+    	for (Player pj: jugadores){
+            if(pj.isJugar() && verificarColor(cartasMesa,pj.getCartas())) {
+                List<Integer> list = valoreColorCartas(cartasMesa,pj.getCartas());
+                List<Integer> list2 = list.stream().sorted().collect(Collectors.toList());
+                if(compararEscalera(list2)){
+                    ganador=pj.getNickName();
+                }
+            }
+        }
         return ganador;
+    }
+
+    private boolean compararEscalera(List<Integer> list2) {
+        int inicio = list2.get(0);
+        boolean verificar = true;
+        for(int i=1 ; i<list2.size()-1 && verificar; i++){
+            if(!(inicio+i==list2.get(i))){
+                verificar=false;
+            }
+        }
+        return verificar;
     }
 
     @Override
@@ -66,7 +87,24 @@ public class VerificarGanadorPoker implements VerificarGanador {
     @Override
     public String escalera(List<List<String>> cartasMesa, List<Player> jugadores) {
     	String ganador = "";
+    	for(Player pj: jugadores) {
+            List<Integer> list = valoresCartas(cartasMesa, pj.getCartas());
+            List<Integer> list2 = list.stream().sorted().collect(Collectors.toList());
+            if(compararEscalera(list2)){
+                ganador=pj.getNickName();
+            }
+        }
         return ganador;
+    }
+
+    private List<Integer> valoresCartas(List<List<String>> cartasMesa, List<String> cartas) {
+        List<Integer> list = new ArrayList<>();
+        list.add(Integer.valueOf(cartas.get(1)));
+        list.add(Integer.valueOf(cartas.get(3)));
+        for(List<String> li:cartasMesa){
+            list.add(Integer.valueOf(li.get(1)));
+        }
+        return list;
     }
 
     @Override
@@ -83,6 +121,11 @@ public class VerificarGanadorPoker implements VerificarGanador {
     @Override
     public String doblesParejas(List<List<String>> cartasMesa, List<Player> jugadores) {
     	String ganador = "";
+        for(Player p : jugadores){
+            if(p.isJugar() && verificarDoblePares(cartasMesa,p.getCartas())){
+                ganador=p.getNickName();
+            }
+        }
         return ganador;
     }
 
@@ -145,6 +188,46 @@ public class VerificarGanadorPoker implements VerificarGanador {
         }
 
         return count>=5;
+    }
+
+    private List<Integer> valoreColorCartas(List<List<String>> cartasMesa, List<String> cartasJuagador){
+        List<Integer> res= new ArrayList<>();
+        String color1=cartasJuagador.get(0);
+        String color2=cartasJuagador.get(2);
+        if(color1.equals(color2)){
+            res.add(Integer.valueOf(cartasJuagador.get(1)));
+            res.add(Integer.valueOf(cartasJuagador.get(3)));
+            for (List<String> carta : cartasMesa){
+                if (carta.get(0).equals(color1)){
+                    res.add(Integer.valueOf(carta.get(1)));
+                }
+            }
+        }
+        else{
+            List<Integer> temp1=new ArrayList<>();
+            List<Integer> temp2=new ArrayList<>();
+            temp1.add(Integer.valueOf(cartasJuagador.get(1)));
+            temp2.add(Integer.valueOf(cartasJuagador.get(3)));
+            for (List<String> carta : cartasMesa){
+                if (carta.get(0).equals(color1)){
+                    temp1.add(Integer.valueOf(carta.get(1)));
+                }
+            }
+            for (List<String> carta : cartasMesa){
+                if (carta.get(0).equals(color2)){
+                    temp2.add(Integer.valueOf(carta.get(1)));
+                }
+            }
+           if(temp1.size()>temp2.size()){
+               res = temp1;
+           }
+           else{
+               res =temp2;
+           }
+        }
+
+        return res;
+
     }
 
     private boolean escaleraRealverificar(List<List<String>> cartasMesa, List<String> cartasJuagador){

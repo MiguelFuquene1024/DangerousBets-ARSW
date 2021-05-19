@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import edu.escuelaing.arsw.dangerousbet.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,8 @@ public class UsuarioTiendaService {
 	
 	@Autowired
 	UsuarioTiendaRepository usuarioTiendaRepository;
-
+	@Autowired
+	JwtProvider jwtProvider;
 
 	public void save(UsuarioTienda usuarioTienda) throws serviceException{
 		TypedQuery<String> query= em.createQuery("SELECT ust.tienda FROM UsuarioTienda ust WHERE ust.tienda LIKE '" + usuarioTienda.getTienda()+"' AND ust.usuario LIKE '"+usuarioTienda.getUsuario() +"'", String.class);
