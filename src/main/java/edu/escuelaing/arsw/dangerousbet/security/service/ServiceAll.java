@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import edu.escuelaing.arsw.dangerousbet.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -39,30 +40,35 @@ public class ServiceAll {
 	
 	@Autowired
 	private SalasPersistence slp;
+
+	@Autowired
+	JwtProvider jwtProvider;
 	
 	
 
 	public void comprarLogo(UsuarioTienda ut) throws serviceException{
-
+		String user = jwtProvider.getNombreUsuarioFromToken(ut.getUsuario());
 		int numero = ust.mayorIdUsuarioLogro();
-		ust.save(new UsuarioTienda(numero,ut.getUsuario(),ut.getTienda()));
+		ust.save(new UsuarioTienda(numero,user,ut.getTienda()));
 		
 	}
 
-	public List<Tienda> logosComprados(String user) {
-		
+	public List<Tienda> logosComprados(String token) {
+		String user = jwtProvider.getNombreUsuarioFromToken(token);
 		return tienda.logosComprados(user);
 
 	}
 
-	public void actualizarDatos(Usuario us, String user) {
+	public void actualizarDatos(Usuario us, String token) {
+		String user = jwtProvider.getNombreUsuarioFromToken(token);
 		Usuario u=usuario.getById(user).get();
 		u.setCorreo(us.getCorreo());
 		u.setName(us.getName());
 		usuario.save(u);
 	}
 	
-	public void actualizarDatosPerfil(Perfil pf, String user) {
+	public void actualizarDatosPerfil(Perfil pf, String token) {
+		String user = jwtProvider.getNombreUsuarioFromToken(token);
 		Perfil p=perfil.getPerfil(user);
 		p.setImagen_perfil(pf.getImagen_perfil());
 		perfil.save(p);
@@ -76,7 +82,9 @@ public class ServiceAll {
 	}
 
 	public void agregarJugador(String sala,String clave ,String nj) throws SalaPersistenceException{
-		Perfil us=perfil.getPerfil(nj);
+		String user = jwtProvider.getNombreUsuarioFromToken(nj);
+
+		Perfil us=perfil.getPerfil(user);
 		slp.agregarJugador(sala, clave,us);
 		
 	}
@@ -140,9 +148,9 @@ public class ServiceAll {
 	public void nuevoMensaje(String sala,String mensaje) {
 		slp.nuevoMensaje(sala, mensaje);
 	}
-	
+
 	public ArrayList recibirMensaje(String sala,String usuario) {
-		return slp.recibirMensaje(sala, usuario);
+		return slp.recibirMensaje(sala, jwtProvider.getNombreUsuarioFromToken(usuario));
 	}
 
 }

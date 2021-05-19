@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import edu.escuelaing.arsw.dangerousbet.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class PerfilService {
 	
 	@Autowired
 	PerfilRepository perfilRepository;
+
+	@Autowired
+	JwtProvider jwtProvider;
 	
 	public  String[][] getMejoresPosiciones(){
 		TypedQuery<Perfil> query= em.createQuery("SELECT d FROM Perfil d ORDER BY moneda desc", Perfil.class);
@@ -42,7 +46,7 @@ public class PerfilService {
 	}
 	
 	public  Perfil getPerfil(String name){
-		
+
 		Perfil perfil=perfilRepository.findById(name).get();
 		
 		return perfil;
@@ -51,7 +55,6 @@ public class PerfilService {
 
 	public void save(Perfil p) {
 		perfilRepository.save(p);
-		
 	}
 
 	public void restarDineroDejuego(Salas sala) {

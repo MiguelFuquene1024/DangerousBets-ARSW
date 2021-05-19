@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+
+import edu.escuelaing.arsw.dangerousbet.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +27,13 @@ public class UsuarioLogrosService {
 	@Autowired
 	private EntityManager em;
 
-	public  ArrayList<String[]> consultaPractica(String nombre){
-		
+	@Autowired
+	JwtProvider jwtProvider;
+
+
+	public  ArrayList<String[]> consultaPractica(String token){
+
+		String nombre = jwtProvider.getNombreUsuarioFromToken(token);
 		TypedQuery<Logros> cantLogros= em.createQuery("SELECT l FROM Logros l", Logros.class);
 		TypedQuery<Logros> query= em.createQuery("SELECT l.logros_id FROM UsuarioLogros l WHERE l.nickname LIKE '" + nombre+"'",Logros.class);
 		List<Logros> resultList2 =cantLogros.getResultList();
@@ -47,7 +54,9 @@ public class UsuarioLogrosService {
 		return lista;
 		
 	}
-	public  Integer[] consultaTrofeos(String nombre){
+	public  Integer[] consultaTrofeos(String token){
+
+		String nombre = jwtProvider.getNombreUsuarioFromToken(token);
 		TypedQuery<Logros> cantLogros= em.createQuery("SELECT l FROM Logros l", Logros.class);
 		TypedQuery<Logros> query= em.createQuery("SELECT l.logros_id FROM UsuarioLogros l WHERE l.nickname LIKE '" + nombre+"'",Logros.class);
 		List<Logros> resultList2 =cantLogros.getResultList();

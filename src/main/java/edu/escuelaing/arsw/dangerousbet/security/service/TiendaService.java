@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import edu.escuelaing.arsw.dangerousbet.security.jwt.JwtProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,11 @@ public class TiendaService {
 	@Autowired
 	private EntityManager em;
 
-	public List<Tienda> logosNoComprados(String user) {
+	@Autowired
+	JwtProvider jwtProvider;
 
+	public List<Tienda> logosNoComprados(String token) {
+		String user = jwtProvider.getNombreUsuarioFromToken(token);
 		TypedQuery<Tienda> query= em.createQuery("SELECT t FROM Tienda t",Tienda.class);
 		List<Tienda> tnda =query.getResultList();
 		List<Tienda> Obtenidos = logosComprados(user);
@@ -45,6 +49,7 @@ public class TiendaService {
 		return noObtenidos;
 	}
 	public List<Tienda> logosComprados(String user){
+
 		System.out.println("=================================");
 		TypedQuery<Tienda> query= em.createQuery("SELECT t FROM UsuarioTienda ust JOIN Tienda t ON t.recurso=ust.tienda where usuario LIKE '" + user + "'",Tienda.class);
 		System.out.println("=================================");
