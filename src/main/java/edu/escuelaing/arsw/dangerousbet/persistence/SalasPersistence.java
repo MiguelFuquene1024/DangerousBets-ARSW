@@ -36,11 +36,11 @@ public interface SalasPersistence {
 
 	public Poker obtenerMesa(String sala);
 
-	public void pasarJugador(String sala) throws JuegoException;
+	public void pasarJugador(String sala, String user2) throws JuegoException;
 
-	public void apostar(String sala, int apuesta) throws JuegoException;
+	public void apostar(String sala, int apuesta,String user2) throws JuegoException;
 
-	public void abandonarJuego(String sala);
+	public void abandonarJuego(String sala,String user2) throws JuegoException;
 
 	public Salas getSalas(String nameSala);
 	

@@ -321,7 +321,7 @@ var apiclient = (function () {
             }, function (error) {
 
 				
-                alert("No se pude anadir jugador")
+                alert("Error al salir de la partida")
 
             })
 		},
@@ -367,7 +367,7 @@ var apiclient = (function () {
 		pasarJugador : function(sala){
 			
 			const promise = $.post({
-				url: "/pasarJugador/"+sala,
+				url: "/pasarJugador/"+sala+"/"+window.localStorage.usuario,
 				contentType: "application/json",
 				type:'PUT'
 			});
@@ -376,7 +376,7 @@ var apiclient = (function () {
                 
             }, function (error) {
 
-                alert("No se pude anadir jugador")
+                alert("No es tu turno")
 
             })
 		},
@@ -384,7 +384,7 @@ var apiclient = (function () {
 			
 			var datos=apuesta;
 			const promise = $.post({
-				url: "/apostarJuego/"+sala,
+				url: "/apostarJuego/"+sala+"/"+window.localStorage.usuario,
 				contentType: "application/json",
 				type:'PUT',
 				data: apuesta
@@ -396,14 +396,14 @@ var apiclient = (function () {
             }, function (error) {
 
 				
-                alert("No se pude anadir jugador")
+                alert("No es tu turno")
 
             })
 		},
 		abandonarJuego : function(sala){
 			
 			const promise = $.post({
-				url: "/abandonarJuego/"+sala,
+				url: "/abandonarJuego/"+sala+"/"+window.localStorage.usuario,
 				contentType: "application/json",
 				type:'PUT'
 			});
@@ -414,7 +414,7 @@ var apiclient = (function () {
             }, function (error) {
 
 				
-                alert("No se pude anadir jugador")
+                alert("No es tu turno")
 
             })
 		},
@@ -442,7 +442,7 @@ var apiclient = (function () {
             }, function (error) {
 
 				
-                alert("No se pude anadir jugador")
+                alert("Error al enviar el mensaje")
 
             })
 		}

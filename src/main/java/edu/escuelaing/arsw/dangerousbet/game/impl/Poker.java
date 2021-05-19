@@ -231,8 +231,9 @@ public class Poker implements Juego {
             
 		}
 	}
-	public void pasar() throws JuegoException {
+	public void pasar(String user2) throws JuegoException {
 		if (apuesta > apuestas.get(jugadores.get(turno).getNickName()) && jugadores.get(turno).getMoneda()!=0) throw new JuegoException(JuegoException.DEBE_IGUALAR);
+		if(!user2.equals(jugadores.get(turno).getNickName())) throw new JuegoException(JuegoException.NO_ES_TU_TURNO);
 		cambiarTurno();
 	}
     
@@ -304,7 +305,11 @@ public class Poker implements Juego {
     public String getGanador() {
         return ganador;
     }
-
+    public void abandonar(String user2) throws JuegoException {
+    	if(!user2.equals(jugadores.get(turno).getNickName())) throw new JuegoException(JuegoException.NO_ES_TU_TURNO);
+    	abandonar();
+    }
+    
     @Override
     public void abandonar() {
     	timer.cancel();
@@ -428,8 +433,8 @@ public class Poker implements Juego {
 		return null;
 	}
 
-	public void apostar2(int apuesta2) throws JuegoException {
-		
+	public void apostar2(int apuesta2, String user2) throws JuegoException {
+		if(!user2.equals(jugadores.get(turno).getNickName())) throw new JuegoException(JuegoException.NO_ES_TU_TURNO);
 		apostar(jugadores.get(turno).getNickName(),apuesta2);
 		
 	}

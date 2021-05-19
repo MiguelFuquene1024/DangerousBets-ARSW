@@ -61,7 +61,7 @@ public class AuthController {
     }
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
-    	System.out.println(loginUsuario.getNickname()+"   "+loginUsuario.getContrasena());
+    	
  
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginUsuario.getNickname(),loginUsuario.getContrasena());
             Authentication authentication =

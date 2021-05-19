@@ -176,18 +176,18 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 	
 	@Override
-	public void pasarJugador(String sala) throws JuegoException{
+	public void pasarJugador(String sala,String user2) throws JuegoException{
 
-		juegos.get(sala).pasar();
+		juegos.get(sala).pasar(user2);
 	}
 	@Override
-	public void apostar(String sala,int apuesta) throws JuegoException{
+	public void apostar(String sala,int apuesta,String user2) throws JuegoException{
 	
-		juegos.get(sala).apostar2(apuesta);
+		juegos.get(sala).apostar2(apuesta,user2);
 	}
 	@Override
-	public void abandonarJuego(String sala){
-		juegos.get(sala).abandonar();
+	public void abandonarJuego(String sala,String user2) throws JuegoException{
+		juegos.get(sala).abandonar(user2);
 	}
 
 	@Override

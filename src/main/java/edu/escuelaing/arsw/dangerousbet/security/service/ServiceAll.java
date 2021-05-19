@@ -138,16 +138,19 @@ public class ServiceAll {
 		
 	}
 	
-	public void pasarJugador(String sala) throws JuegoException{
-		slp.pasarJugador(sala);;
+	public void pasarJugador(String sala, String user) throws JuegoException{
+		String user2 = jwtProvider.getNombreUsuarioFromToken(user);
+		slp.pasarJugador(sala,user2);
 		
 	}
-	public void apostar(String sala,int apuesta) throws JuegoException{
-		slp.apostar(sala, apuesta);;
+	public void apostar(String sala,int apuesta,String user) throws JuegoException{
+		String user2 = jwtProvider.getNombreUsuarioFromToken(user);
+		slp.apostar(sala, apuesta,user2);
 		
 	}
-	public void abandonarJuego(String sala){
-		slp.abandonarJuego(sala);
+	public void abandonarJuego(String sala,String user) throws JuegoException{
+		String user2 = jwtProvider.getNombreUsuarioFromToken(user);
+		slp.abandonarJuego(sala,user2);
 		
 	}
 	public void nuevoMensaje(String sala,String mensaje) {

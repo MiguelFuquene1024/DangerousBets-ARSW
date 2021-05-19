@@ -74,7 +74,7 @@ public class WebController {
         if(request.isUserInRole("ROLE_USER")){
             return "redirect:/menu";
         }
-        System.out.println("Login exitoso");
+        
         return "redirect:/admin";
     }
     @GetMapping("/perfil/{user}")
@@ -100,29 +100,29 @@ public class WebController {
     public ResponseEntity<?> obtenerUsuario(@PathVariable("user") String user) {
     	Usuario u=usuario.getById(user).get();
     	u.setContrasena(null);
-        System.out.println(u);
+     
     	return new ResponseEntity<>(u,HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/usuario/token/{token}")
     public ResponseEntity<?> obtenerUsuarioToken(@PathVariable("token") String token) {
-        System.out.println("================================");
+        
         Usuario u=usuario.getByIdToken(token).get();
 
         u.setContrasena(null);
-        System.out.println(u);
+        
         return new ResponseEntity<>(u,HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/usuario/token/{token}/{user}")
     public ResponseEntity<?> dueñoSala(@PathVariable("token") String token,@PathVariable("user") String user) {
-        System.out.println("================================");
+        
         boolean val=false;
         Usuario u=usuario.getByIdToken(token).get();
         val=(user.equals(u.getNickname()));
 
         u.setContrasena(null);
-        System.out.println(u);
+    
         return new ResponseEntity<>(val,HttpStatus.ACCEPTED);
     }
 
@@ -150,7 +150,7 @@ public class WebController {
     }
     @PutMapping("/eliminarJugador/{sala}")
     public ResponseEntity<?> eliminarJugador(@PathVariable("sala") String sala,@RequestBody String nj){
-    	System.out.println(nj);
+    	
     	srvall.eliminarJugador(sala,nj);
     	return new ResponseEntity<>(HttpStatus.ACCEPTED);
 
@@ -194,8 +194,8 @@ public class WebController {
 	
     @GetMapping("/logoutSuccessful")
     public String logoutSuccessful(Model model) {
-        //System.out.print(model.getAttribute("input1"));
-        System.out.println("logout exitoso");
+     
+       
         return "logoutSuccessful";
     }
 
@@ -270,33 +270,37 @@ public class WebController {
         return new ResponseEntity<>(srvall.obtenerMesa(sala),HttpStatus.ACCEPTED);
     }
     
-    @PutMapping("/pasarJugador/{sala}")
-    public ResponseEntity<?> pasarJugador(@PathVariable("sala") String sala) throws JuegoException{	
+    @PutMapping("/pasarJugador/{sala}/{user}")
+    public ResponseEntity<?> pasarJugador(@PathVariable("sala") String sala,@PathVariable("user") String user) throws JuegoException{	
 
     	try {
-	    	srvall.pasarJugador(sala);
+	    	srvall.pasarJugador(sala,user);
 	        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     	}catch(JuegoException sx) {
     		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     	}
     }
     
-    @PutMapping("/apostarJuego/{sala}")
-    public ResponseEntity<?> apostarJuego(@PathVariable("sala") String sala, @RequestBody int apuesta) throws JuegoException{	
+    @PutMapping("/apostarJuego/{sala}/{user}")
+    public ResponseEntity<?> apostarJuego(@PathVariable("sala") String sala, @RequestBody int apuesta,@PathVariable("user") String user) throws JuegoException{	
 
     	try {
-	    	srvall.apostar(sala, apuesta);
-			System.out.println(apuesta);
+	    	srvall.apostar(sala, apuesta,user);
+			
 	        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     	}catch(JuegoException sx) {
     		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     	}
     }
     
-    @PutMapping("/abandonarJuego/{sala}")
-    public ResponseEntity<?> abandonarJuego(@PathVariable("sala") String sala){	
-    	srvall.abandonarJuego(sala);
-		return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    @PutMapping("/abandonarJuego/{sala}/{user}")
+    public ResponseEntity<?> abandonarJuego(@PathVariable("sala") String sala,@PathVariable("user") String user){	
+    	try {
+	    	srvall.abandonarJuego(sala,user);
+			return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    	}catch(JuegoException sx) {
+    		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	}
     }
     
     @GetMapping("/recibirMensaje/{sala}/{user}")
