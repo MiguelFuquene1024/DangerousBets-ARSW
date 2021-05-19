@@ -53,6 +53,15 @@ public class PerfilService {
 		
 	}
 
+	public  Perfil getPerfilToken(String name){
+		String user = jwtProvider.getNombreUsuarioFromToken(name);
+
+		Perfil perfil=perfilRepository.findById(user).get();
+
+		return perfil;
+
+	}
+
 	public void save(Perfil p) {
 		perfilRepository.save(p);
 	}

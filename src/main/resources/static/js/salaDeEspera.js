@@ -59,14 +59,18 @@ function perfilJugadores(){
 		
 		//Dueño de la sal
 		
+		api.getPrincipal(window.localStorage.usuario,mesa.jugadores[0],function(data){
+			
+			if(data===false){
+				$("#boton_comenzar").attr("disabled","true");
+				$("#boton_priv").attr("disabled","true");
+			}else{
+				$("#boton_comenzar").removeAttr("disabled");
+				$("#boton_priv").removeAttr("disabled")
+			}
+		})
 	
-		if(mesa.jugadores[0]!=window.localStorage.usuario){
-			$("#boton_comenzar").attr("disabled","true");
-			$("#boton_priv").attr("disabled","true");
-		}else{
-			$("#boton_comenzar").removeAttr("disabled");
-			$("#boton_priv").removeAttr("disabled")
-		}
+		
 		
 		
 		
