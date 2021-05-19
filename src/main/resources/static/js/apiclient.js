@@ -20,6 +20,15 @@ var apiclient = (function () {
 				}
 			);
 		},
+		obtenerClaveDeAcceso : function (sala,callback){
+			user=window.localStorage.usuario;
+			
+			$.getJSON("/obtenerClaveDeAcceso/"+ sala + "/" + user,function (data) {
+					callback(data);
+					
+				}
+			);
+		},
 		logosComprados : function (user,callback) {
 	
 			$.getJSON("/logosComprados/"+ user ,function (data) {
@@ -84,7 +93,7 @@ var apiclient = (function () {
 				//localStorage.setItem("authority",data.authorities[0].authority)
 				window.location.href="/menu.html";
             }, function (error) {
-                alert("No se pudo conectar")
+                alert("El usuario o la contraseña son incorrectas")
             }
 			
         );
@@ -116,6 +125,7 @@ var apiclient = (function () {
             }, function (error) {
 
 				$("#nickname").after('<small class="error">nickname ya existe.</small>');
+				window.location.href="#nickname";
                 alert("No se pudo crear el usuario")
 
             })
@@ -167,7 +177,7 @@ var apiclient = (function () {
             }, function (data,error) {
 
 				
-                alert("No se pudo acceder a la sala");
+                alert("Contraseña incorrecta o el dinero no es suficiente");
 
             })
 		},
@@ -208,7 +218,7 @@ var apiclient = (function () {
 			promise.then((resultado) =>{
 				
 			}).catch((error) => {
-				alert("No se puede comprar");
+				alert("No tiene el dinero suficiente");
 			});
 			
 			return promise;

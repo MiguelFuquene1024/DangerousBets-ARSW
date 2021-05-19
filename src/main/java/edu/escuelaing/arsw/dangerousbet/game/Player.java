@@ -11,9 +11,11 @@ public class Player {
     private List<String> cartas;
     private int numeroJugador;
     private boolean eliminado=false;
+    private int victoriasConsecutivas;
     
     private boolean turno;
     public Player() {
+    	victoriasConsecutivas=0;
         jugar = true;
         turno=false;
         cartas=new ArrayList<>();
@@ -43,7 +45,8 @@ public class Player {
         this.jugar = jugar;
     }
 
-	public List<String> getCartas() {
+	public List<String> obtenerCartas(){
+		
 		return cartas;
 	}
 
@@ -82,6 +85,15 @@ public class Player {
 	public void setEliminado(boolean eliminado) {
 		this.eliminado = eliminado;
 	}
+
+	public int getVictoriasConsecutivas() {
+		return victoriasConsecutivas;
+	}
+
+	public void setVictoriasConsecutivas(int victoriasConsecutivas) {
+		this.victoriasConsecutivas = victoriasConsecutivas;
+	}
+	
 	
     
 }

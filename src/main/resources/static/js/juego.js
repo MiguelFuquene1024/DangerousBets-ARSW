@@ -50,12 +50,20 @@ function actualizarJuego(){
 					$(".botones_juego").removeAttr("disabled");
 					
 						
-					if(datos.apuesta>datos.jugadores[numero].misApuestas){
+					if(datos.apuesta>datos.jugadores[numero].misApuestas && datos.jugadores[numero].moneda!=0){
 						$("#boton_pasar").attr("disabled","true");
 						apu_grande= parseInt(datos.apuesta)-datos.jugadores[numero].misApuestas;
-						$("#apuesta_extra").html("Debes apostar minimo " + apu_grande);
+						if(datos.jugadores[numero].moneda>=apu_grande){
+							$("#apuesta_extra").html("Debes apostar minimo " + apu_grande);
+						}else{
+							$("#apuesta_extra").html("Debes apostar minimo " + datos.jugadores[numero].moneda);
+						}
 						
-					}else{
+						
+					}else if(datos.jugadores[numero].moneda==0){
+						$("#boton_apostar").attr("disabled","true");
+					}
+					else{
 						$("#apuesta_extra").html("");
 
 						

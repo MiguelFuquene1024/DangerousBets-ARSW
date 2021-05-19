@@ -132,11 +132,17 @@ public class WebController {
     
     @GetMapping("/investigarSala/{sala}")
     public ResponseEntity<?> investigarSala(@PathVariable("sala") String s) {
-
-    	return new ResponseEntity<>(srvall.obtenerSala(s),HttpStatus.ACCEPTED);
+    	Salas sala=srvall.obtenerSala(s);
+    	if(sala!=null) {
+    		return new ResponseEntity<>(sala,HttpStatus.ACCEPTED);
+    	}
+    	return new ResponseEntity<>("null",HttpStatus.ACCEPTED);
     
     }
-    
+    @GetMapping("/obtenerClaveDeAcceso/{sala}/{jugador}")
+    public ResponseEntity<?> obtenerClaveDeAcceso(@PathVariable("sala") String s,@PathVariable("jugador") String j) {
+    	return new ResponseEntity<>(srvall.obtenerClaveDeAcceso(j, s),HttpStatus.ACCEPTED);
+    }
 	@GetMapping("/logrosObtenidos/{user}")
     public ResponseEntity<?> logrosObtenidos(@PathVariable("user") String user) {
 

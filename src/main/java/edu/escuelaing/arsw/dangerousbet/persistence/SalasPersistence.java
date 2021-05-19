@@ -47,5 +47,5 @@ public interface SalasPersistence {
 	public void nuevoMensaje(String sala,String mensaje);
 
 	public ArrayList recibirMensaje(String sala, String usuario);
-
+	public String obtenerClaveDeAcceso(String jugador,String sala);
 }

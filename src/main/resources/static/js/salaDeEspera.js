@@ -88,7 +88,7 @@ $(document).ready(async function(){
 	await api.investigarSala(name,async function(mesa){
 		
 		$("#mesa_vacio").html(mesa.nombre);
-		$("#clave_vacio").html(mesa.clave);
+		
 		jugadores_actuales=mesa.jugadores;
 		for(numero in mesa.jugadores){
 			
@@ -100,6 +100,10 @@ $(document).ready(async function(){
 
 		setInterval(perfilJugadores, 1000);
 
+		
+	});
+	api.obtenerClaveDeAcceso(name, function(clave){
+		$("#clave_vacio").html(clave);
 		
 	});
 	$("#boton_comenzar").click(function(){

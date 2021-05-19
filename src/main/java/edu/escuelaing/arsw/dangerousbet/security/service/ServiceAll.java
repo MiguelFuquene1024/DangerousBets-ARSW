@@ -23,7 +23,7 @@ import edu.escuelaing.arsw.dangerousbet.security.entity.UsuarioTienda;
 public class ServiceAll {
 	
 	@Autowired
-	private UsuarioLogrosService s;
+	private UsuarioLogrosService ul;
 	
 	@Autowired
 	private TiendaService tienda;
@@ -115,8 +115,10 @@ public class ServiceAll {
 	}
 
 	public Poker obtenerMesa(String sala){
+		
 		Poker poker=slp.obtenerMesa(sala);
 		Salas s=obtenerSala(sala);
+		
 		if(s.getJugadores().size()==1 && s.isIniciada() && !s.isRecompensaEntregada()) {
 			s.setRecompensaEntregada(true);
 			perfil.sumarRecompensa(s,poker.getJugadores().size());
@@ -143,6 +145,9 @@ public class ServiceAll {
 	
 	public ArrayList recibirMensaje(String sala,String usuario) {
 		return slp.recibirMensaje(sala, usuario);
+	}
+	public String obtenerClaveDeAcceso(String jugador,String sala) {
+		return slp.obtenerClaveDeAcceso(jugador, sala);
 	}
 
 }

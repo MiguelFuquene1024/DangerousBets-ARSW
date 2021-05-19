@@ -1,3 +1,4 @@
+ 
 package edu.escuelaing.arsw.dangerousbet.security.entity;
 
 
@@ -21,7 +22,15 @@ public class UsuarioLogros {
 	
 	@Id
 	private int id;
+	public UsuarioLogros() {}
 	
+
+	public UsuarioLogros(int idMayor, String ganador, Logros logros) {
+		id=idMayor;
+		nickname=ganador;
+		logros_id=logros;
+	}
+
 
 	public Logros getLogros_id() {
 		return logros_id;

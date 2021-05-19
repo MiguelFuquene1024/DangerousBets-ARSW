@@ -79,6 +79,7 @@ var monedas = api.getPerfil(window.localStorage.usuario,function(obtenerMonedas)
 			console.log($(this).attr("id"));
 			await api.actualizarDatos(nombre,correo,window.localStorage.usuario);
 			await api.actualizarDatosPerfil(logosC[numero].recurso,window.localStorage.usuario);
+			window.location.href="/perfil.html";
 		}
 
 

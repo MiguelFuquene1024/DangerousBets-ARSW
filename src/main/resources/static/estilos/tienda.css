@@ -22,3 +22,7 @@ body{
 	line-height:2vw;
 }
 
+.error{
+	color:red;
+	display:inline-block;
+}

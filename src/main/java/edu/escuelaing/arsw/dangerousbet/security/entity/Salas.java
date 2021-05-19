@@ -99,15 +99,6 @@ public class Salas {
 	}
 	
 
-	
-
-	public String getClave() {
-		return clave;
-	}
-
-	public void setClave(String clave) {
-		this.clave = clave;
-	}
 
 	public boolean isPublico() {
 		return publico;
@@ -115,6 +106,20 @@ public class Salas {
 
 	public void setPublico(boolean publico) {
 		this.publico = publico;
+	}
+
+	public String obtenerClaveDeAcceso(String jugador) {
+		for(String s:jugadores) {
+			if(s.contentEquals(jugador)) {
+				return clave;
+			}
+		}
+		return null;
+	}
+
+
+	public void setClave(String clave) {
+		this.clave = clave;
 	}
 
 
@@ -153,6 +158,14 @@ public class Salas {
 
 	public void setRecompensaEntregada(boolean recompensaEntregada) {
 		this.recompensaEntregada = recompensaEntregada;
+	}
+
+
+	public boolean coincidenClaves(String clave2) {
+		if(clave.contentEquals(clave2)) {
+			return true;
+		}
+		return false;
 	}
 	
 	

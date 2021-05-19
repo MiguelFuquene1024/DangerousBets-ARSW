@@ -72,7 +72,7 @@ public class InMmemorySalas implements SalasPersistence{
 		
 		if(salas.containsKey(sala)) {
 
-			if((salas.get(sala).getJugadores().size()<6 || !salas.get(sala).isIniciada() || salas.get(sala).isPublico() || salas.get(sala).getClave().equals(clave)) && jugador.getMoneda()>=salas.get(sala).getValorsala()) {
+			if(salas.get(sala).getJugadores().size()<6 && !salas.get(sala).isIniciada() && (salas.get(sala).isPublico() || salas.get(sala).coincidenClaves(clave)) && jugador.getMoneda()>=salas.get(sala).getValorsala()) {
 
 				salas.get(sala).agregarJugador(jugador.getNickname());
 
@@ -98,7 +98,9 @@ public class InMmemorySalas implements SalasPersistence{
 		
 		
 	}
-	
+	public String obtenerClaveDeAcceso(String jugador,String sala) {
+		return salas.get(sala).obtenerClaveDeAcceso(jugador);
+	}
 	public void eliminarSala(String sala) {
 		if(salas.containsKey(sala) && !salas.get(sala).getNombre().equals("Sala Publica")) {
 			salas.remove(sala);

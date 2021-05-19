@@ -5,19 +5,27 @@ if (window.localStorage.usuario==undefined){
 }
 function cambio(){
 
-		api.investigarSala($("#sala").val(),function(data){
-
-					$("#valorSala").html(data.valorsala);
-					if(data.publico){
-						$("#privacidadSala").html("publica");
-					}else{
-						$("#privacidadSala").html("privada");
-					}
+	api.investigarSala($("#sala").val(),function(data){
+		console.log(data);
+		api.getPerfil(window.localStorage.usuario,function(perfil){
+			if(data!=null){
+				$("#valorSala").html(data.valorsala);
+				if(data.publico){
+					$("#privacidadSala").html("publica");
+				}else{
+					$("#privacidadSala").html("privada");
+				}
+				if(perfil.moneda<data.valorsala){
+					$(".error").remove();
+					$("#valorSala").after('<small class="error">No tienes el dinero suficiente</small>');
+				}
+			}else{
+				$("#privacidadSala").html("No existe Sala");	
+			}				
 			
-		});
-		
-		
-	};
+		});		
+	});		
+}
 	
 $(document).ready(function(){
 	$("#restablecer").click(function(){
@@ -51,7 +59,7 @@ $(document).ready(function(){
 		}
 
 		api.getPerfil( window.localStorage.usuario,function(data){
-			console.log(data);
+		
 			if(cd>data.moneda){
 				
 				$("#cdinero").after('<small class="error">No tienes suficiente dinero.</small>');
