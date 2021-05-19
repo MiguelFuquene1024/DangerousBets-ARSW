@@ -17,7 +17,17 @@
 </head>
 
 <body>
-
+	<button id="invocar_chat" type="button" class="btn btn-primary">Chat</button>
+		<div id="chat">
+					  <div id="mensajes_recibidos">
+						
+					  </div>
+					  <div id="mi_chat" class="card-body">
+						<input name="mensaje" id="mensaje" type="text" maxlength="80" required="true">
+						<button id="enviar_mensaje" type="button" class="btn btn-success">Enviar</button>
+					  </div>
+		</div>
+		<button id="boton_abandonar_Juego" type="button" class="btn btn-danger">Abandonar Sala</button>
    <div id="contenedor">
 		
 		<center>
@@ -37,11 +47,11 @@
 		</div>
 		</center>
 		<label id="cronometro" class="cronometro"></label>
-		<button id="boton_pasar" class="btn btn-success botones_juego" type="button" class="btn btn-danger">pasar</button>
+		<button id="boton_pasar" class="btn btn-success botones_juego" type="button">pasar</button>
 		
-		<button id="boton_abandonar" class="btn btn-success botones_juego" type="button" class="btn btn-danger">abandonar</button>
+		<button id="boton_abandonar" class="btn btn-success botones_juego" type="button">abandonar</button>
 		
-		<button id="boton_apostar" class="btn btn-success botones_juego" type="button" class="btn btn-danger">apostar</button>
+		<button id="boton_apostar" class="btn btn-success botones_juego" type="button">apostar</button>
 		<input name="numero" id="numero" type="number" required>
 		<label id="apuesta_extra">+ 0</label>
    </div>

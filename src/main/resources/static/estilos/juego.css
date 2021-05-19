@@ -106,5 +106,71 @@ img{
 #numero{
 	width:100px;
 	height:32px;
-	
+}
+#chat{
+	z-index:100;
+	position:absolute;
+	width:400px;
+	height:300px;
+	word-wrap: break-word;
+	left:10px;
+	top:37px;
+	display:none;
+	font-size:17px;
+	line-height:17px;
+}
+#chat p{
+	line-height:17px;
+}
+#chat label,
+#chat br{
+	line-height:0px;
+}
+
+#mensajes_recibidos{
+	width:100%;
+	background:white;
+	height:80%;
+	border:2px solid black;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	word-wrap: break-word;
+	padding:3%;
+}
+#mi_chat{
+	width:100%;
+	height:20%;
+	word-wrap: break-word;
+}
+#mensaje{
+	width:70%;
+	height:20px;
+}
+#enviar_mensaje{
+	width:25%;
+	height:2.5vw;
+	font-size:1.3vw;
+	line-height:0vw;
+}
+#invocar_chat{
+	position:absolute;
+	font-size:15px;
+	line-height:15px;
+	text-align:center;
+	margin:0;padding:0;
+	left:10px;
+	top:1px;
+	width:80px;
+	height:30px;
+}
+#contenedor{
+	margin-top:10px;
+}
+#boton_abandonar_Juego{
+	position:absolute;
+	right:10px;
+	top:5px;
+	width:120px;
+	height:60px;
+
 }

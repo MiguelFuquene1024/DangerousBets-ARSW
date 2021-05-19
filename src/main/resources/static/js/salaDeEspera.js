@@ -20,7 +20,7 @@ function getQueryVariable(variable) {
 function perfilJugadores(){
 	
 	api.investigarSala(name,async function(mesa){
-		
+	
 		for(numero in mesa.jugadores){
 			
 			if(jugadores_actuales.includes(mesa.jugadores[numero])==false){
@@ -57,8 +57,8 @@ function perfilJugadores(){
 
 		});
 		
-		//Dueño de la sala
-		console.log(mesa.jugadores[0]);
+		//Dueño de la sal
+		
 	
 		if(mesa.jugadores[0]!=window.localStorage.usuario){
 			$("#boton_comenzar").attr("disabled","true");
@@ -68,7 +68,17 @@ function perfilJugadores(){
 			$("#boton_priv").removeAttr("disabled")
 		}
 		
+		
+		
 	});
+	
+	api.recibirMensaje(name,window.localStorage.usuario,function(data){
+		for(numero in data){
+			$("#mensajes_recibidos").append('<p>'+ data[numero] +'</p>');
+		}
+	});
+	
+	
 }
 
 var name=getQueryVariable("name");
@@ -92,9 +102,6 @@ $(document).ready(async function(){
 
 		
 	});
-	
-				
-	
 	$("#boton_comenzar").click(function(){
 		
 		api.comenzarJuego(name);
@@ -107,6 +114,30 @@ $(document).ready(async function(){
 		
 	});
 	
+	$("#invocar_chat").click(function(){
+		
+		if($("#chat").css("display")=="none"){
+			$("#chat").css("display","block");
+		}else{
+			$("#chat").css("display","none")
+		}
+		
+	});
 	
-
+	$("#enviar_mensaje").click(function(){
+		let mensaje='<label style="font-weight:700;">' + window.localStorage.usuario + ": </label>"+ $("#mensaje").val();
+		
+		api.nuevoMensaje(name,mensaje);
+		$('input[type="text"]').val('');
+	});
+	$("input").keypress(function(tecla){
+		
+        if(tecla.which==13){
+			let mensaje='<label style="font-weight:700;">' + window.localStorage.usuario + ": </label>"+ $("#mensaje").val();
+			
+			api.nuevoMensaje(name,mensaje);
+			$('input[type="text"]').val('');
+		}
+    });
 });
+

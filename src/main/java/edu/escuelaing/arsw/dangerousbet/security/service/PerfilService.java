@@ -62,4 +62,11 @@ public class PerfilService {
 		}
 		
 	}
+
+	public void sumarRecompensa(Salas s, int i) {
+		Perfil perfil=perfilRepository.findById(s.getJugadores().get(0)).get();
+		perfil.setMoneda(perfil.getMoneda()+(s.getValorsala()*i));
+		save(perfil);
+		
+	}
 }

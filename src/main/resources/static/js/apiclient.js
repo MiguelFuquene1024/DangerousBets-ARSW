@@ -380,6 +380,34 @@ var apiclient = (function () {
                 alert("No se pude anadir jugador")
 
             })
+		},
+		
+		recibirMensaje : function (sala,user,callback) {
+	
+			$.getJSON("/recibirMensaje/"+ sala + "/" + user ,function (data) {
+			
+					callback(data);
+					
+				}
+			);
+		},
+		
+		nuevoMensaje : function(sala,mensaje){
+			
+			var datos=mensaje;
+			const promise = $.post({
+				url: "/nuevoMensaje/"+sala,
+				contentType: "application/json",
+				type:'PUT',
+				data: datos
+			});
+			promise.then(function (data) {
+            }, function (error) {
+
+				
+                alert("No se pude anadir jugador")
+
+            })
 		}
 		
 		

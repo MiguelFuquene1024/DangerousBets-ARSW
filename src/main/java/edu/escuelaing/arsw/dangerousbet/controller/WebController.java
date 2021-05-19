@@ -127,7 +127,9 @@ public class WebController {
     	return new ResponseEntity<>(HttpStatus.ACCEPTED);
 
     }
-
+    
+    
+    
     @GetMapping("/investigarSala/{sala}")
     public ResponseEntity<?> investigarSala(@PathVariable("sala") String s) {
 
@@ -250,5 +252,17 @@ public class WebController {
 		return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
     
+    @GetMapping("/recibirMensaje/{sala}/{user}")
+    public ResponseEntity<?> recibirMensaje(@PathVariable("sala") String sala, @PathVariable("user") String user) {
 
+    	return new ResponseEntity<>(srvall.recibirMensaje(sala, user),HttpStatus.ACCEPTED);
+    }
+    
+    @PutMapping("/nuevoMensaje/{sala}")
+    public ResponseEntity<?> nuevoMensaje(@PathVariable("sala") String sala, @RequestBody String mensaje){
+
+    	srvall.nuevoMensaje(sala, mensaje);
+    	return new ResponseEntity<>(HttpStatus.ACCEPTED);
+
+    }
 }

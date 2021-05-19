@@ -28,7 +28,7 @@ import edu.escuelaing.arsw.dangerousbet.security.entity.Salas;
 @Service
 public class InMmemorySalas implements SalasPersistence{
 	
-
+	
 	private final ConcurrentHashMap<String,Salas> salas=new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<String,Poker> juegos=new ConcurrentHashMap<>();
 	
@@ -44,6 +44,10 @@ public class InMmemorySalas implements SalasPersistence{
 					
 					if(entry.getValue().getJugadores().size()==0) {
 						eliminarSala(entry.getKey());
+						if(salas.containsKey(entry.getKey())){
+							juegos.remove(entry.getKey());
+							
+						}
 					}
 				}
 				
@@ -56,6 +60,7 @@ public class InMmemorySalas implements SalasPersistence{
 	
 	public void agregarSala(Salas sala) throws SalaPersistenceException{
 		if(!salas.containsKey(sala.getNombre())) {
+			
 			salas.put(sala.getNombre(), sala);
 		}else {
 			throw new SalaPersistenceException("Ya existe sala");
@@ -83,12 +88,22 @@ public class InMmemorySalas implements SalasPersistence{
 		if(salas.containsKey(sala)) {
 			salas.get(sala).eliminarJugador(jugador);
 		}
+		if(juegos.containsKey(sala)) {
+			juegos.get(sala).eliminarJugador(jugador);
+			
+		}
+		
+		
+		
+		
+		
 	}
 	
 	public void eliminarSala(String sala) {
 		if(salas.containsKey(sala) && !salas.get(sala).getNombre().equals("Sala Publica")) {
 			salas.remove(sala);
 		}
+		
 	}
 
 	@Override
@@ -138,16 +153,21 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 	
 	@Override
-	public List<Player> obtenerPlayer(String sala,String name) {
-		System.out.println(sala+" "+name);
+	public List<Player> obtenerPlayer(String sala,String name) {		
+		
 		sala=sala.replace("%20", " ");
+		
 		return juegos.get(sala).getJugadores();
 	}
 	
 	@Override
-	public List<Object> obtenerMesa(String sala){
-
-		return juegos.get(sala).EstadoActualJuego();
+	public Poker obtenerMesa(String sala){
+		for(Player player:juegos.get(sala).getJugadores()) {
+			if(player.isEliminado()) {
+				eliminarJugador(sala,player.getNickName());
+			}
+		}
+		return juegos.get(sala);
 	}
 	
 	@Override
@@ -170,6 +190,17 @@ public class InMmemorySalas implements SalasPersistence{
 		Salas s=salas.get(nameSala);
 		return s;
 	}
+
+	@Override
+	public void nuevoMensaje(String sala, String mensaje) {
+		salas.get(sala).nuevoMensajes(mensaje);
+	}
+	
+	@Override
+	public ArrayList recibirMensaje(String sala, String usuario) {
+		return salas.get(sala).devolverMensajes(usuario);
+	}
+	
 	
 	
 }

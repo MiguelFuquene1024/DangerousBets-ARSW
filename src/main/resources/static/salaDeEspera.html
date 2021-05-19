@@ -17,40 +17,52 @@
 	
 </head>
 <body>
+	
+
 
    <div id="contenedor">
+		
 		<div id="panel-masSuperior">
+			
+				<button id="invocar_chat" type="button" class="btn btn-primary">Chat</button>
+			
+			
 			<div id="nombre_mesa">
 				<label class="negrilla">Nombre Mesa</label><br>
 				<label id="mesa_vacio"></label>
 			</div>
+			
 			<div id="contrasena">
 				<label class="negrilla">Contraseña</label><br>
 				<label id="clave_vacio"></label>
-				
 			</div>
 			
 		</div>
 		<div id="panel-superior">
 			<div id="bloque1">
-				
+				<div id="chat">
+					  <div id="mensajes_recibidos">
+						
+					  </div>
+					  <div id="mi_chat" class="card-body">
+						<input name="mensaje" id="mensaje" type="text" maxlength="80" required="true">
+						<button id="enviar_mensaje" type="button" class="btn btn-success">Enviar</button>
+					  </div>
+					</div>
 			</div>
 
 			<div id="bloque2">
 				<div id="jugadores" class="jugadores">
-					
-					
-				
-					
+
 				</div>
 			</div>
 			
 		</div>
 		<div id="panel-inferior">
 			<div class="boton_comenzar"> 
-				<button id="boton_comenzar" type="button" class="btn btn-success">Iniciar</button>
+				<button id="boton_comenzar" type="button" class="btn btn-success" disabled>Iniciar</button>
 			</div>
-			<div id="boton_privacidad" class="boton_privacidad"> 
+			<div id="boton_privacidad" class="boton_privacidad" disabled> 
 
 			</div>
 			<div class="boton_salir"> 
