@@ -85,6 +85,16 @@ public class WebController {
     		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     	}
     }
+
+
+    @GetMapping("/perfil/token/{user}")
+    public ResponseEntity<?> getPerfilToken(@PathVariable("user") String user) {
+        try {
+            return new ResponseEntity<>(perfil.getPerfilToken(user),HttpStatus.ACCEPTED);
+        }catch(Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
     
     @GetMapping("/usuario/{user}")
     public ResponseEntity<?> obtenerUsuario(@PathVariable("user") String user) {
@@ -93,6 +103,29 @@ public class WebController {
         System.out.println(u);
     	return new ResponseEntity<>(u,HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("/usuario/token/{token}")
+    public ResponseEntity<?> obtenerUsuarioToken(@PathVariable("token") String token) {
+        System.out.println("================================");
+        Usuario u=usuario.getByIdToken(token).get();
+
+        u.setContrasena(null);
+        System.out.println(u);
+        return new ResponseEntity<>(u,HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/usuario/token/{token}/{user}")
+    public ResponseEntity<?> dueñoSala(@PathVariable("token") String token,@PathVariable("user") String user) {
+        System.out.println("================================");
+        boolean val=false;
+        Usuario u=usuario.getByIdToken(token).get();
+        val=(user.equals(u.getNickname()));
+
+        u.setContrasena(null);
+        System.out.println(u);
+        return new ResponseEntity<>(val,HttpStatus.ACCEPTED);
+    }
+
     
     @PostMapping("/salas")
     public ResponseEntity<?> crearSalas(@RequestBody Salas sala) throws SalaPersistenceException{

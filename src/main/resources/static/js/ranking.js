@@ -18,34 +18,34 @@ function ranking(ran){
 	$("#ranking").append(s);
 		
 	$("#" + ran[0][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[0][0];
+		window.location.href="/perfilranking.html?name="+ran[0][0];
 	});
 	$("#" + ran[1][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[1][0];
+		window.location.href="/perfilranking.html?name="+ran[1][0];
 	});
 	$("#" + ran[2][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[2][0];
+		window.location.href="/perfilranking.html?name="+ran[2][0];
 	});
 	$("#" + ran[3][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[3][0];
+		window.location.href="/perfilranking.html?name="+ran[3][0];
 	});
 	$("#" + ran[4][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[4][0];
+		window.location.href="/perfilranking.html?name="+ran[4][0];
 	});
 	$("#" + ran[5][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[5][0];
+		window.location.href="/perfilranking.html?name="+ran[5][0];
 	});
 	$("#" + ran[6][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[6][0];
+		window.location.href="/perfilranking.html?name="+ran[6][0];
 	});
 	$("#" + ran[7][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[7][0];
+		window.location.href="/perfilranking.html?name="+ran[7][0];
 	});
 	$("#" + ran[8][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[8][0];
+		window.location.href="/perfilranking.html?name="+ran[8][0];
 	});
 	$("#" + ran[9][0]).click(function(){
-		window.location.href="/perfil.html?name="+ran[9][0];
+		window.location.href="/perfilranking.html?name="+ran[9][0];
 	});
 		
 	

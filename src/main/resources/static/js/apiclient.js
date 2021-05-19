@@ -38,6 +38,28 @@ var apiclient = (function () {
 				}
 			);
 		},
+		getPerfilToken : function (user,callback) {
+
+			$.getJSON("/perfil/token/"+ user ,function (data) {
+					callback(data);
+				}
+			);
+		},
+		getUsuarioToken : function (user,callback) {
+
+			$.getJSON("/usuario/token/"+ user ,function (data) {
+					callback(data);
+				}
+			);
+		},
+		getPrincipal : function (token,user,callback) {
+
+			$.getJSON("/usuario/token/"+token+"/"+ user ,function (data) {
+					callback(data);
+				}
+			);
+		},
+
 		logrosObtenidos : function (callback) {
 			let user = window.localStorage.usuario;
 			console.log(user);

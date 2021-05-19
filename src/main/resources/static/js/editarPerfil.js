@@ -13,14 +13,14 @@ if (window.localStorage.usuario==undefined){
 
 
 
-var usuario = api.getUsuario(window.localStorage.usuario,function(obtenerUsuario){
+var usuario = api.getUsuarioToken(window.localStorage.usuario,function(obtenerUsuario){
 		console.log(obtenerUsuario);
 		$("#nombreUsuario").attr("value",obtenerUsuario.name);
 		$("#correo").attr("value",obtenerUsuario.correo);
 	
 });
 
-var monedas = api.getPerfil(window.localStorage.usuario,function(obtenerMonedas){
+var monedas = api.getPerfilToken(window.localStorage.usuario,function(obtenerMonedas){
 	
 	
 	api.logosComprados(window.localStorage.usuario,function(logosC){
