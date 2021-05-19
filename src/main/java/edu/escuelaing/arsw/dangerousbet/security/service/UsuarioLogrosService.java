@@ -78,7 +78,7 @@ public class UsuarioLogrosService {
 
 	}
 	public void darTrofeos(Poker poker) {
-		System.out.println("#################################################################################");
+		
 		TypedQuery<Logros> cantLogros= em.createQuery("SELECT l FROM Logros l", Logros.class);
 		TypedQuery<Logros> query= em.createQuery("SELECT l.logros_id FROM UsuarioLogros l WHERE l.nickname LIKE '" +poker.getGanador() +"'",Logros.class);
 		List<Logros> resultList2 =cantLogros.getResultList();
@@ -91,10 +91,10 @@ public class UsuarioLogrosService {
 		for(Logros logros:resultList) {
 			dicc2.put(logros.getNombre(), logros);
 		}
-		System.out.println(poker.getFormaVictoria() + "aaaa");
+		
 		
 		if(poker.getFormaVictoria().equals("full")  && !dicc2.containsKey("Gana por Full-House")) {
-			System.out.println(1);
+		
 			UsuarioLogros ul=new UsuarioLogros(idMayor(),poker.getGanador(),dicc.get("Gana por Full-House"));
 			usuarioLogrosRepository.save(ul);
 		}if(poker.getFormaVictoria().equals("escalera") && !dicc2.containsKey("Gana por escalera")) {

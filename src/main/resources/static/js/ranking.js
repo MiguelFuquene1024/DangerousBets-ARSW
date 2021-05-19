@@ -5,7 +5,7 @@ if (window.localStorage.usuario==undefined){
 
 
 function ranking(ran){
-	console.log(ran);
+	
 	let s='<table class="tabla"><tr><th class="puesto">Puesto</th><th class="nombre">Nombre</th><th class="cmonedas">Cantidad de Monedas</th></tr>';
 	let cont=1
 	for(numero in ran){

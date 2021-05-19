@@ -33,31 +33,28 @@ function perfilJugadores(){
 			}
 		}
 		for(numero in jugadores_actuales){
-			console.log(jugadores_actuales[numero]);
+			
 			$("#"+jugadores_actuales[numero]).remove();
 		}
 		
 		jugadores_actuales=mesa.jugadores;
-		
 		//Privacidad Sala
-		$(".botonP_P").remove();
 		if(mesa.iniciada){
 			window.location.href="/juego.html?name="+name;
 		}
 		
 		else if(mesa.publico){
-			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-success botonP_P" type="button">Publico</button>');
+			$("#boton_priv").attr("background-color","#28a745");
+			$("#boton_priv").html("Publico");
 		}
 		
 		else{
-			$("#boton_privacidad").append('<button id="boton_priv" class="btn btn-danger botonP_P" type="button">Privado</button>');
+			$("#boton_priv").attr("background-color","#dc3545");
+			$("#boton_priv").html("Privado");
 		}
-		$(".botonP_P").click(function(){
-			let valor=api.privacidadSala(name);
-
-		});
 		
-		//Dueño de la sal
+		
+		//Dueño de la sala
 		
 		api.getPrincipal(window.localStorage.usuario,mesa.jugadores[0],function(data){
 			
@@ -87,6 +84,7 @@ function perfilJugadores(){
 
 var name=getQueryVariable("name");
 var jugadores_actuales=[];
+var jugador="";
 $(document).ready(async function(){
 	
 	await api.investigarSala(name,async function(mesa){
@@ -106,6 +104,7 @@ $(document).ready(async function(){
 
 		
 	});
+	
 	api.obtenerClaveDeAcceso(name, function(clave){
 		$("#clave_vacio").html(clave);
 		
@@ -131,17 +130,28 @@ $(document).ready(async function(){
 		}
 		
 	});
-	
+	$("#boton_priv").click(function(){
+		
+			let valor=api.privacidadSala(name);
+
+		});
 	$("#enviar_mensaje").click(function(){
-		let mensaje='<label style="font-weight:700;">' + window.localStorage.usuario + ": </label>"+ $("#mensaje").val();
+		api.getPerfilToken(window.localStorage.usuario, function(yo){
+			jugador=yo.nickname;
+		
+		});
+		let mensaje='<label style="font-weight:700;">' + jugador + ": </label>"+ $("#mensaje").val();
 		
 		api.nuevoMensaje(name,mensaje);
 		$('input[type="text"]').val('');
 	});
 	$("input").keypress(function(tecla){
+		api.getPerfilToken(window.localStorage.usuario, function(yo){
+			jugador=yo.nickname;
 		
+		});
         if(tecla.which==13){
-			let mensaje='<label style="font-weight:700;">' + window.localStorage.usuario + ": </label>"+ $("#mensaje").val();
+			let mensaje='<label style="font-weight:700;">' + jugador + ": </label>"+ $("#mensaje").val();
 			
 			api.nuevoMensaje(name,mensaje);
 			$('input[type="text"]').val('');

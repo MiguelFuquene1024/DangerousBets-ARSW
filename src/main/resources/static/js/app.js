@@ -3,9 +3,8 @@ var api = apiclient;
 if (window.localStorage.usuario==undefined){
 	window.location.href="/login.html";
 }
-console.log(window.localStorage.usuario);
+
 var dinero=api.getPerfilToken(window.localStorage.usuario,function(plata){
-	console.log(plata);
 	$("#cantidadDeMonedas").html(plata.moneda);
 });
 var logrosOb=api.logrosObtenidos(function(numeroLogros){

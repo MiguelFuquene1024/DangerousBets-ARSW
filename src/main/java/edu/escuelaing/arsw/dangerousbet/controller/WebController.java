@@ -181,6 +181,7 @@ public class WebController {
     }
     @GetMapping("/obtenerCartasJugadores/{sala}/{jugador}")
     public ResponseEntity<?> obtenerCartasJugadores(@PathVariable("sala") String s,@PathVariable("jugador") String j) {
+    	
     	return new ResponseEntity<>(srvall.obtenerCartasJugador(j, s),HttpStatus.ACCEPTED);
     }
 	@GetMapping("/logrosObtenidos/{user}")

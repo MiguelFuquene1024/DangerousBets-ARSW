@@ -24,10 +24,8 @@ function getQueryVariable(variable) {
 function actualizarJuego(){
 	
 	api.obtenerMesa(name,function(datos){
-		api.obtenerCartaJugadores(window.localStorage.usuario,function(cartas){
-		
-			console.log(datos);
-			console.log(cartas);
+		api.obtenerCartaJugadores(window.localStorage.usuario,name,function(cartas){
+	
 			for(numero in datos.jugadores){
 				if(datos.estadoPartida=="finJuego"){
 					setTimeout(function(){
@@ -38,11 +36,12 @@ function actualizarJuego(){
 				$("#monedas_propias"+ datos.jugadores[numero].numeroJugador +" label.mpropias").html(datos.jugadores[numero].moneda);
 				$("#monedas_apuestas"+ datos.jugadores[numero].numeroJugador +" label.mapuestas").html(datos.jugadores[numero].misApuestas);
 				
-				if(datos.jugadores[numero].nickName==window.localStorage.usuario){
+				if(datos.jugadores[numero].nickName==jugador){
 					
 					if(datos.jugadores[numero].jugar){
-						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/"+datos.jugadores[numero].cartas[1]+"-"+datos.jugadores[numero].cartas[0]+".png");
-						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/"+datos.jugadores[numero].cartas[3]+"-"+datos.jugadores[numero].cartas[2]+".png");
+					
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/"+cartas[numero][1]+"-"+cartas[numero][0]+".png");
+						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/"+cartas[numero][3]+"-"+cartas[numero][2]+".png");
 					}else{
 						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/carta-blanca.png");
 						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img2").attr("src","/estilos/imagenes/carta-blanca.png");
@@ -138,7 +137,7 @@ function actualizarJuego(){
 
 
 var name=getQueryVariable("name");
-var jugadores_actuales=[];
+var jugador="";
 var numeroJugador=0;
 
 $(document).ready(function(){
@@ -154,6 +153,10 @@ $(document).ready(function(){
 			});
 		}
 	});
+	api.getPerfilToken(window.localStorage.usuario, function(yo){
+			jugador=yo.nickname;
+		
+		});
 	setInterval(actualizarJuego, 500);
 
 	$("#boton_pasar").click(function(){
@@ -189,15 +192,22 @@ $(document).ready(function(){
 	});
 	
 	$("#enviar_mensaje").click(function(){
-		let mensaje='<label style="font-weight:700;">' + window.localStorage.usuario + ": </label>"+ $("#mensaje").val();
+		api.getPerfilToken(window.localStorage.usuario, function(yo){
+			jugador=yo.nickname;
+		
+		});
+		let mensaje='<label style="font-weight:700;">' + jugador + ": </label>"+ $("#mensaje").val();
 		
 		api.nuevoMensaje(name,mensaje);
 		$('input[type="text"]').val('');
 	});
 	$("input").keypress(function(tecla){
+		api.getPerfilToken(window.localStorage.usuario, function(yo){
+			jugador=yo.nickname;
 		
+		});
         if(tecla.which==13){
-			let mensaje='<label style="font-weight:700;">' + window.localStorage.usuario + ": </label>"+ $("#mensaje").val();
+			let mensaje='<label style="font-weight:700;">' + jugador + ": </label>"+ $("#mensaje").val();
 			
 			api.nuevoMensaje(name,mensaje);
 			$('input[type="text"]').val('');

@@ -28,7 +28,6 @@ public class Poker implements Juego {
     private Map<String, List<String>> cartas;
     private Map<String, Integer> apuestas;
     private Integer apuesta;
-    private boolean estadoCartas;
     private int turno;
     private int finRonda;  
     private Timer timer; 
@@ -54,7 +53,7 @@ public class Poker implements Juego {
         baraja = new Baraja();
         apuestas = new HashMap<String, Integer>();
         jugadores = new ArrayList<>();
-        estadoCartas = false;
+  
         verificarGanadorPoker= new VerificarGanadorPoker();
         estadoPartida="cargandoPagina";
     }
@@ -75,7 +74,7 @@ public class Poker implements Juego {
             } 
            }; 
 		Timer timerInicioJuego = new Timer(); 
-		timerInicioJuego.schedule(timerTask,4000);
+		timerInicioJuego.schedule(timerTask,1000);
         
 
     }
@@ -132,6 +131,7 @@ public class Poker implements Juego {
     	ronda=1;
     	cartasMesa=new ArrayList<>();
     	cartas = new HashMap<String, List<String>>();
+    	baraja.reiniciarBaraja();
         for(Player player: jugadores){
         		if(!player.isEliminado()) {
 	        		player.setJugar(true);
@@ -511,6 +511,7 @@ public class Poker implements Juego {
 	}
 	
 	public ArrayList<List<String>> obtenerCartasJugadores(String jugador){
+		
 		Player yo=getJugador(jugador);
 		ArrayList<List<String>> car=new ArrayList<>();
 		for(Player p:jugadores) {

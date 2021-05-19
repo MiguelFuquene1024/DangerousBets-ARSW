@@ -6,8 +6,8 @@ if (window.localStorage.usuario==undefined){
 function cambio(){
 
 	api.investigarSala($("#sala").val(),function(data){
-		console.log(data);
-		api.getPerfil(window.localStorage.usuario,function(perfil){
+	
+		api.getPerfilToken(window.localStorage.usuario,function(perfil){
 			if(data!=null){
 				$("#valorSala").html(data.valorsala);
 				if(data.publico){
@@ -58,7 +58,7 @@ $(document).ready(function(){
 			flag = false;
 		}
 
-		api.getPerfil( window.localStorage.usuario,function(data){
+		api.getPerfilToken( window.localStorage.usuario,function(data){
 		
 			if(cd>data.moneda){
 				
@@ -66,14 +66,17 @@ $(document).ready(function(){
 				
 				flag = false;
 			}if(flag){
-				api.crearSala();
+				api.getPerfilToken(window.localStorage.usuario,function(data){
+					api.crearSala(data.nickname);
+				});
 			}
-		})
 		
 		
+		
+		});
+	
+	
 	});
-	
-	
 });
 	
 

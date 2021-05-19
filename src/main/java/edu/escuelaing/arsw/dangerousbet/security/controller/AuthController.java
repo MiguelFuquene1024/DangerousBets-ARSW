@@ -62,7 +62,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUsuario loginUsuario, BindingResult bindingResult){
     	System.out.println(loginUsuario.getNickname()+"   "+loginUsuario.getContrasena());
-        try {
+ 
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginUsuario.getNickname(),loginUsuario.getContrasena());
             Authentication authentication =
                    authenticationManager.authenticate(usernamePasswordAuthenticationToken);
@@ -71,12 +71,7 @@ public class AuthController {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
             return new ResponseEntity<>(jwtDto.getToken(),HttpStatus.CREATED);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
-        return new ResponseEntity<>("jwtDto.getToken()",HttpStatus.CREATED);
 
     }
 }

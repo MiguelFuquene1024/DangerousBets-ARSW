@@ -37,6 +37,14 @@ var apiclient = (function () {
 				}
 			);
 		},
+		obtenerCartaJugadores : function (user,sala,callback) {
+	
+			$.getJSON("/obtenerCartasJugadores/"+ sala + "/" + user ,function (data) {
+					callback(data);
+					
+				}
+			);
+		},
 		
 		
 		
@@ -71,9 +79,9 @@ var apiclient = (function () {
 
 		logrosObtenidos : function (callback) {
 			let user = window.localStorage.usuario;
-			console.log(user);
+			
 			$.getJSON("/logrosObtenidos/"+ user,function (data) {
-					console.log("Empezando a creer");
+					
 					callback(data);
 				}
 			);
@@ -104,15 +112,12 @@ var apiclient = (function () {
 				data: "{\"nickname\":\"" + nickname + "\",\"contrasena\":\"" + pass + "\"}",
 			});
 			promise.then(function (data) {
-				console.log(data)
-				//console.log(data.nombreUsuario)
-				//console.log(data.authorities[0].authority)
+			
+	
 				localStorage.removeItem("usuario")
-				//localStorage.removeItem("token")
-				//localStorage.removeItem("authority")
+
 				localStorage.setItem("usuario",data)
-				//localStorage.setItem("token",data.token)
-				//localStorage.setItem("authority",data.authorities[0].authority)
+
 				window.location.href="/menu.html";
             }, function (error) {
                 alert("El usuario o la contraseña son incorrectas")
@@ -126,16 +131,16 @@ var apiclient = (function () {
 			let pass=$("#contrasena1").val()
 			let name=$("#nombre").val()
 			let correo=$("#correo1").val()
-			console.log(pass);
+		
 			const promise = $.post({
 				url: "/auth/register",
 				contentType: "application/json",
 				data: "{\"nickname\": \"" + nickname + "\",\"contrasena\":\"" + pass + "\",\"name\":\"" + name + "\",\"correo\":\"" + correo + "\"}",
 			});
 			promise.then(function (data) {
-				console.log(data)
+			
                 if(data=="Usuario creado"){
-					console.log(data)
+					
 
 					window.location.href="/bienvenido.html";					
 
@@ -155,11 +160,11 @@ var apiclient = (function () {
 		
 		
 		
-		crearSala: function(){
+		crearSala: function(usuario){
 			let nickname=$("#name").val()
 			let pass=$("#contrasena1").val()
 			let cd=$("#cdinero").val()
-			var datos={valorsala:cd, nombre:nickname,clave:pass,jugadores:[window.localStorage.usuario]};
+			var datos={valorsala:cd, nombre:nickname,clave:pass,jugadores:[usuario]};
 			datos = JSON.stringify(datos);
 			const promise = $.post({
 				url: "/salas",
@@ -168,12 +173,12 @@ var apiclient = (function () {
 			});
 			promise.then(function (data) {
 				window.location.href="/salaDeEspera.html?name="+nickname;
-				console.log(data)
+				
                 
             }, function (error) {
-
+				alert("El nombre de la sala ya existe");
 				
-                alert("El nombre de la sala ya existe")
+                
 
             })
 		},
@@ -192,7 +197,7 @@ var apiclient = (function () {
 				data: datos
 			});
 			promise.then(function (data) {
-				console.log(data)
+				
 				window.location.href="/salaDeEspera.html?name="+sala;
 				
                 
@@ -309,7 +314,7 @@ var apiclient = (function () {
 				data: datos
 			});
 			promise.then(function (data) {
-				console.log(data)
+				
 				window.location.href="/salasPublicas.html";
 				
                 
@@ -329,7 +334,7 @@ var apiclient = (function () {
 				data: sala
 			});
 			promise.then(function (data) {
-				console.log(data)
+			
 
 				
                 
@@ -367,7 +372,7 @@ var apiclient = (function () {
 				type:'PUT'
 			});
 			promise.then(function (data) {
-				console.log(data)
+			
                 
             }, function (error) {
 
@@ -385,7 +390,7 @@ var apiclient = (function () {
 				data: apuesta
 			});
 			promise.then(function (data) {
-				console.log(data)
+			
 				
                 
             }, function (error) {
@@ -403,7 +408,7 @@ var apiclient = (function () {
 				type:'PUT'
 			});
 			promise.then(function (data) {
-				console.log(data)
+				
 				
                 
             }, function (error) {

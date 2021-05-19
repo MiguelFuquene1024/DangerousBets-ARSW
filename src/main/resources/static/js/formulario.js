@@ -92,13 +92,8 @@ $(document).ready(function(){
 	});
 	
 	setInterval(function(){
-		console.log(nombreFlag);
-		console.log(nicknameFlag);
-		console.log(correo1Flag);
-		console.log(correo2Flag);
-		console.log(contrasena1Flag);
-		console.log(contrasena2Flag);
-		console.log("==================================================");
+
+		
 		if(nombreFlag && nicknameFlag && correo1Flag && correo2Flag && contrasena1Flag && contrasena2Flag){
 			$("#submit").removeAttr("disabled");
 		}else{

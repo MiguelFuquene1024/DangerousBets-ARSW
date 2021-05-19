@@ -50,11 +50,11 @@ public class TiendaService {
 	}
 	public List<Tienda> logosComprados(String user){
 
-		System.out.println("=================================");
+		
 		TypedQuery<Tienda> query= em.createQuery("SELECT t FROM UsuarioTienda ust JOIN Tienda t ON t.recurso=ust.tienda where usuario LIKE '" + user + "'",Tienda.class);
-		System.out.println("=================================");
+		
 		List<Tienda> tnda =query.getResultList();
-		System.out.println("=================================");
+
 		return tnda;
 	
 	}

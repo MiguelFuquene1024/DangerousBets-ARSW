@@ -14,8 +14,8 @@ if (window.localStorage.usuario==undefined){
 async function noComprados(logos){
 	lista={};
 	$(".imagen").remove();
-	console.log(logos);
-	await api.getPerfil(window.localStorage.usuario,function(perfil){
+
+	await api.getPerfilToken(window.localStorage.usuario,function(perfil){
 		
 		for(numero in logos){
 			lista[logos[numero].id] = logos[numero];
@@ -35,8 +35,7 @@ async function noComprados(logos){
 			
 		}
 		
-		console.log(lista);
-		
+
 		$(".comprar").click(async function(){
 				let promise=await api.comprarLogo(lista[$(this).attr("id")].recurso,window.localStorage.usuario);
 				api.logosNoComprados(window.localStorage.usuario,noComprados);

@@ -37,7 +37,7 @@ public class UsuarioService {
 
     //No tocar
     public void save(Usuario usuario){
-    	System.out.println(usuario.getNickname()+"   ============== "+usuario.getContrasena());
+  
         usuarioRepository.save(usuario);
     }
 

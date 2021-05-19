@@ -74,7 +74,9 @@ public class ServiceAll {
 		perfil.save(p);
 	}
 	public ArrayList<List<String>> obtenerCartasJugador(String token,String sala){
+
 		String jugador = jwtProvider.getNombreUsuarioFromToken(token);
+
 		return slp.obtenerCartasJugador(jugador, sala);
 	}
 	public void crearSala(Salas sala2) throws SalaPersistenceException{
@@ -105,7 +107,8 @@ public class ServiceAll {
 	}
 
 	public void eliminarJugador(String sala, String nj) {
-		slp.eliminarJugador(sala,nj);
+		String user = jwtProvider.getNombreUsuarioFromToken(nj);
+		slp.eliminarJugador(sala,user);
 		
 	}
 

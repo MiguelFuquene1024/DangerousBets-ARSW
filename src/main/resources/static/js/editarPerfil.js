@@ -14,7 +14,7 @@ if (window.localStorage.usuario==undefined){
 
 
 var usuario = api.getUsuarioToken(window.localStorage.usuario,function(obtenerUsuario){
-		console.log(obtenerUsuario);
+		
 		$("#nombreUsuario").attr("value",obtenerUsuario.name);
 		$("#correo").attr("value",obtenerUsuario.correo);
 	
@@ -24,7 +24,7 @@ var monedas = api.getPerfilToken(window.localStorage.usuario,function(obtenerMon
 	
 	
 	api.logosComprados(window.localStorage.usuario,function(logosC){
-		console.log(logosC);
+		
 		var numero=-1;
 		for(n in logosC){
 			if(logosC[n].recurso == obtenerMonedas.imagen_perfil){
@@ -64,19 +64,19 @@ var monedas = api.getPerfilToken(window.localStorage.usuario,function(obtenerMon
 		let falg=true;
 	
 		if(nombre.length < 5){
-			console.log("rrrrr");
+
 			$("#nombreUsuario").after('<small class="error">Nombre demasiado corto</small>');
 			
 			falg=false;
 		}
 		if(!re.exec(correo)){
-			console.log(correo);
+		
 			$("#correo").after('<small class="error">Correo es invalido</small>');
 			falg=false;
 		}
-		console.log(falg);
+	
 		if(falg){
-			console.log($(this).attr("id"));
+		
 			await api.actualizarDatos(nombre,correo,window.localStorage.usuario);
 			await api.actualizarDatosPerfil(logosC[numero].recurso,window.localStorage.usuario);
 			window.location.href="/perfil.html";
