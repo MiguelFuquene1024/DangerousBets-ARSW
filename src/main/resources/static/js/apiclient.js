@@ -321,7 +321,8 @@ var apiclient = (function () {
             }, function (error) {
 
 				
-                alert("Error al salir de la partida")
+                alert("Error al   salir de la partida")
+				window.location.href="/menu.html";
 
             })
 		},
@@ -396,7 +397,7 @@ var apiclient = (function () {
             }, function (error) {
 
 				
-                alert("No es tu turno")
+                alert("No tienes la cantidad suficiente o es muy poco dinero")
 
             })
 		},

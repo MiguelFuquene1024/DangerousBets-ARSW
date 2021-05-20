@@ -43,9 +43,7 @@ function actualizarJuego(){
 							window.location.href="/menu.html";
 						}, 2000);
 					}
-					if(datos.jugadores[numero].turnoSinJugar==2){
-						alert("Si no presionas un boton en esta ronda se te sacara por inactividad.");
-					}
+					
 					if(datos.jugadores[numero].jugar){
 					
 						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/"+cartas[numero][1]+"-"+cartas[numero][0]+".png");
@@ -56,7 +54,9 @@ function actualizarJuego(){
 					}
 					if(datos.jugadores[numero].turno){
 						$(".botones_juego").removeAttr("disabled");
-						
+						if(datos.jugadores[numero].turnoSinJugar==2 && datos.cronometro==24){
+							alert("Si no presionas un boton en esta ronda se te sacara por inactividad.");
+						}
 							
 						if(datos.apuesta>datos.jugadores[numero].misApuestas && datos.jugadores[numero].moneda!=0){
 							$("#boton_pasar").attr("disabled","true");

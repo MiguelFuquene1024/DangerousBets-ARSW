@@ -1,13 +1,12 @@
 package edu.escuelaing.arsw.dangerousbet.persistence.impl;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
+
+import java.util.Timer; 
+import java.util.TimerTask; 
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -32,15 +31,21 @@ public class InMmemorySalas implements SalasPersistence{
 	private final ConcurrentHashMap<String,Salas> salas=new ConcurrentHashMap<>();
 	private final ConcurrentHashMap<String,Poker> juegos=new ConcurrentHashMap<>();
 	
+	
 	public InMmemorySalas() {
 		Salas s=new Salas(0,"Sala Publica",null,true);
 		salas.put(s.getNombre(), s);
-		Timer timer=new Timer(5000,new ActionListener() {
+		cronoSalaPublica();
+		
+		
+		
+		
+		
+		TimerTask timerTask = new TimerTask() { 
 
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				for(Entry<String,Salas> entry:salas.entrySet()) {
+            @Override 
+            public void run() { 
+            	for(Entry<String,Salas> entry:salas.entrySet()) {
 					
 					if(entry.getValue().getJugadores().size()==0) {
 						eliminarSala(entry.getKey());
@@ -50,18 +55,58 @@ public class InMmemorySalas implements SalasPersistence{
 						}
 					}
 				}
-				
-			}
-		});
-		
-		timer.start();
+            	
+            } 
+           }; 
+   
 
+		Timer timer = new Timer(); 
+	    timer.schedule(timerTask,0,5000); 
+	}
+	private void cronoSalaPublica(){
+		
+	
+
+           
+		TimerTask timerTask = new TimerTask() { 
+
+	            @Override 
+	            public void run() { 
+	            	
+	            	eliminarSala("Sala Publica");
+	            	cronoSalaPublica();
+	            } 
+	           }; 
+	   
+
+		Timer timer = new Timer(); 
+		timer.schedule(timerTask,60000); 
 	}
 	
 	public void agregarSala(Salas sala) throws SalaPersistenceException{
 		if(!salas.containsKey(sala.getNombre())) {
-			
 			salas.put(sala.getNombre(), sala);
+			TimerTask timerTask = new TimerTask() { 
+
+	            @Override 
+	            public void run() { 
+	            	if(!salas.get(sala.getNombre()).isIniciada()) {
+	            		eliminarSala(sala.getNombre());
+	            	}
+	            	
+	            } 
+	           }; 
+	   
+
+			Timer timer = new Timer(); 
+		    timer.schedule(timerTask,600000); 
+			
+			
+			
+			
+			
+			
+			
 		}else {
 			throw new SalaPersistenceException("Ya existe sala");
 		}
@@ -107,6 +152,12 @@ public class InMmemorySalas implements SalasPersistence{
 	public void eliminarSala(String sala) {
 		if(salas.containsKey(sala) && !salas.get(sala).getNombre().equals("Sala Publica")) {
 			salas.remove(sala);
+		}else if(salas.get(sala).getNombre().equals("Sala Publica")) {
+			salas.get(sala).setIniciada(false);
+			salas.get(sala).setJugadores(new ArrayList<>());
+			salas.get(sala).setPublico(true);
+			salas.get(sala).setRecompensaEntregada(false);
+			
 		}
 		
 	}
@@ -204,7 +255,7 @@ public class InMmemorySalas implements SalasPersistence{
 	
 	@Override
 	public ArrayList recibirMensaje(String sala, String usuario) throws SalaPersistenceException {
-		if(!salas.contains(sala)) throw new SalaPersistenceException("No existe la sala");
+		if(!salas.containsKey(sala)) throw new SalaPersistenceException("No existe la sala");
 		return salas.get(sala).devolverMensajes(usuario);
 
 	}

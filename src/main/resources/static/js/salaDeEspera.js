@@ -76,6 +76,7 @@ function perfilJugadores(){
 	});
 	
 	api.recibirMensaje(name,window.localStorage.usuario,function(data){
+		console.log(data);
 		for(numero in data){
 			$("#mensajes_recibidos").append('<p>'+ data[numero] +'</p>');
 		}
@@ -90,7 +91,7 @@ var jugador="";
 $(document).ready(async function(){
 	
 	await api.investigarSala(name,async function(mesa){
-		if (mesa==null){
+		if (mesa==null || mesa.jugadores.length==0){
 			window.location.href="/menu.html";
 		}
 		$("#mesa_vacio").html(mesa.nombre);
@@ -142,24 +143,28 @@ $(document).ready(async function(){
 	$("#enviar_mensaje").click(function(){
 		api.getPerfilToken(window.localStorage.usuario, function(yo){
 			jugador=yo.nickname;
-		
-		});
-		let mensaje='<label style="font-weight:700;">' + jugador + ": </label>"+ $("#mensaje").val();
+			
+					let mensaje='<label style="font-weight:700;">' + jugador + ": </label>"+ $("#mensaje").val();
 		
 		api.nuevoMensaje(name,mensaje);
 		$('input[type="text"]').val('');
+		
+		});
+
 	});
 	$("input").keypress(function(tecla){
 		api.getPerfilToken(window.localStorage.usuario, function(yo){
+			
 			jugador=yo.nickname;
-		
-		});
-        if(tecla.which==13){
+			        if(tecla.which==13){
 			let mensaje='<label style="font-weight:700;">' + jugador + ": </label>"+ $("#mensaje").val();
 			
 			api.nuevoMensaje(name,mensaje);
 			$('input[type="text"]').val('');
 		}
+		
+		});
+
     });
 });
 
