@@ -47,19 +47,19 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 - Login y registro
 
 
-![](img/Mockups/Mockup1.png)
+![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/Mockups/login.jpeg)
 
 
 - Menu principal
 
 
-![](img/Mockups/Mockup2.png)
+![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/Mockups/menu.jpeg)
 
 
 - Personalizacion de juego
 
 
-![](img/Mockups/Mockup5.png)
+![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/Mockups/crearsalas.jpeg)
 
 
 - Sala de juego
@@ -68,15 +68,23 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 ![](img/Mockups/Mockup3.png)
 
 
-- Datos y estadisticas
+- Datos y perfil
 
 
-![](img/Mockups/Mockup4.png)
+![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/Mockups/perfil.jpeg)
 
 
+- Ranking
 
+![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/Mockups/ranking.jpeg)
 
+- Tienda
 
+![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/Mockups/tienda.jpeg)
+
+- Logros
+
+![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/Mockups/logros.jpeg)
 
 ## Diagrama de Clases
 ![](img/DiagramaClases.PNG)
