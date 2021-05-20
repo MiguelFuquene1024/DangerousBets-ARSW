@@ -93,7 +93,7 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 
 ## Diagrama c&c
 
-![](img/cc.jpeg)
+![](img/C&c.jpeg)
 
 
 ## Diagrama de despliegue
@@ -102,6 +102,6 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 
 ## Diagrama entidad-Relación
 
-![](img/img.png)
+![](img/entidadRelacion.jpeg)
 
  
