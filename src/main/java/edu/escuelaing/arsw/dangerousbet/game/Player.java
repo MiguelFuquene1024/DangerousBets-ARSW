@@ -12,7 +12,7 @@ public class Player {
     private int numeroJugador;
     private boolean eliminado=false;
     private int victoriasConsecutivas;
-    
+    private int turnoSinJugar=0;
     private boolean turno;
     public Player() {
     	victoriasConsecutivas=0;
@@ -92,6 +92,14 @@ public class Player {
 
 	public void setVictoriasConsecutivas(int victoriasConsecutivas) {
 		this.victoriasConsecutivas = victoriasConsecutivas;
+	}
+
+	public int getTurnoSinJugar() {
+		return turnoSinJugar;
+	}
+
+	public void setTurnoSinJugar(int turnoSinJugar) {
+		this.turnoSinJugar = turnoSinJugar;
 	}
 	
 	

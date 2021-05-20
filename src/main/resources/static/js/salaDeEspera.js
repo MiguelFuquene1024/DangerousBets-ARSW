@@ -20,7 +20,9 @@ function getQueryVariable(variable) {
 function perfilJugadores(){
 	
 	api.investigarSala(name,async function(mesa){
-	
+		if(mesa==null){
+			window.location.href="/menu.html";
+		}
 		for(numero in mesa.jugadores){
 			
 			if(jugadores_actuales.includes(mesa.jugadores[numero])==false){
@@ -88,7 +90,9 @@ var jugador="";
 $(document).ready(async function(){
 	
 	await api.investigarSala(name,async function(mesa){
-		
+		if (mesa==null){
+			window.location.href="/menu.html";
+		}
 		$("#mesa_vacio").html(mesa.nombre);
 		
 		jugadores_actuales=mesa.jugadores;

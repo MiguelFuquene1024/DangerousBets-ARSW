@@ -305,8 +305,12 @@ public class WebController {
     
     @GetMapping("/recibirMensaje/{sala}/{user}")
     public ResponseEntity<?> recibirMensaje(@PathVariable("sala") String sala, @PathVariable("user") String user) {
-
-    	return new ResponseEntity<>(srvall.recibirMensaje(sala, user),HttpStatus.ACCEPTED);
+    	
+    	try {
+			return new ResponseEntity<>(srvall.recibirMensaje(sala, user),HttpStatus.ACCEPTED);
+		} catch (SalaPersistenceException e) {
+			return new ResponseEntity<>("ERROR",HttpStatus.ACCEPTED);
+		}
     }
     
     @PutMapping("/nuevoMensaje/{sala}")

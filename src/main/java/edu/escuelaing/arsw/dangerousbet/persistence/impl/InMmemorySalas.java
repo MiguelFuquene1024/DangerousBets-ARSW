@@ -167,8 +167,9 @@ public class InMmemorySalas implements SalasPersistence{
 	
 	@Override
 	public Poker obtenerMesa(String sala){
+		
 		for(Player player:juegos.get(sala).getJugadores()) {
-			if(player.isEliminado()) {
+			if(player.isEliminado() || player.getTurnoSinJugar()==3) {
 				eliminarJugador(sala,player.getNickName());
 			}
 		}
@@ -182,7 +183,7 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 	@Override
 	public void apostar(String sala,int apuesta,String user2) throws JuegoException{
-	
+		
 		juegos.get(sala).apostar2(apuesta,user2);
 	}
 	@Override
@@ -202,8 +203,10 @@ public class InMmemorySalas implements SalasPersistence{
 	}
 	
 	@Override
-	public ArrayList recibirMensaje(String sala, String usuario) {
+	public ArrayList recibirMensaje(String sala, String usuario) throws SalaPersistenceException {
+		if(!salas.contains(sala)) throw new SalaPersistenceException("No existe la sala");
 		return salas.get(sala).devolverMensajes(usuario);
+
 	}
 	
 	

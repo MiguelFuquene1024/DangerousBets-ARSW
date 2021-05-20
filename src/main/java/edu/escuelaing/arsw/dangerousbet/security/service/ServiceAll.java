@@ -157,7 +157,7 @@ public class ServiceAll {
 		slp.nuevoMensaje(sala, mensaje);
 	}
 
-	public ArrayList recibirMensaje(String sala,String usuario) {
+	public ArrayList recibirMensaje(String sala,String usuario) throws SalaPersistenceException {
 		return slp.recibirMensaje(sala, jwtProvider.getNombreUsuarioFromToken(usuario));
 	}
 	public String obtenerClaveDeAcceso(String jugador,String sala) {

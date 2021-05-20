@@ -32,12 +32,20 @@ function actualizarJuego(){
 						window.location.href="/menu.html";
 					}, 5000);
 				}
+				
 				$(".monedas_apuestasmesa").html(datos.apuestaTotalMesa);
 				$("#monedas_propias"+ datos.jugadores[numero].numeroJugador +" label.mpropias").html(datos.jugadores[numero].moneda);
 				$("#monedas_apuestas"+ datos.jugadores[numero].numeroJugador +" label.mapuestas").html(datos.jugadores[numero].misApuestas);
 				
 				if(datos.jugadores[numero].nickName==jugador){
-					
+					if(datos.jugadores[numero].eliminado){
+						setTimeout(function(){
+							window.location.href="/menu.html";
+						}, 2000);
+					}
+					if(datos.jugadores[numero].turnoSinJugar==2){
+						alert("Si no presionas un boton en esta ronda se te sacara por inactividad.");
+					}
 					if(datos.jugadores[numero].jugar){
 					
 						$("#jugador"+datos.jugadores[numero].numeroJugador+" img.img1").attr("src","/estilos/imagenes/"+cartas[numero][1]+"-"+cartas[numero][0]+".png");
@@ -126,8 +134,10 @@ function actualizarJuego(){
 	});
 	
 	api.recibirMensaje(name,window.localStorage.usuario,function(data){
-		for(numero in data){
-			$("#mensajes_recibidos").append('<p>'+ data[numero] +'</p>');
+		if(data!="ERROR"){
+			for(numero in data){
+				$("#mensajes_recibidos").append('<p>'+ data[numero] +'</p>');
+			}
 		}
 	});
 
@@ -140,12 +150,17 @@ var name=getQueryVariable("name");
 var jugador="";
 var numeroJugador=0;
 
-$(document).ready(function(){
+$(document).ready(async function(){
 	
-		
-	api.investigarSala(name, async function(mesa){
-		
+	enSala=false;
+	let ap=await api.getPerfilToken(window.localStorage.usuario, function(yo){
+		jugador=yo.nickname;
+	
+	});
+	let ap1=await api.investigarSala(name, async function(mesa){
+			
 			for(numero in mesa.jugadores){
+				
 				let rnumero=parseInt(numero) +1;
 				await api.getPerfil(mesa.jugadores[numero],function(perfil){
 				
@@ -153,10 +168,7 @@ $(document).ready(function(){
 			});
 		}
 	});
-	api.getPerfilToken(window.localStorage.usuario, function(yo){
-			jugador=yo.nickname;
-		
-		});
+	
 	setInterval(actualizarJuego, 500);
 
 	$("#boton_pasar").click(function(){
