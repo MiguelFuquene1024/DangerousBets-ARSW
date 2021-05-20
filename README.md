@@ -62,10 +62,10 @@ Esta plataforma ayudara a personas de todas las edades a tener un medio por el c
 ![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/Mockups/crearsalas.jpeg)
 
 
-- Sala de juego
+- Sala juego de poker
 
 
-![](img/Mockups/Mockup3.png)
+![](https://github.com/MiguelFuquene1024/DangerousBets-ARSW/blob/master/img/Mockups/juego.jpeg)
 
 
 - Datos y perfil
