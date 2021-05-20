@@ -11,7 +11,7 @@ body{
 	margin-top:10em;
 	margin-bottom:1em;
 	width:100%;
-	background:url('imagenes/poker.jfif');
+	background:url('imagenes/texturaverde.jpg');
 	background-size:100% auto;
 }
 #panel-superior{
@@ -161,26 +161,26 @@ body{
 }
 #bloque2 .botones .ranking .inferior,
 #bloque2 .botones .ranking .fondo-superior{
-	background:#0c8a67;
+	background:#3EA38A;
 }
 
 #bloque2 .botones .crear-sala .inferior,
 #bloque2 .botones .crear-sala .fondo-superior{
-	background:#b5141a;
+	background:#47BA9D;
 }
 
 #bloque2 .botones .unirse-sala .inferior,
 #bloque2 .botones .unirse-sala .fondo-superior{
-	background:#8A9B00;
+	background:#56E3C0;
 }
 
 #bloque2 .botones .logros .inferior,
 #bloque2 .botones .logros .fondo-superior{
-	background:#FFC146;
+	background:#5BF0CB;
 }
 #bloque2 .botones .tienda .inferior,
 #bloque2 .botones .tienda .fondo-superior{
-	background:#868074;
+	background:#4DC9AA;
 }
 
 

@@ -7,11 +7,15 @@ body{
 	height:50vw;
 }
 #informacion,
-#imagen_perfil{
+#imagen_dangerous{
 	width:50%;
 	float:left;	
 }
-#imagen_perfil{
+#imagen_dangerous{
+	text-align:center;
+}
+#imagen_instrucciones{
+        filter: hue-rotate(113deg);
 	text-align:center;
 }
 #informacion{
@@ -19,9 +23,9 @@ body{
 	position:relative;
 }
 #informacion .titulo{
-	line-height:3vw;
-	font-weight:700;
-	font-size:3vw;
+	line-height:1vw;
+	font-weight:100;
+	font-size:1vw;
 	padding:0;
 	margin:0;
 }
@@ -30,8 +34,9 @@ body{
 	font-size:2.5vw;
 }
 #informacion .info{
+    	position:relative;
 
-	margin-top:4%;
+	margin-top:5%;
 }
 #informacion .editar{
 	top:-4%;
@@ -55,8 +60,11 @@ body{
 	font-size:6vw;
 	font-weight:700;
 }
-titulo{
-    filter: hue-rotate(113deg);
-	text-align:center;
+.fondo{
+	position:absolute;
+	width:100%;
+	height:100%;
+	z-index:-1;
+	background:red;
+        color:#F5F5DC;
 }
-
