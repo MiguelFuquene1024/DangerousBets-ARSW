@@ -80,7 +80,7 @@ public class InMmemorySalas implements SalasPersistence{
 	   
 
 		Timer timer = new Timer(); 
-		timer.schedule(timerTask,60000); 
+		timer.schedule(timerTask,600000); 
 	}
 	
 	public void agregarSala(Salas sala) throws SalaPersistenceException{
