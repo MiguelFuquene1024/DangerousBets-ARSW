@@ -91,6 +91,7 @@ var jugador="";
 $(document).ready(async function(){
 	
 	await api.investigarSala(name,async function(mesa){
+		
 		if (mesa==null || mesa.jugadores.length==0){
 			window.location.href="/menu.html";
 		}
