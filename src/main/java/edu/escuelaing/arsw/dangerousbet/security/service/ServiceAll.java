@@ -161,7 +161,8 @@ public class ServiceAll {
 		return slp.recibirMensaje(sala, jwtProvider.getNombreUsuarioFromToken(usuario));
 	}
 	public String obtenerClaveDeAcceso(String jugador,String sala) {
-		return slp.obtenerClaveDeAcceso(jugador, sala);
+		
+		return slp.obtenerClaveDeAcceso(jwtProvider.getNombreUsuarioFromToken(jugador), sala);
 	}
 
 }

@@ -109,7 +109,9 @@ public class Salas {
 	}
 
 	public String obtenerClaveDeAcceso(String jugador) {
+	
 		for(String s:jugadores) {
+		
 			if(s.contentEquals(jugador)) {
 				return clave;
 			}
